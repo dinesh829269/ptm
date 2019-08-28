@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Copyright (c) 2018 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
@@ -12,14 +12,6 @@ EXIT_CODE=0
 OUTPUT=$(git grep " open(" -- "*.py" | grep -vE "encoding=.(ascii|utf8|utf-8)." | grep -vE "open\([^,]*, ['\"][^'\"]*b[^'\"]*['\"]")
 if [[ ${OUTPUT} != "" ]]; then
     echo "Python's open(...) seems to be used to open text files without explicitly"
-    echo "specifying encoding=\"utf8\":"
-    echo
-    echo "${OUTPUT}"
-    EXIT_CODE=1
-fi
-OUTPUT=$(git grep "check_output(" -- "*.py" | grep "universal_newlines=True" | grep -vE "encoding=.(ascii|utf8|utf-8).")
-if [[ ${OUTPUT} != "" ]]; then
-    echo "Python's check_output(...) seems to be used to get program outputs without explicitly"
     echo "specifying encoding=\"utf8\":"
     echo
     echo "${OUTPUT}"

@@ -1,4 +1,5 @@
-// Copyright (c) 2011-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,9 +10,8 @@
 #include <qt/guiutil.h>
 
 #include <interfaces/node.h>
+#include <validation.h> // for cs_main
 #include <sync.h>
-
-#include <algorithm>
 
 #include <QDebug>
 #include <QList>
@@ -50,8 +50,8 @@ class PeerTablePriv
 public:
     /** Local cache of peer information */
     QList<CNodeCombinedStats> cachedNodeStats;
-    /** Column to sort nodes by (default to unsorted) */
-    int sortColumn{-1};
+    /** Column to sort nodes by */
+    int sortColumn;
     /** Order (ascending or descending) to sort nodes by */
     Qt::SortOrder sortOrder;
     /** Index of rows by node ID */
@@ -65,8 +65,10 @@ public:
 
             interfaces::Node::NodesStats nodes_stats;
             node.getNodesStats(nodes_stats);
+#if QT_VERSION >= 0x040700
             cachedNodeStats.reserve(nodes_stats.size());
-            for (const auto& node_stats : nodes_stats)
+#endif
+            for (auto& node_stats : nodes_stats)
             {
                 CNodeCombinedStats stats;
                 stats.nodeStats = std::get<0>(node_stats);
@@ -78,7 +80,7 @@ public:
 
         if (sortColumn >= 0)
             // sort cacheNodeStats (use stable sort to prevent rows jumping around unnecessarily)
-            std::stable_sort(cachedNodeStats.begin(), cachedNodeStats.end(), NodeLessThan(sortColumn, sortOrder));
+            qStableSort(cachedNodeStats.begin(), cachedNodeStats.end(), NodeLessThan(sortColumn, sortOrder));
 
         // build index map
         mapNodeRows.clear();
@@ -97,7 +99,7 @@ public:
         if (idx >= 0 && idx < cachedNodeStats.size())
             return &cachedNodeStats[idx];
 
-        return nullptr;
+        return 0;
     }
 };
 
@@ -105,14 +107,16 @@ PeerTableModel::PeerTableModel(interfaces::Node& node, ClientModel *parent) :
     QAbstractTableModel(parent),
     m_node(node),
     clientModel(parent),
-    timer(nullptr)
+    timer(0)
 {
     columns << tr("NodeId") << tr("Node/Service") << tr("Ping") << tr("Sent") << tr("Received") << tr("User Agent");
     priv.reset(new PeerTablePriv());
+    // default to unsorted
+    priv->sortColumn = -1;
 
     // set up timer for auto refresh
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &PeerTableModel::refresh);
+    connect(timer, SIGNAL(timeout()), SLOT(refresh()));
     timer->setInterval(MODEL_UPDATE_DELAY);
 
     // load initial data
@@ -159,8 +163,7 @@ QVariant PeerTableModel::data(const QModelIndex &index, int role) const
         case NetNodeId:
             return (qint64)rec->nodeStats.nodeid;
         case Address:
-            // prepend to peer address down-arrow symbol for inbound connection and up-arrow for outbound connection
-            return QString(rec->nodeStats.fInbound ? "↓ " : "↑ ") + QString::fromStdString(rec->nodeStats.addrName);
+            return QString::fromStdString(rec->nodeStats.addrName);
         case Subversion:
             return QString::fromStdString(rec->nodeStats.cleanSubVer);
         case Ping:
@@ -198,7 +201,8 @@ QVariant PeerTableModel::headerData(int section, Qt::Orientation orientation, in
 
 Qt::ItemFlags PeerTableModel::flags(const QModelIndex &index) const
 {
-    if (!index.isValid()) return Qt::NoItemFlags;
+    if(!index.isValid())
+        return 0;
 
     Qt::ItemFlags retval = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     return retval;

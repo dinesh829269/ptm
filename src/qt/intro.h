@@ -1,9 +1,10 @@
-// Copyright (c) 2011-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_INTRO_H
-#define BITCOIN_QT_INTRO_H
+#ifndef VERGE_QT_INTRO_H
+#define VERGE_QT_INTRO_H
 
 #include <QDialog>
 #include <QMutex>
@@ -30,8 +31,7 @@ class Intro : public QDialog
     Q_OBJECT
 
 public:
-    explicit Intro(QWidget *parent = nullptr,
-                   uint64_t blockchain_size = 0, uint64_t chain_state_size = 0);
+    explicit Intro(QWidget *parent = 0);
     ~Intro();
 
     QString getDataDirectory();
@@ -48,8 +48,14 @@ public:
      */
     static bool pickDataDirectory(interfaces::Node& node);
 
+    /**
+     * Determine default data directory for operating system.
+     */
+    static QString getDefaultDataDirectory();
+
 Q_SIGNALS:
     void requestCheck();
+    void stopThread();
 
 public Q_SLOTS:
     void setStatus(int status, const QString &message, quint64 bytesAvailable);
@@ -66,8 +72,6 @@ private:
     QMutex mutex;
     bool signalled;
     QString pathToCheck;
-    uint64_t m_blockchain_size;
-    uint64_t m_chain_state_size;
 
     void startThread();
     void checkPath(const QString &dataDir);
@@ -76,4 +80,4 @@ private:
     friend class FreespaceChecker;
 };
 
-#endif // BITCOIN_QT_INTRO_H
+#endif // VERGE_QT_INTRO_H

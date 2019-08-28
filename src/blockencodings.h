@@ -1,9 +1,10 @@
-// Copyright (c) 2016-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_BLOCKENCODINGS_H
-#define BITCOIN_BLOCKENCODINGS_H
+#ifndef VERGE_BLOCKENCODINGS_H
+#define VERGE_BLOCKENCODINGS_H
 
 #include <primitives/block.h>
 
@@ -52,12 +53,12 @@ public:
                 }
             }
 
-            int32_t offset = 0;
+            uint16_t offset = 0;
             for (size_t j = 0; j < indexes.size(); j++) {
-                if (int32_t(indexes[j]) + offset > std::numeric_limits<uint16_t>::max())
+                if (uint64_t(indexes[j]) + uint64_t(offset) > std::numeric_limits<uint16_t>::max())
                     throw std::ios_base::failure("indexes overflowed 16 bits");
                 indexes[j] = indexes[j] + offset;
-                offset = int32_t(indexes[j]) + 1;
+                offset = indexes[j] + 1;
             }
         } else {
             for (size_t i = 0; i < indexes.size(); i++) {
@@ -144,6 +145,7 @@ protected:
 
 public:
     CBlockHeader header;
+    std::vector<unsigned char> vchBlockSig;
 
     // Dummy for deserialization
     CBlockHeaderAndShortTxIDs() {}
@@ -160,7 +162,7 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action) {
         READWRITE(header);
         READWRITE(nonce);
-
+        READWRITE(vchBlockSig);
         uint64_t shorttxids_size = (uint64_t)shorttxids.size();
         READWRITE(COMPACTSIZE(shorttxids_size));
         if (ser_action.ForRead()) {
@@ -186,9 +188,6 @@ public:
 
         READWRITE(prefilledtxn);
 
-        if (BlockTxCount() > std::numeric_limits<uint16_t>::max())
-            throw std::ios_base::failure("indexes overflowed 16 bits");
-
         if (ser_action.ForRead())
             FillShortTxIDSelector();
     }
@@ -201,6 +200,7 @@ protected:
     CTxMemPool* pool;
 public:
     CBlockHeader header;
+    std::vector<unsigned char> vchBlockSig;
     explicit PartiallyDownloadedBlock(CTxMemPool* poolIn) : pool(poolIn) {}
 
     // extra_txn is a list of extra transactions to look at, in <witness hash, reference> form
@@ -209,4 +209,4 @@ public:
     ReadStatus FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing);
 };
 
-#endif // BITCOIN_BLOCKENCODINGS_H
+#endif // VERGE_BLOCKENCODINGS_H

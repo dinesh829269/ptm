@@ -1,17 +1,19 @@
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NETADDRESS_H
-#define BITCOIN_NETADDRESS_H
+#ifndef VERGE_NETADDRESS_H
+#define VERGE_NETADDRESS_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/verge-config.h>
 #endif
 
 #include <compat.h>
 #include <serialize.h>
 #include <span.h>
+#include <version.h>
 
 #include <stdint.h>
 #include <string>
@@ -22,7 +24,8 @@ enum Network
     NET_UNROUTABLE = 0,
     NET_IPV4,
     NET_IPV6,
-    NET_ONION,
+    NET_TOR,
+	NET_I2P,
     NET_INTERNAL,
 
     NET_MAX,
@@ -32,8 +35,9 @@ enum Network
 class CNetAddr
 {
     protected:
-        unsigned char ip[16]; // in network byte order
-        uint32_t scopeId{0}; // for scoped/link-local ipv6 addresses
+        unsigned char ip[41]; // in network byte order
+        bool usesTorV3 = false;
+        uint32_t scopeId; // for scoped/link-local ipv6 addresses
 
     public:
         CNetAddr();
@@ -48,12 +52,15 @@ class CNetAddr
         void SetRaw(Network network, const uint8_t *data);
 
     public:
+        /**
+          * Transform an arbitrary string into a non-routable ipv6 address.
+          * Useful for mapping resolved addresses back to their source.
+         */
         bool SetInternal(const std::string& name);
 
-        bool SetSpecial(const std::string &strName); // for Tor addresses
-        bool IsBindAny() const; // INADDR_ANY equivalent
+        bool SetSpecial(const std::string &strName); // for Tor & i2p addresses
         bool IsIPv4() const;    // IPv4 mapped address (::FFFF:0:0/96, 0.0.0.0/0)
-        bool IsIPv6() const;    // IPv6 address (not mapped IPv4, not Tor)
+        bool IsIPv6() const;    // IPv6 address (not mapped IPv4, not Tor/i2p)
         bool IsRFC1918() const; // IPv4 private networks (10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12)
         bool IsRFC2544() const; // IPv4 inter-network communications (192.18.0.0/15)
         bool IsRFC6598() const; // IPv4 ISP-level NAT (100.64.0.0/10)
@@ -63,12 +70,13 @@ class CNetAddr
         bool IsRFC3964() const; // IPv6 6to4 tunnelling (2002::/16)
         bool IsRFC4193() const; // IPv6 unique local (FC00::/7)
         bool IsRFC4380() const; // IPv6 Teredo tunnelling (2001::/32)
-        bool IsRFC4843() const; // IPv6 ORCHID (deprecated) (2001:10::/28)
-        bool IsRFC7343() const; // IPv6 ORCHIDv2 (2001:20::/28)
+        bool IsRFC4843() const; // IPv6 ORCHID (2001:10::/28)
         bool IsRFC4862() const; // IPv6 autoconfig (FE80::/64)
-        bool IsRFC6052() const; // IPv6 well-known prefix for IPv4-embedded address (64:FF9B::/96)
-        bool IsRFC6145() const; // IPv6 IPv4-translated address (::FFFF:0:0:0/96) (actually defined in RFC2765)
+        bool IsRFC6052() const; // IPv6 well-known prefix (64:FF9B::/96)
+        bool IsRFC6145() const; // IPv6 IPv4-translated address (::FFFF:0:0:0/96)
         bool IsTor() const;
+		    bool IsI2P() const;
+        bool IsTorV3() const;
         bool IsLocal() const;
         bool IsRoutable() const;
         bool IsInternal() const;
@@ -93,7 +101,19 @@ class CNetAddr
 
         template <typename Stream, typename Operation>
         inline void SerializationOp(Stream& s, Operation ser_action) {
-            READWRITE(ip);
+            if(s.GetVersion() > TORV3_SERVICES_VERSION) {
+                READWRITE(ip);
+            } else { // backwards compatibility
+                if(ser_action.ForRead()){
+                    unsigned char compatibleIP[16];
+                    READWRITE(compatibleIP);
+                    memcpy(CNetAddr::ip, compatibleIP, sizeof(compatibleIP));
+                } else {
+                    unsigned char compatibleIP[16]; 
+                    memcpy(compatibleIP, CNetAddr::ip, sizeof(compatibleIP));
+                    READWRITE(compatibleIP);
+                }
+            }    
         }
 
         friend class CSubNet;
@@ -165,9 +185,21 @@ class CService : public CNetAddr
 
         template <typename Stream, typename Operation>
         inline void SerializationOp(Stream& s, Operation ser_action) {
-            READWRITE(ip);
+            if(s.GetVersion() >= TORV3_SERVICES_VERSION) {
+                READWRITE(ip);
+            } else {
+                if(ser_action.ForRead()){
+                    unsigned char compatibleIP[16];
+                    READWRITE(compatibleIP);
+                    memcpy(CNetAddr::ip, compatibleIP, sizeof(compatibleIP));
+                } else {
+                    unsigned char compatibleIP[16]; // backwards compatibility
+                    memcpy(compatibleIP, CNetAddr::ip, sizeof(compatibleIP));
+                    READWRITE(compatibleIP);
+                }
+            }         
             READWRITE(WrapBigEndian(port));
         }
 };
 
-#endif // BITCOIN_NETADDRESS_H
+#endif // VERGE_NETADDRESS_H

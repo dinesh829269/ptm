@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SYNC_H
-#define BITCOIN_SYNC_H
+#ifndef VERGE_SYNC_H
+#define VERGE_SYNC_H
 
 #include <threadsafety.h>
 
@@ -20,7 +21,7 @@
 ////////////////////////////////////////////////
 
 /*
-RecursiveMutex mutex;
+CCriticalSection mutex;
     std::recursive_mutex mutex;
 
 LOCK(mutex);
@@ -69,8 +70,7 @@ void static inline DeleteLock(void* cs) {}
 #endif
 #define AssertLockHeld(cs) AssertLockHeldInternal(#cs, __FILE__, __LINE__, &cs)
 #define AssertLockNotHeld(cs) AssertLockNotHeldInternal(#cs, __FILE__, __LINE__, &cs)
-
-/**
+ /**
  * Template mixin that adds -Wthread-safety locking annotations and lock order
  * checking to a subset of the mutex API.
  */
@@ -78,10 +78,10 @@ template <typename PARENT>
 class LOCKABLE AnnotatedMixin : public PARENT
 {
 public:
-    ~AnnotatedMixin() {
+	~AnnotatedMixin() {
         DeleteLock((void*)this);
     }
-
+	
     void lock() EXCLUSIVE_LOCK_FUNCTION()
     {
         PARENT::lock();
@@ -97,14 +97,13 @@ public:
         return PARENT::try_lock();
     }
 
-    using UniqueLock = std::unique_lock<PARENT>;
+	using UniqueLock = std::unique_lock<PARENT>;
 };
 
 /**
  * Wrapped mutex: supports recursive locking, but no waiting
  * TODO: We should move away from using the recursive lock by default.
  */
-using RecursiveMutex = AnnotatedMixin<std::recursive_mutex>;
 typedef AnnotatedMixin<std::recursive_mutex> CCriticalSection;
 
 /** Wrapped mutex: supports waiting but not recursive locking */
@@ -197,16 +196,6 @@ using DebugLock = UniqueLock<typename std::remove_reference<typename std::remove
         (cs).unlock();             \
         LeaveCritical();           \
     }
-
-//! Run code while locking a mutex.
-//!
-//! Examples:
-//!
-//!   WITH_LOCK(cs, shared_val = shared_val + 1);
-//!
-//!   int val = WITH_LOCK(cs, return shared_val);
-//!
-#define WITH_LOCK(cs, code) [&] { LOCK(cs); code; }()
 
 class CSemaphore
 {
@@ -304,18 +293,4 @@ public:
     }
 };
 
-// Utility class for indicating to compiler thread analysis that a mutex is
-// locked (when it couldn't be determined otherwise).
-struct SCOPED_LOCKABLE LockAssertion
-{
-    template <typename Mutex>
-    explicit LockAssertion(Mutex& mutex) EXCLUSIVE_LOCK_FUNCTION(mutex)
-    {
-#ifdef DEBUG_LOCKORDER
-        AssertLockHeld(mutex);
-#endif
-    }
-    ~LockAssertion() UNLOCK_FUNCTION() {}
-};
-
-#endif // BITCOIN_SYNC_H
+#endif // VERGE_SYNC_H

@@ -1,24 +1,23 @@
-This directory contains integration tests that test bitcoind and its
+This directory contains integration tests that test verged and its
 utilities in their entirety. It does not contain unit tests, which
 can be found in [/src/test](/src/test), [/src/wallet/test](/src/wallet/test),
 etc.
 
-This directory contains the following sets of tests:
+There are currently two sets of tests in this directory:
 
-- [functional](/test/functional) which test the functionality of
-bitcoind and bitcoin-qt by interacting with them through the RPC and P2P
+- [functional](/test/functional) which test the functionality of 
+verged and verge-qt by interacting with them through the RPC and P2P
 interfaces.
-- [util](/test/util) which tests the bitcoin utilities, currently only
-bitcoin-tx.
-- [lint](/test/lint/) which perform various static analysis checks.
+- [util](/test/util) which tests the verge utilities, currently only
+verge-tx.
 
 The util tests are run as part of `make check` target. The functional
-tests and lint scripts can be run as explained in the sections below.
+tests are run by the travis continuous build process whenever a pull
+request is opened. Both sets of tests can also be run locally.
 
 # Running tests locally
 
-Before tests can be run locally, Bitcoin Core must be built.  See the [building instructions](/doc#building) for help.
-
+Build for your system first. Be sure to enable wallet, utils and daemon when you configure. Tests will not run otherwise.
 
 ### Functional tests
 
@@ -31,7 +30,7 @@ The ZMQ functional test requires a python ZMQ library. To install it:
 
 #### Running the tests
 
-Individual tests can be run by directly calling the test script, e.g.:
+Individual tests can be run by directly calling the test script, eg:
 
 ```
 test/functional/feature_rbf.py
@@ -47,29 +46,6 @@ You can run any combination (incl. duplicates) of tests by calling:
 
 ```
 test/functional/test_runner.py <testname1> <testname2> <testname3> ...
-```
-
-Wildcard test names can be passed, if the paths are coherent and the test runner
-is called from a `bash` shell or similar that does the globbing. For example,
-to run all the wallet tests:
-
-```
-test/functional/test_runner.py test/functional/wallet*
-functional/test_runner.py functional/wallet* (called from the test/ directory)
-test_runner.py wallet* (called from the test/functional/ directory)
-```
-
-but not
-
-```
-test/functional/test_runner.py wallet*
-```
-
-Combinations of wildcards can be passed:
-
-```
-test/functional/test_runner.py ./test/functional/tool* test/functional/mempool*
-test_runner.py tool* mempool*
 ```
 
 Run the regression test suite with:
@@ -94,29 +70,29 @@ options. Run `test_runner.py -h` to see them all.
 
 ##### Resource contention
 
-The P2P and RPC ports used by the bitcoind nodes-under-test are chosen to make
-conflicts with other processes unlikely. However, if there is another bitcoind
+The P2P and RPC ports used by the verged nodes-under-test are chosen to make
+conflicts with other processes unlikely. However, if there is another verged
 process running on the system (perhaps from a previous test which hasn't successfully
-killed all its bitcoind nodes), then there may be a port conflict which will
+killed all its verged nodes), then there may be a port conflict which will
 cause the test to fail. It is recommended that you run the tests on a system
-where no other bitcoind processes are running.
+where no other verged processes are running.
 
 On linux, the test_framework will warn if there is another
-bitcoind process running when the tests are started.
+verged process running when the tests are started.
 
-If there are zombie bitcoind processes after test failure, you can kill them
+If there are zombie verged processes after test failure, you can kill them
 by running the following commands. **Note that these commands will kill all
-bitcoind processes running on the system, so should not be used if any non-test
-bitcoind processes are being run.**
+verged processes running on the system, so should not be used if any non-test
+verged processes are being run.**
 
 ```bash
-killall bitcoind
+killall verged
 ```
 
 or
 
 ```bash
-pkill -9 bitcoind
+pkill -9 verged
 ```
 
 
@@ -127,11 +103,11 @@ functional test is run and is stored in test/cache. This speeds up
 test startup times since new blockchains don't need to be generated for
 each test. However, the cache may get into a bad state, in which case
 tests will fail. If this happens, remove the cache directory (and make
-sure bitcoind processes are stopped as above):
+sure verged processes are stopped as above):
 
 ```bash
 rm -rf cache
-killall bitcoind
+killall verged
 ```
 
 ##### Test logging
@@ -144,13 +120,13 @@ default:
 - when run directly, *all* logs are written to `test_framework.log` and INFO
   level and above are output to the console.
 - when run on Travis, no logs are output to the console. However, if a test
-  fails, the `test_framework.log` and bitcoind `debug.log`s will all be dumped
+  fails, the `test_framework.log` and verged `debug.log`s will all be dumped
   to the console to help troubleshooting.
 
 To change the level of logs output to the console, use the `-l` command line
 argument.
 
-`test_framework.log` and bitcoind `debug.log`s can be combined into a single
+`test_framework.log` and verged `debug.log`s can be combined into a single
 aggregate log by running the `combine_logs.py` script. The output can be plain
 text, colorized text or html. For example:
 
@@ -177,9 +153,9 @@ import pdb; pdb.set_trace()
 ```
 
 anywhere in the test. You will then be able to inspect variables, as well as
-call methods that interact with the bitcoind nodes-under-test.
+call methods that interact with the verged nodes-under-test.
 
-If further introspection of the bitcoind instances themselves becomes
+If further introspection of the verged instances themselves becomes
 necessary, this can be accomplished by first setting a pdb breakpoint
 at an appropriate location, running the test to that point, then using
 `gdb` to attach to the process and debug.
@@ -193,60 +169,19 @@ For instance, to attach to `self.node[1]` during a run:
 use the directory path to get the pid from the pid file:
 
 ```bash
-cat /tmp/user/1000/testo9vsdjo3/node1/regtest/bitcoind.pid
-gdb /home/example/bitcoind <pid>
+cat /tmp/user/1000/testo9vsdjo3/node1/regtest/verged.pid
+gdb /home/example/verged <pid>
 ```
 
-Note: gdb attach step may require ptrace_scope to be modified, or `sudo` preceding the `gdb`.
-See this link for considerations: https://www.kernel.org/doc/Documentation/security/Yama.txt
-
-##### Profiling
-
-An easy way to profile node performance during functional tests is provided
-for Linux platforms using `perf`.
-
-Perf will sample the running node and will generate profile data in the node's
-datadir. The profile data can then be presented using `perf report` or a graphical
-tool like [hotspot](https://github.com/KDAB/hotspot).
-
-To generate a profile during test suite runs, use the `--perf` flag.
-
-To see render the output to text, run
-
-```sh
-perf report -i /path/to/datadir/send-big-msgs.perf.data.xxxx --stdio | c++filt | less
-```
-
-For ways to generate more granular profiles, see the README in
-[test/functional](/test/functional).
+Note: gdb attach step may require `sudo`
 
 ### Util tests
 
-Util tests can be run locally by running `test/util/bitcoin-util-test.py`.
+Util tests can be run locally by running `test/util/verge-util-test.py`. 
 Use the `-v` option for verbose output.
-
-### Lint tests
-
-#### Dependencies
-
-The lint tests require codespell and flake8. To install: `pip3 install codespell flake8`.
-
-#### Running the tests
-
-Individual tests can be run by directly calling the test script, e.g.:
-
-```
-test/lint/lint-filenames.sh
-```
-
-You can run all the shell-based lint tests by running:
-
-```
-test/lint/lint-all.sh
-```
 
 # Writing functional tests
 
 You are encouraged to write functional tests for new or existing features.
-Further information about the functional test framework and individual
+Further information about the functional test framework and individual 
 tests is found in [test/functional](/test/functional).

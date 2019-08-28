@@ -1,4 +1,5 @@
-// Copyright (c) 2016-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,6 +13,7 @@ static void RollingBloom(benchmark::State& state)
     CRollingBloomFilter filter(120000, 0.000001);
     std::vector<unsigned char> data(32);
     uint32_t count = 0;
+    uint64_t match = 0;
     while (state.KeepRunning()) {
         count++;
         data[0] = count;
@@ -24,17 +26,8 @@ static void RollingBloom(benchmark::State& state)
         data[1] = count >> 16;
         data[2] = count >> 8;
         data[3] = count;
-        filter.contains(data);
-    }
-}
-
-static void RollingBloomReset(benchmark::State& state)
-{
-    CRollingBloomFilter filter(120000, 0.000001);
-    while (state.KeepRunning()) {
-        filter.reset();
+        match += filter.contains(data);
     }
 }
 
 BENCHMARK(RollingBloom, 1500 * 1000);
-BENCHMARK(RollingBloomReset, 20000);

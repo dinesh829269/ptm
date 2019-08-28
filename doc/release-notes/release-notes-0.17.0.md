@@ -1,36 +1,46 @@
-Bitcoin Core version 0.17.0 is now available from:
+---
+# This file is licensed under the MIT License (MIT) available on
+# http://opensource.org/licenses/MIT.
+# Text originally from Bitcoin Core project
+# Metadata and small formatting changes from Bitcoin.org project
 
-  <https://bitcoincore.org/bin/bitcoin-core-0.17.0/>
+## Required value below populates the %v variable (note: % needs to be escaped in YAML if it starts a value)
+required_version: 0.17.0
+## Required title.
+title: Bitcoin Core version 0.17.0 released
+## Optional release date.  May be filled in hours/days after a release
+optional_date: 2018-10-03
 
-This is a new major version release, including new features, various bugfixes
-and performance improvements, as well as updated translations.
+---
 
-Please report bugs using the issue tracker at GitHub:
+<div class="post-content" markdown="1">
 
-  <https://github.com/bitcoin/bitcoin/issues>
+Important Notice
+==============
 
-To receive security and update notifications, please subscribe to:
+The information contained in this document originated from the Bitcoin Core project. 
 
-  <https://bitcoincore.org/en/list/announcements/join/>
+This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+
+---
+
+Please report bugs using the issue tracker at github:
+
+  <https://github.com/vergecurrency/VERGE/issues>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
-shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Bitcoin-Qt` (on Mac)
-or `bitcoind`/`bitcoin-qt` (on Linux).
-
-If your node has a txindex, the txindex db will be migrated the first time you run 0.17.0 or newer, which may take up to a few hours. Your node will not be functional until this migration completes.
+shut down (which might take a few minutes for older versions), then create a directory in the same root folder as you setup previously, and unzip. 
+It is good practice to call the folder you create the version number. 
+On Mac, copy over `/Applications/VERGE-Qt` 
+or on Linux `verged`/`verge-qt`.
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
 depending on the speed of your machine.
 
-Note that the block database format also changed in version 0.8.0 and there is no
-automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
-directly from 0.7.x and earlier without redownloading the blockchain is not supported.
-However, as usual, old wallet versions are still supported.
 
 Downgrading warning
 -------------------
@@ -46,21 +56,15 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Bitcoin Core is extensively tested on multiple operating systems using
+VERGE is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+VERGE should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't
 support versions of macOS older than 10.10.
 
-Known issues
-============
-
-- Upgrading from 0.13.0 or older currently results in memory blow-up during the roll-back of blocks to the SegWit activation point. In these cases, a full `-reindex` is necessary.
-
-- The GUI suffers from visual glitches in the new MacOS dark mode. This has to do with our Qt theme handling and is not a new problem in 0.17.0, but is expected to be resolved in 0.17.1.
 
 Notable changes
 ===============
@@ -69,7 +73,7 @@ Changed configuration options
 -----------------------------
 
 - `-includeconf=<file>` can be used to include additional configuration files.
-  Only works inside the `bitcoin.conf` file, not inside included files or from
+  Only works inside the `verge.conf` file, not inside included files or from
   command-line. Multiple files may be included. Can be disabled from command-
   line via `-noincludeconf`. Note that multi-argument commands like
   `-includeconf` will override preceding `-noincludeconf`, i.e.
@@ -78,7 +82,7 @@ Changed configuration options
   includeconf=relative.conf
   ```
 
-  as bitcoin.conf will still include `relative.conf`.
+  as verge.conf will still include `relative.conf`.
 
 GUI changes
 -----------
@@ -131,8 +135,8 @@ It is now possible for a single configuration file to set different
 options for different networks. This is done by using sections or by
 prefixing the option with the network, such as:
 
-    main.uacomment=bitcoin
-    test.uacomment=bitcoin-testnet
+    main.uacomment=verge
+    test.uacomment=verge-testnet
     regtest.uacomment=regtest
     [main]
     mempoolsize=300
@@ -151,7 +155,7 @@ outside of sections.
 
 A new 'label' API has been introduced for the wallet. This is intended as a
 replacement for the deprecated 'account' API. The 'account' can continue to
-be used in V0.17 by starting bitcoind with the '-deprecatedrpc=accounts'
+be used in V0.17 by starting verged with the '-deprecatedrpc=accounts'
 argument, and will be fully removed in V0.18.
 
 The label RPC methods mirror the account functionality, with the following functional differences:
@@ -184,10 +188,10 @@ Here are the changes to RPC methods:
 | `listtransactions`     | The `account` named parameter has been renamed to `dummy`. If provided, the `dummy` parameter must be set to the string `*`, unless running with the `-deprecatedrpc=accounts` argument (in which case functionality is unchanged). |
 | `getbalance`           | `account`, `minconf` and `include_watchonly` parameters are deprecated, and can only be used if running with '-deprecatedrpc=accounts' |
 
-BIP 174 Partially Signed Bitcoin Transactions support
+BIP 174 Partially Signed VERGE Transactions support
 -----------------------------------------------------
 
-[BIP 174 PSBT](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for Bitcoin transactions that are not fully signed
+[BIP 174 PSBT](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for VERGE transactions that are not fully signed
 yet, together with relevant metadata to help entities work towards signing it.
 It is intended to simplify workflows where multiple parties need to cooperate to
 produce a transaction. Examples include hardware wallets, multisig setups, and
@@ -195,7 +199,7 @@ produce a transaction. Examples include hardware wallets, multisig setups, and
 
 ### Overall workflow
 
-Overall, the construction of a fully signed Bitcoin transaction goes through the
+Overall, the construction of a fully signed VERGE transaction goes through the
 following steps:
 
 - A **Creator** proposes a particular transaction to be created. He constructs
@@ -210,7 +214,7 @@ following steps:
   partial signature for the inputs for which they have relevant key(s).
 - A **Finalizer** is run for each input to convert the partial signatures and
   possibly script information into a final `scriptSig` and/or `scriptWitness`.
-- An **Extractor** produces a valid Bitcoin transaction (in network format)
+- An **Extractor** produces a valid VERGE transaction (in network format)
   from a PSBT for which all inputs are finalized.
 
 Generally, each of the above (excluding Creator and Extractor) will simply
@@ -270,7 +274,7 @@ Low-level RPC changes
 
 - The new RPC `scantxoutset` can be used to scan the UTXO set for entries
   that match certain output descriptors. Refer to the [output descriptors
-  reference documentation](/doc/descriptors.md) for more details. This call
+  reference documentation](doc/descriptors.md) for more details. This call
   is similar to `listunspent` but does not use a wallet, meaning that the
   wallet can be disabled at compile or run time. This call is experimental,
   as such, is subject to changes or removal in future releases.
@@ -290,9 +294,9 @@ Low-level RPC changes
    `fee`, `modifiedfee`, `ancestorfee` and `descendantfee`.
 - The new RPC `getzmqnotifications` returns information about active ZMQ
   notifications.
-- When bitcoin is not started with any `-wallet=<path>` options, the name of
+- When VERGE is not started with any `-wallet=<path>` options, the name of
   the default wallet returned by `getwalletinfo` and `listwallets` RPCs is
-  now the empty string `""` instead of `"wallet.dat"`. If bitcoin is started
+  now the empty string `""` instead of `"wallet.dat"`. If VERGE is started
   with any `-wallet=<path>` options, there is no change in behavior, and the
   name of any wallet is just its `<path>` string.
 - Passing an empty string (`""`) as the `address_type` parameter to
@@ -322,7 +326,7 @@ Low-level RPC changes
   `pubkeys`, `sigsrequired`, `pubkey`, `addresses`, `embedded`, `iscompressed`,
   `account`, `timestamp`, `hdkeypath`, `hdmasterkeyid`.
 - `signrawtransaction` is deprecated and will be fully removed in v0.18. To use
-  `signrawtransaction` in v0.17, restart bitcoind with
+  `signrawtransaction` in v0.17, restart verged with
   `-deprecatedrpc=signrawtransaction`. Projects should transition to using
   `signrawtransactionwithkey` and `signrawtransactionwithwallet` before
   upgrading to v0.18.
@@ -336,7 +340,7 @@ Other API changes
 
 - The log timestamp format is now ISO 8601 (e.g. "2018-02-28T12:34:56Z").
 
-- When running bitcoind with `-debug` but without `-daemon`, logging to stdout
+- When running verged with `-debug` but without `-daemon`, logging to stdout
   is now the default behavior. Setting `-printtoconsole=1` no longer implicitly
   disables logging to debug.log. Instead, logging to file can be explicitly disabled
   by setting `-debuglogfile=0`.
@@ -345,7 +349,7 @@ Transaction index changes
 -------------------------
 
 The transaction index is now built separately from the main node procedure,
-meaning the `-txindex` flag can be toggled without a full reindex. If bitcoind
+meaning the `-txindex` flag can be toggled without a full reindex. If verged
 is run with `-txindex` on a node that is already partially or fully synced
 without one, the transaction index will be built in the background and become
 available once caught up. When switching from running `-txindex` to running
@@ -373,7 +377,6 @@ Support for Python 2 has been discontinued for all test files and tools.
 
 ### Policy
 - #12568 `ed6ae80` Allow dustrelayfee to be set to zero (luke-jr)
-- #13120 `ca2a233` Treat segwit as always active (MarcoFalke)
 - #13096 `062738c` Fix `MAX_STANDARD_TX_WEIGHT` check (jl2012)
 
 ### Mining
@@ -389,7 +392,6 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #12431 `947c25e` Only call NotifyBlockTip when chainActive changes (jamesob)
 - #12653 `534b8fa` Allow to optional specify the directory for the blocks storage (jonasschnelli)
 - #12172 `3b62a91` Bugfix: RPC: savemempool: Don't save until LoadMempool() is finished (jtimon)
-- #12167 `88430cb` Make segwit failure due to `CLEANSTACK` violation return a `SCRIPT_ERR_CLEANSTACK` error code (maaku)
 - #12561 `24133b1` Check for block corruption in ConnectBlock() (sdaftuar)
 - #11617 `1b5723e` Avoid lock: Call FlushStateToDisk(…) regardless of fCheckForPruning (practicalswift)
 - #11739 `0a8b7b4` Enforce `SCRIPT_VERIFY_P2SH` and `SCRIPT_VERIFY_WITNESS` from genesis (sdaftuar)
@@ -546,7 +548,6 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13394 `e1f8dce` cli: Ignore libevent warnings (theuni)
 - #13439 `3f398d7` Avoid "duplicate" return value for invalid submitblock (TheBlueMatt)
 - #13570 `a247594` Add new "getzmqnotifications" method (domob1812)
-- #13072 `b25a4c2` Update createmultisig RPC to support segwit (ajtowns)
 - #12196 `8fceae0` Add scantxoutset RPC method (jonasschnelli)
 - #13557 `b654723` BIP 174 PSBT Serializations and RPCs (achow101)
 - #13697 `f030410` Support output descriptors in scantxoutset (sipa)
@@ -662,7 +663,6 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #12582 `6012f1c` Fix ListCoins test failure due to unset `g_wallet_allow_fallback_fee` (ryanofsky)
 - #12516 `7f99964` Avoid unintentional unsigned integer wraparounds in tests (practicalswift)
 - #12512 `955fd23` Don't test against the mempool min fee information in mempool_limit.py (Empact)
-- #12600 `29088b1` Add a test for large tx output scripts with segwit input (richardkiss)
 - #12627 `791c3ea` Fix some tests to work on native windows (MarcoFalke)
 - #12405 `0f58d7f` travis: Full clone for git subtree check (MarcoFalke)
 - #11772 `0630974` Change invalidblockrequest to use BitcoinTestFramework (jnewbery)
@@ -723,7 +723,6 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13198 `196c5a9` Avoid printing to console during cache creation (sdaftuar)
 - #13075 `cb9bbf7` Remove 'account' API from wallet functional tests (jnewbery)
 - #13221 `ffa86af` travis: Rename the build stage `check_doc` to `lint` (practicalswift)
-- #13205 `3cbd25f` Remove spurious error log in `p2p_segwit.py` (jnewbery)
 - #13291 `536120e` Don't include torcontrol.cpp into the test file (Empact)
 - #13281 `2ac6315` Move linters to test/lint, add readme (MarcoFalke)
 - #13215 `f8a29ca` travis: Build tests on ubuntu 18.04 with docker (ken2812221)
@@ -753,12 +752,10 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13563 `b330f3f` bench: Simplify coinselection (promag)
 - #13517 `a6ed99a` Remove need to handle the network thread in tests (MarcoFalke)
 - #13522 `686e97a` Fix `p2p_sendheaders` race (jnewbery)
-- #13467 `3dc2dcf` Make `p2p_segwit` easier to debug (jnewbery)
 - #13598 `0212187` bench: Fix incorrect behaviour in prevector.cpp (AkioNak)
 - #13565 `b05ded1` Fix AreInputsStandard test to reference the proper scriptPubKey (Empact)
 - #13145 `d3dae3d` Use common getPath method to create temp directory in tests (winder)
 - #13645 `2ea7eb6` skip `rpc_zmq` functional test as necessary (jamesob)
-- #13626 `8f1106d` Fix some TODOs in `p2p_segwit` (MarcoFalke)
 - #13138 `8803c91` Remove accounts from `wallet_importprunedfunds.py` (jnewbery)
 - #13663 `cbc9b50` Avoid read/write to default datadir (MarcoFalke)
 - #13682 `f8a32a3` bench: Remove unused variable (practicalswift)

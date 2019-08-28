@@ -1,11 +1,21 @@
-// Copyright (c) 2016-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <policy/rbf.h>
-#include <util/rbf.h>
 
-RBFTransactionState IsRBFOptIn(const CTransaction& tx, const CTxMemPool& pool)
+bool SignalsOptInRBF(const CTransaction &tx)
+{
+    for (const CTxIn &txin : tx.vin) {
+        if (txin.nSequence < std::numeric_limits<unsigned int>::max()-1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+RBFTransactionState IsRBFOptIn(const CTransaction &tx, CTxMemPool &pool)
 {
     AssertLockHeld(pool.cs);
 

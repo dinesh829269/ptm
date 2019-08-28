@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_STREAMS_H
-#define BITCOIN_STREAMS_H
+#ifndef VERGE_STREAMS_H
+#define VERGE_STREAMS_H
 
 #include <support/allocators/zeroafterfree.h>
 #include <serialize.h>
@@ -59,10 +60,19 @@ public:
         stream->read(pch, nSize);
     }
 
+    void Rewind(size_t n){
+        stream->Rewind(n);
+    }
+
     int GetVersion() const { return nVersion; }
     int GetType() const { return nType; }
-    size_t size() const { return stream->size(); }
 };
+
+template<typename S>
+OverrideStream<S> WithOrVersion(S* s, int nVersionFlag)
+{
+    return OverrideStream<S>(s, s->GetType(), s->GetVersion() | nVersionFlag);
+}
 
 /* Minimal stream for overwriting and/or appending to an existing byte vector
  *
@@ -120,6 +130,12 @@ class CVectorWriter
     {
         return nType;
     }
+    void seek(size_t nSize)
+    {
+        nPos += nSize;
+        if(nPos > vchData.size())
+            vchData.resize(nPos);
+    }
 private:
     const int nType;
     const int nVersion;
@@ -136,24 +152,19 @@ private:
     const int m_version;
     const std::vector<unsigned char>& m_data;
     size_t m_pos = 0;
-
 public:
-
-    /**
+     /*
      * @param[in]  type Serialization Type
      * @param[in]  version Serialization Version (including any flags)
      * @param[in]  data Referenced byte vector to overwrite/append
      * @param[in]  pos Starting position. Vector index where reads should start.
      */
     VectorReader(int type, int version, const std::vector<unsigned char>& data, size_t pos)
-        : m_type(type), m_version(version), m_data(data), m_pos(pos)
+        : m_type(type), m_version(version), m_data(data)
     {
-        if (m_pos > m_data.size()) {
-            throw std::ios_base::failure("VectorReader(...): end of data (m_pos > m_data.size())");
-        }
+        seek(pos);
     }
-
-    /**
+     /*
      * (other params same as above)
      * @param[in]  args  A list of items to deserialize starting at pos.
      */
@@ -164,7 +175,6 @@ public:
     {
         ::UnserializeMany(*this, std::forward<Args>(args)...);
     }
-
     template<typename T>
     VectorReader& operator>>(T& obj)
     {
@@ -172,26 +182,29 @@ public:
         ::Unserialize(*this, obj);
         return (*this);
     }
-
     int GetVersion() const { return m_version; }
     int GetType() const { return m_type; }
-
     size_t size() const { return m_data.size() - m_pos; }
     bool empty() const { return m_data.size() == m_pos; }
-
     void read(char* dst, size_t n)
     {
         if (n == 0) {
             return;
         }
-
-        // Read from the beginning of the buffer
+         // Read from the beginning of the buffer
         size_t pos_next = m_pos + n;
         if (pos_next > m_data.size()) {
             throw std::ios_base::failure("VectorReader::read(): end of data");
         }
         memcpy(dst, m_data.data() + m_pos, n);
         m_pos = pos_next;
+    }
+     void seek(size_t n)
+    {
+        m_pos += n;
+        if (m_pos > m_data.size()) {
+            throw std::ios_base::failure("VectorReader::seek(): end of data");
+        }
     }
 };
 
@@ -405,7 +418,7 @@ public:
         if (nReadPosNext > vch.size()) {
             throw std::ios_base::failure("CDataStream::read(): end of data");
         }
-        memcpy(pch, &vch[nReadPos], nSize);
+        memcpy(pch, &vch[nReadPos], nSize);        
         if (nReadPosNext == vch.size())
         {
             nReadPos = 0;
@@ -497,35 +510,29 @@ class BitStreamReader
 {
 private:
     IStream& m_istream;
-
-    /// Buffered byte read in from the input stream. A new byte is read into the
+     /// Buffered byte read in from the input stream. A new byte is read into the
     /// buffer when m_offset reaches 8.
     uint8_t m_buffer{0};
-
-    /// Number of high order bits in m_buffer already returned by previous
+     /// Number of high order bits in m_buffer already returned by previous
     /// Read() calls. The next bit to be returned is at this offset from the
     /// most significant bit position.
     int m_offset{8};
-
 public:
     explicit BitStreamReader(IStream& istream) : m_istream(istream) {}
-
-    /** Read the specified number of bits from the stream. The data is returned
-     * in the nbits least significant bits of a 64-bit uint.
+     /** Read the specified number of bits from the stream. The data is returned
+     * in the nbits least signficant bits of a 64-bit uint.
      */
     uint64_t Read(int nbits) {
         if (nbits < 0 || nbits > 64) {
             throw std::out_of_range("nbits must be between 0 and 64");
         }
-
-        uint64_t data = 0;
+         uint64_t data = 0;
         while (nbits > 0) {
             if (m_offset == 8) {
                 m_istream >> m_buffer;
                 m_offset = 0;
             }
-
-            int bits = std::min(8 - m_offset, nbits);
+             int bits = std::min(8 - m_offset, nbits);
             data <<= bits;
             data |= static_cast<uint8_t>(m_buffer << m_offset) >> (8 - bits);
             m_offset += bits;
@@ -534,65 +541,53 @@ public:
         return data;
     }
 };
-
 template <typename OStream>
 class BitStreamWriter
 {
 private:
     OStream& m_ostream;
-
-    /// Buffered byte waiting to be written to the output stream. The byte is
+     /// Buffered byte waiting to be written to the output stream. The byte is
     /// written buffer when m_offset reaches 8 or Flush() is called.
     uint8_t m_buffer{0};
-
-    /// Number of high order bits in m_buffer already written by previous
+     /// Number of high order bits in m_buffer already written by previous
     /// Write() calls and not yet flushed to the stream. The next bit to be
     /// written to is at this offset from the most significant bit position.
     int m_offset{0};
-
 public:
     explicit BitStreamWriter(OStream& ostream) : m_ostream(ostream) {}
-
-    ~BitStreamWriter()
+     ~BitStreamWriter()
     {
         Flush();
     }
-
-    /** Write the nbits least significant bits of a 64-bit int to the output
+     /** Write the nbits least significant bits of a 64-bit int to the output
      * stream. Data is buffered until it completes an octet.
      */
     void Write(uint64_t data, int nbits) {
         if (nbits < 0 || nbits > 64) {
             throw std::out_of_range("nbits must be between 0 and 64");
         }
-
-        while (nbits > 0) {
+         while (nbits > 0) {
             int bits = std::min(8 - m_offset, nbits);
             m_buffer |= (data << (64 - nbits)) >> (64 - 8 + m_offset);
             m_offset += bits;
             nbits -= bits;
-
-            if (m_offset == 8) {
+             if (m_offset == 8) {
                 Flush();
             }
         }
     }
-
-    /** Flush any unwritten bits to the output stream, padding with 0's to the
+     /** Flush any unwritten bits to the output stream, padding with 0's to the
      * next byte boundary.
      */
     void Flush() {
         if (m_offset == 0) {
             return;
         }
-
-        m_ostream << m_buffer;
+         m_ostream << m_buffer;
         m_buffer = 0;
         m_offset = 0;
     }
 };
-
-
 
 /** Non-refcounted RAII wrapper for FILE*
  *
@@ -606,7 +601,7 @@ private:
     const int nType;
     const int nVersion;
 
-    FILE* file;
+    FILE* file;	
 
 public:
     CAutoFile(FILE* filenew, int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn)
@@ -682,6 +677,10 @@ public:
             throw std::ios_base::failure("CAutoFile::write: write failed");
     }
 
+    void Rewind(size_t n){
+        fseek(file, -(static_cast<int>(n)),SEEK_CUR);
+    }
+
     template<typename T>
     CAutoFile& operator<<(const T& obj)
     {
@@ -715,15 +714,15 @@ private:
     const int nType;
     const int nVersion;
 
-    FILE *src;            //!< source file
-    uint64_t nSrcPos;     //!< how many bytes have been read from source
-    uint64_t nReadPos;    //!< how many bytes have been read from this
-    uint64_t nReadLimit;  //!< up to which position we're allowed to read
-    uint64_t nRewind;     //!< how many bytes we guarantee to rewind
-    std::vector<char> vchBuf; //!< the buffer
+    FILE *src;            // source file
+    uint64_t nSrcPos;     // how many bytes have been read from source
+    uint64_t nReadPos;    // how many bytes have been read from this
+    uint64_t nReadLimit;  // up to which position we're allowed to read
+    uint64_t nRewind;     // how many bytes we guarantee to rewind
+    std::vector<char> vchBuf; // the buffer
 
 protected:
-    //! read data from the source to fill the buffer
+    // read data from the source to fill the buffer
     bool Fill() {
         unsigned int pos = nSrcPos % vchBuf.size();
         unsigned int readNow = vchBuf.size() - pos;
@@ -768,12 +767,12 @@ public:
         }
     }
 
-    //! check whether we're at the end of the source file
+    // check whether we're at the end of the source file
     bool eof() const {
         return nReadPos == nSrcPos && feof(src);
     }
 
-    //! read a number of bytes
+    // read a number of bytes
     void read(char *pch, size_t nSize) {
         if (nSize + nReadPos > nReadLimit)
             throw std::ios_base::failure("Read attempted past buffer limit");
@@ -795,12 +794,12 @@ public:
         }
     }
 
-    //! return the current reading position
+    // return the current reading position
     uint64_t GetPos() const {
         return nReadPos;
     }
 
-    //! rewind to a given reading position
+    // rewind to a given reading position
     bool SetPos(uint64_t nPos) {
         nReadPos = nPos;
         if (nReadPos + nRewind < nSrcPos) {
@@ -812,6 +811,10 @@ public:
         } else {
             return true;
         }
+    }
+
+    bool Rewind(size_t n){
+        return SetPos(GetPos() - static_cast<int>(n));
     }
 
     bool Seek(uint64_t nPos) {
@@ -826,8 +829,8 @@ public:
         return true;
     }
 
-    //! prevent reading beyond a certain position
-    //! no argument removes the limit
+    // prevent reading beyond a certain position
+    // no argument removes the limit
     bool SetLimit(uint64_t nPos = std::numeric_limits<uint64_t>::max()) {
         if (nPos < nReadPos)
             return false;
@@ -842,7 +845,7 @@ public:
         return (*this);
     }
 
-    //! search for a given byte in the stream, and remain positioned on it
+    // search for a given byte in the stream, and remain positioned on it
     void FindByte(char ch) {
         while (true) {
             if (nReadPos == nSrcPos)
@@ -854,4 +857,4 @@ public:
     }
 };
 
-#endif // BITCOIN_STREAMS_H
+#endif // VERGE_STREAMS_H

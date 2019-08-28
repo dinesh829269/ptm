@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_POLICY_FEERATE_H
-#define BITCOIN_POLICY_FEERATE_H
+#ifndef VERGE_POLICY_FEERATE_H
+#define VERGE_POLICY_FEERATE_H
 
 #include <amount.h>
 #include <serialize.h>
@@ -12,6 +13,7 @@
 #include <string>
 
 extern const std::string CURRENCY_UNIT;
+extern const size_t ONE_KILO_BYTE;
 
 /**
  * Fee rate in satoshis per kilobyte: CAmount / kB
@@ -31,10 +33,12 @@ public:
     }
     /** Constructor for a fee rate in satoshis per kB. The size in bytes must not exceed (2^63 - 1)*/
     CFeeRate(const CAmount& nFeePaid, size_t nBytes);
+
     /**
      * Return the fee in satoshis for the given size in bytes.
      */
     CAmount GetFee(size_t nBytes) const;
+
     /**
      * Return the fee in satoshis for a size of 1000 bytes
      */
@@ -56,4 +60,4 @@ public:
     }
 };
 
-#endif //  BITCOIN_POLICY_FEERATE_H
+#endif //  VERGE_POLICY_FEERATE_H

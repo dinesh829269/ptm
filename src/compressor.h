@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_COMPRESSOR_H
-#define BITCOIN_COMPRESSOR_H
+#ifndef VERGE_COMPRESSOR_H
+#define VERGE_COMPRESSOR_H
 
 #include <primitives/transaction.h>
 #include <script/script.h>
@@ -108,4 +109,4 @@ public:
     }
 };
 
-#endif // BITCOIN_COMPRESSOR_H
+#endif // VERGE_COMPRESSOR_H

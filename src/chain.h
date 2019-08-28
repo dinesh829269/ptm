@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CHAIN_H
-#define BITCOIN_CHAIN_H
+#ifndef VERGE_CHAIN_H
+#define VERGE_CHAIN_H
 
 #include <arith_uint256.h>
 #include <consensus/params.h>
@@ -12,14 +13,46 @@
 #include <primitives/block.h>
 #include <tinyformat.h>
 #include <uint256.h>
+#include <util/system.h>
 
 #include <vector>
+
+
+inline int GetTargetSpacing(int Height, bool fProofOfStake=false)
+{
+    if(gArgs.GetChainName() == "testnet3")
+        return 150;
+    if(fProofOfStake)
+        return 30;
+    else
+    {
+        if (Height < 340000) { // switch from v1 to DGW3 w multialgo
+            return 60; // standard target spacing 1 min
+        }else{
+            return 150; // DarkGravityWave3 Spacing  2.5 min
+        }
+    }
+}
+
+inline int CalculateAvgBlockTimeForHeight(int nHeight){
+    if (nHeight < 1) nHeight = 1;
+    int result = (340000 * 3 + (nHeight - 340000) * 30)/nHeight;
+    if (result < 1) result = GetTargetSpacing(nHeight);
+    return result;
+}
+
 
 /**
  * Maximum amount of time that a block timestamp is allowed to exceed the
  * current network-adjusted time before the block will be accepted.
  */
-static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60;
+static const int64_t MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60;
+
+inline int64_t GetMaxClockDrift(int Height){
+    if (Height < 2218500)
+        return MAX_FUTURE_BLOCK_TIME;
+    return 10 * 60;
+}
 
 /**
  * Timestamp window used as a grace period by code that compares external
@@ -27,15 +60,7 @@ static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60;
  * to block timestamps. This should be set at least as high as
  * MAX_FUTURE_BLOCK_TIME.
  */
-static constexpr int64_t TIMESTAMP_WINDOW = MAX_FUTURE_BLOCK_TIME;
-
-/**
- * Maximum gap between node time and block time used
- * for the "Catching up..." mode in GUI.
- *
- * Ref: https://github.com/bitcoin/bitcoin/pull/1026
- */
-static constexpr int64_t MAX_BLOCK_TIME_GAP = 90 * 60;
+static const int64_t TIMESTAMP_WINDOW = MAX_FUTURE_BLOCK_TIME;
 
 class CBlockFileInfo
 {
@@ -262,15 +287,25 @@ public:
     {
         return *phashBlock;
     }
-
-    /**
-     * Check whether this block's and all previous blocks' transactions have been
-     * downloaded (and stored to disk) at some point.
-     *
-     * Does not imply the transactions are consensus-valid (ConnectTip might fail)
-     * Does not imply the transactions are still stored on disk. (IsBlockPruned might return true)
-     */
-    bool HaveTxsDownloaded() const { return nChainTx != 0; }
+    
+    int GetAlgo() const
+    {
+        switch (nVersion & BLOCK_VERSION_ALGO)
+        {
+            case BLOCK_VERSION_SCRYPT:
+                return ALGO_SCRYPT;
+            case BLOCK_VERSION_GROESTL:
+                return ALGO_GROESTL;
+            case BLOCK_VERSION_LYRA2RE:
+                return ALGO_LYRA2RE;
+			case BLOCK_VERSION_BLAKE:
+                return ALGO_BLAKE;
+            case BLOCK_VERSION_X17:
+                return ALGO_X17;
+        }
+        //printf("CBlock::GetAlgo(): Can't Parse Algo, %d, %d, %d\n", nVersion & BLOCK_VERSION_ALGO, nVersion, this->nVersion);
+        return ALGO_SCRYPT;
+    }
 
     int64_t GetBlockTime() const
     {
@@ -349,13 +384,19 @@ class CDiskBlockIndex : public CBlockIndex
 {
 public:
     uint256 hashPrev;
+    uint256 hashBlockShared;
+    uint256 hashPOWShared;
 
     CDiskBlockIndex() {
         hashPrev = uint256();
+        hashBlockShared = uint256();
+        hashPOWShared = uint256();
     }
 
     explicit CDiskBlockIndex(const CBlockIndex* pindex) : CBlockIndex(*pindex) {
         hashPrev = (pprev ? pprev->GetBlockHash() : uint256());
+        hashBlockShared = pindex->GetBlockHash();
+        hashPOWShared = uint256();
     }
 
     ADD_SERIALIZE_METHODS;
@@ -369,6 +410,25 @@ public:
         READWRITE(VARINT(nHeight, VarIntMode::NONNEGATIVE_SIGNED));
         READWRITE(VARINT(nStatus));
         READWRITE(VARINT(nTx));
+    
+        // prepare block hash if not set yet (always scrypt)
+        if(!ser_action.ForRead() && hashBlockShared.IsNull()) {
+            hashBlockShared = this->GetBlockHash();
+        }
+        READWRITE(hashBlockShared);
+
+        if(!ser_action.ForRead()) {
+            // for write prepare POW hash if not set yet.
+            int algo = this->GetAlgo();
+            // we can reuse hashBlockShared if block ALGO is scrypt
+            if(hashPOWShared.IsNull() && algo == ALGO_SCRYPT){
+                hashPOWShared = uint256(hashBlockShared);
+            } else if (hashPOWShared.IsNull()) {
+                hashPOWShared = this->GetBlockHeader().GetPoWHash(algo);
+            }
+        }
+        READWRITE(hashPOWShared);
+
         if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
             READWRITE(VARINT(nFile, VarIntMode::NONNEGATIVE_SIGNED));
         if (nStatus & BLOCK_HAVE_DATA)
@@ -465,8 +525,8 @@ public:
     /** Find the last common block between this chain and a block index entry. */
     const CBlockIndex *FindFork(const CBlockIndex *pindex) const;
 
-    /** Find the earliest block with timestamp equal or greater than the given time and height equal or greater than the given height. */
-    CBlockIndex* FindEarliestAtLeast(int64_t nTime, int height) const;
+    /** Find the earliest block with timestamp equal or greater than the given. */
+    CBlockIndex* FindEarliestAtLeast(int64_t nTime) const;
 };
 
-#endif // BITCOIN_CHAIN_H
+#endif // VERGE_CHAIN_H

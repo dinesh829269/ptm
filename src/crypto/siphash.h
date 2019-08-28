@@ -1,14 +1,10 @@
 // Copyright (c) 2016-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
-#ifndef BITCOIN_CRYPTO_SIPHASH_H
-#define BITCOIN_CRYPTO_SIPHASH_H
-
+#ifndef VERGE_CRYPTO_SIPHASH_H
+#define VERGE_CRYPTO_SIPHASH_H
 #include <stdint.h>
-
 #include <uint256.h>
-
 /** SipHash-2-4 */
 class CSipHasher
 {
@@ -16,8 +12,7 @@ private:
     uint64_t v[4];
     uint64_t tmp;
     int count;
-
-public:
+ public:
     /** Construct a SipHash calculator initialized with 128-bit key (k0, k1) */
     CSipHasher(uint64_t k0, uint64_t k1);
     /** Hash a 64-bit integer worth of data
@@ -30,8 +25,7 @@ public:
     /** Compute the 64-bit SipHash-2-4 of the data written so far. The object remains untouched. */
     uint64_t Finalize() const;
 };
-
-/** Optimized SipHash-2-4 implementation for uint256.
+ /** Optimized SipHash-2-4 implementation for uint256.
  *
  *  It is identical to:
  *    SipHasher(k0, k1)
@@ -43,5 +37,4 @@ public:
  */
 uint64_t SipHashUint256(uint64_t k0, uint64_t k1, const uint256& val);
 uint64_t SipHashUint256Extra(uint64_t k0, uint64_t k1, const uint256& val, uint32_t extra);
-
-#endif // BITCOIN_CRYPTO_SIPHASH_H
+#endif // VERGE_CRYPTO_SIPHASH_H

@@ -1,10 +1,11 @@
-// Copyright (c) 2014-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The Verge Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <qt/winshutdownmonitor.h>
 
-#if defined(Q_OS_WIN)
+#if defined(Q_OS_WIN) && QT_VERSION >= 0x050000
 #include <shutdown.h>
 #include <util/system.h>
 
@@ -63,7 +64,7 @@ void WinShutdownMonitor::registerShutdownBlockReason(const QString& strReason, c
     }
 
     if (shutdownBRCreate(mainWinId, strReason.toStdWString().c_str()))
-        qInfo() << "registerShutdownBlockReason: Successfully registered: " + strReason;
+        qWarning() << "registerShutdownBlockReason: Successfully registered: " + strReason;
     else
         qWarning() << "registerShutdownBlockReason: Failed to register: " + strReason;
 }

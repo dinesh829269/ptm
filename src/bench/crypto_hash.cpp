@@ -1,13 +1,16 @@
-// Copyright (c) 2016-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <iostream>
 
 #include <bench/bench.h>
+#include <bloom.h>
 #include <hash.h>
 #include <random.h>
 #include <uint256.h>
+#include <util/time.h>
 #include <crypto/ripemd160.h>
 #include <crypto/sha1.h>
 #include <crypto/sha256.h>
@@ -79,16 +82,18 @@ static void SipHash_32b(benchmark::State& state)
 static void FastRandom_32bit(benchmark::State& state)
 {
     FastRandomContext rng(true);
+    uint32_t x = 0;
     while (state.KeepRunning()) {
-        rng.rand32();
+        x += rng.rand32();
     }
 }
 
 static void FastRandom_1bit(benchmark::State& state)
 {
     FastRandomContext rng(true);
+    uint32_t x = 0;
     while (state.KeepRunning()) {
-        rng.randbool();
+        x += rng.randbool();
     }
 }
 

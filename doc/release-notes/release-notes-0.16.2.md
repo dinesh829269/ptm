@@ -1,49 +1,61 @@
-Bitcoin Core version 0.16.2 is now available from:
+---
+# This file is licensed under the MIT License (MIT) available on
+# http://opensource.org/licenses/MIT.
+# Text originally from Bitcoin Core project
+# Metadata and small formatting changes from Bitcoin.org project
 
-  <https://bitcoincore.org/bin/bitcoin-core-0.16.2/>
+## Required value below populates the %v variable (note: % needs to be escaped in YAML if it starts a value)
+required_version: 0.16.2
+## Required title.
+title: Bitcoin Core version 0.16.2 released
+## Optional release date.  May be filled in hours/days after a release
+optional_date: 2018-07-29
 
-This is a new minor version release, with various bugfixes
-as well as updated translations.
+---
 
-Please report bugs using the issue tracker at GitHub:
+<div class="post-content" markdown="1">
 
-  <https://github.com/bitcoin/bitcoin/issues>
+Important Notice
+==============
 
-To receive security and update notifications, please subscribe to:
+The information contained in this document originated from the Bitcoin Core project. 
 
-  <https://bitcoincore.org/en/list/announcements/join/>
+This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+
+---
+
+Please report bugs using the issue tracker at github:
+
+  <https://github.com/vergecurrency/VERGE/issues>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
-shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Bitcoin-Qt` (on Mac)
-or `bitcoind`/`bitcoin-qt` (on Linux).
+shut down (which might take a few minutes for older versions), then create a directory in the same root folder as you setup previously, and unzip. 
+It is good practice to call the folder you create the version number. 
+On Mac, copy over `/Applications/VERGE-Qt` 
+or on Linux `verged`/`verge-qt`.
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
 depending on the speed of your machine.
 
-Note that the block database format also changed in version 0.8.0 and there is no
-automatic upgrade code from before version 0.8 to version 0.15.0 or higher. Upgrading
-directly from 0.7.x and earlier without re-downloading the blockchain is not supported.
-However, as usual, old wallet versions are still supported.
 
 Downgrading warning
 -------------------
 
-Wallets created in 0.16 and later are not compatible with versions prior to 0.16
+Wallets created in 5.0.0 and later are not compatible with versions prior to 5.0.0
 and will not work if you try to use newly created wallets in older versions. Existing
 wallets that were created with older versions are not affected by this.
 
 Compatibility
 ==============
 
-Bitcoin Core is extensively tested on multiple operating systems using
+VERGE is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+VERGE should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 0.16.2 change log
@@ -61,11 +73,6 @@ frequently tested on them.
 - #12837 `bf1f150` rpc: fix type mistmatch in `listreceivedbyaddress` (joemphilips)
 - #12743 `657dfc5` Fix csBestBlock/cvBlockChange waiting in rpc/mining (sipa)
 
-### GUI
-- #12432 `f78e7f6` [qt] send: Clear All also resets coin control options (Sjors)
-- #12617 `21dd512` gui: Show messages as text not html (laanwj)
-- #12793 `cf6feb7` qt: Avoid reseting on resetguisettigs=0 (MarcoFalke)
-
 ### Build system
 - #13544 `9fd3e00` depends: Update Qt download url (fanquake)
 - #12573 `88d1a64` Fix compilation when compiler do not support `__builtin_clz*` (532479301)
@@ -79,7 +86,7 @@ frequently tested on them.
 
 ### Miscellaneous
 - #12887 `2291774` Add newlines to end of log messages (jnewbery)
-- #12859 `18b0c69` Bugfix: Include <memory> for `std::unique_ptr` (luke-jr)
+- #12859 `18b0c69` Bugfix: Include `<memory>` for `std::unique_ptr` (luke-jr)
 - #13131 `ce8aa54` Add Windows shutdown handler (ken2812221)
 - #13652 `20461fc` rpc: Fix that CWallet::AbandonTransaction would leave the grandchildren, etc. active (Empact)
 
@@ -114,3 +121,6 @@ And to those that reported security issues:
 - Himanshu Mehta
 
 As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).
+{% endgithubify %}
+
+</div>

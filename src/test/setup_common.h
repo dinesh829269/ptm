@@ -1,9 +1,10 @@
-// Copyright (c) 2015-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_TEST_SETUP_COMMON_H
-#define BITCOIN_TEST_SETUP_COMMON_H
+#ifndef VERGE_TEST_TEST_VERGE_H
+#define VERGE_TEST_TEST_VERGE_H
 
 #include <chainparamsbase.h>
 #include <fs.h>
@@ -11,64 +12,63 @@
 #include <pubkey.h>
 #include <random.h>
 #include <scheduler.h>
+#include <txdb.h>
 #include <txmempool.h>
 
-#include <type_traits>
+#include <memory>
 
 #include <boost/thread.hpp>
 
-// Enable BOOST_CHECK_EQUAL for enum class types
-template <typename T>
-std::ostream& operator<<(typename std::enable_if<std::is_enum<T>::value, std::ostream>::type& stream, const T& e)
+extern uint256 insecure_rand_seed;
+extern FastRandomContext insecure_rand_ctx;
+
+static inline void SeedInsecureRand(bool fDeterministic = false)
 {
-    return stream << static_cast<typename std::underlying_type<T>::type>(e);
+    if (fDeterministic) {
+        insecure_rand_seed = uint256();
+    } else {
+        insecure_rand_seed = GetRandHash();
+    }
+    insecure_rand_ctx = FastRandomContext(insecure_rand_seed);
 }
 
-/**
- * This global and the helpers that use it are not thread-safe.
- *
- * If thread-safety is needed, the global could be made thread_local (given
- * that thread_local is supported on all architectures we support) or a
- * per-thread instance could be used in the multi-threaded test.
- */
-extern FastRandomContext g_insecure_rand_ctx;
-
-/**
- * Flag to make GetRand in random.h return the same number
- */
-extern bool g_mock_deterministic_tests;
-
-static inline void SeedInsecureRand(bool deterministic = false)
-{
-    g_insecure_rand_ctx = FastRandomContext(deterministic);
-}
-
-static inline uint32_t InsecureRand32() { return g_insecure_rand_ctx.rand32(); }
-static inline uint256 InsecureRand256() { return g_insecure_rand_ctx.rand256(); }
-static inline uint64_t InsecureRandBits(int bits) { return g_insecure_rand_ctx.randbits(bits); }
-static inline uint64_t InsecureRandRange(uint64_t range) { return g_insecure_rand_ctx.randrange(range); }
-static inline bool InsecureRandBool() { return g_insecure_rand_ctx.randbool(); }
-
-static constexpr CAmount CENT{1000000};
+static inline uint32_t InsecureRand32() { return insecure_rand_ctx.rand32(); }
+static inline uint256 InsecureRand256() { return insecure_rand_ctx.rand256(); }
+static inline uint64_t InsecureRandBits(int bits) { return insecure_rand_ctx.randbits(bits); }
+static inline uint64_t InsecureRandRange(uint64_t range) { return insecure_rand_ctx.randrange(range); }
+static inline bool InsecureRandBool() { return insecure_rand_ctx.randbool(); }
 
 /** Basic testing setup.
- * This just configures logging, data dir and chain parameters.
+ * This just configures logging and chain parameters.
  */
 struct BasicTestingSetup {
     ECCVerifyHandle globalVerifyHandle;
 
     explicit BasicTestingSetup(const std::string& chainName = CBaseChainParams::MAIN);
     ~BasicTestingSetup();
+	
+	fs::path SetDataDir(const std::string& name);
+
 private:
     const fs::path m_path_root;
 };
 
 /** Testing setup that configures a complete environment.
- * Included are coins database, script check threads setup.
+ * Included are data directory, coins database, script check threads setup.
  */
-struct TestingSetup : public BasicTestingSetup {
+class CConnman;
+class CNode;
+struct CConnmanTest {
+    static void AddNode(CNode& node);
+    static void ClearNodes();
+};
+
+class PeerLogicValidation;
+struct TestingSetup: public BasicTestingSetup {
     boost::thread_group threadGroup;
+    CConnman* connman;
     CScheduler scheduler;
+    std::unique_ptr<PeerLogicValidation> peerLogic;
 
     explicit TestingSetup(const std::string& chainName = CBaseChainParams::MAIN);
     ~TestingSetup();

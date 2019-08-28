@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Copyright (c) 2018 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
@@ -10,10 +10,7 @@
 export LC_ALL=C
 
 EXIT_CODE=0
-OUTPUT=$(git ls-files --full-name -- "*.[cC][pP][pP]" "*.[hH]" "*.[pP][yY]" "*.[sS][hH]" | \
-    grep -vE '^[a-z0-9_./-]+$' | \
-    grep -vE '^src/(secp256k1|univalue)/')
-
+OUTPUT=$(git ls-files -- "*.cpp" "*.h" "*.py" "*.sh" | grep -vE '^[a-z0-9_./-]+$' | grep -vE 'src/(secp256k1|univalue|crypto)/')
 if [[ ${OUTPUT} != "" ]]; then
     echo "Use only lowercase alphanumerics (a-z0-9), underscores (_), hyphens (-) and dots (.)"
     echo "in source code filenames:"

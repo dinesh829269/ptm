@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,38 +8,58 @@
  * Server/client environment: argument handling, config file parsing,
  * thread wrappers, startup time
  */
-#ifndef BITCOIN_UTIL_SYSTEM_H
-#define BITCOIN_UTIL_SYSTEM_H
+#ifndef VERGE_UTIL_SYSTEM_H
+#define VERGE_UTIL_SYSTEM_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/verge-config.h>
 #endif
 
-#include <attributes.h>
 #include <compat.h>
-#include <compat/assumptions.h>
 #include <fs.h>
 #include <logging.h>
 #include <sync.h>
 #include <tinyformat.h>
-#include <util/memory.h>
-#include <util/threadnames.h>
 #include <util/time.h>
+#include <util/memory.h>
 
+#include <atomic>
 #include <exception>
 #include <map>
 #include <set>
 #include <stdint.h>
 #include <string>
-#include <utility>
+#include <unordered_set>
 #include <vector>
 
-#include <boost/thread/condition_variable.hpp> // for boost::thread_interrupted
+#include <boost/signals2/signal.hpp>
+#include <boost/thread.hpp>
 
 // Application startup time (used for uptime calculation)
 int64_t GetStartupTime();
 
-extern const char * const BITCOIN_CONF_FILENAME;
+/** Signals for translation. */
+class CTranslationInterface
+{
+public:
+    /** Translate a message to the native language of the user. */
+    boost::signals2::signal<std::string (const char* psz)> Translate;
+};
+
+extern CTranslationInterface translationInterface;
+
+extern const char * const VERGE_CONF_FILENAME;
+extern const char * const VERGE_PID_FILENAME;
+
+/**
+ * Translation function: Call Translate signal on UI interface, which returns a boost::optional result.
+ * If no translation slot is registered, nothing is returned, and simply return the input.
+ */
+inline std::string _(const char* psz)
+{
+    boost::optional<std::string> rv = translationInterface.Translate(psz);
+    return rv ? (*rv) : psz;
+}
 
 void SetupEnvironment();
 bool SetupNetworking();
@@ -57,7 +78,6 @@ int RaiseFileDescriptorLimit(int nMinFD);
 void AllocateFileRange(FILE *file, unsigned int offset, unsigned int length);
 bool RenameOver(fs::path src, fs::path dest);
 bool LockDirectory(const fs::path& directory, const std::string lockfile_name, bool probe_only=false);
-void UnlockDirectory(const fs::path& directory, const std::string& lockfile_name);
 bool DirIsWritable(const fs::path& directory);
 bool CheckDiskSpace(const fs::path& dir, uint64_t additional_bytes = 0);
 
@@ -68,20 +88,18 @@ void ReleaseDirectoryLocks();
 
 bool TryCreateDirectories(const fs::path& p);
 fs::path GetDefaultDataDir();
-// The blocks directory is always net specific.
-const fs::path &GetBlocksDir();
+const fs::path &GetBlocksDir(bool fNetSpecific = true);
 const fs::path &GetDataDir(bool fNetSpecific = true);
-// Return true if -datadir option points to a valid directory or is not specified.
-bool CheckDataDirOption();
-/** Tests only */
 void ClearDatadirCache();
 fs::path GetConfigFile(const std::string& confPath);
+#ifndef WIN32
+fs::path GetPidFile();
+void CreatePidFile(const fs::path &path, pid_t pid);
+#endif
 #ifdef WIN32
 fs::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
 #endif
-#if HAVE_SYSTEM
 void runCommand(const std::string& strCommand);
-#endif
 
 /**
  * Most paths passed as configuration arguments are treated as relative to
@@ -120,32 +138,8 @@ enum class OptionsCategory {
     HIDDEN // Always the last option to avoid printing these in the help
 };
 
-struct SectionInfo
-{
-    std::string m_name;
-    std::string m_file;
-    int m_line;
-};
-
 class ArgsManager
 {
-public:
-    enum Flags {
-        NONE = 0x00,
-        // Boolean options can accept negation syntax -noOPTION or -noOPTION=1
-        ALLOW_BOOL = 0x01,
-        ALLOW_INT = 0x02,
-        ALLOW_STRING = 0x04,
-        ALLOW_ANY = ALLOW_BOOL | ALLOW_INT | ALLOW_STRING,
-        DEBUG_ONLY = 0x100,
-        /* Some options would cause cross-contamination if values for
-         * mainnet were used while running on regtest/testnet (or vice-versa).
-         * Setting them as NETWORK_ONLY ensures that sharing a config file
-         * between mainnet and regtest/testnet won't cause problems due to these
-         * parameters by accident. */
-        NETWORK_ONLY = 0x200,
-    };
-
 protected:
     friend class ArgsManagerHelper;
 
@@ -153,18 +147,19 @@ protected:
     {
         std::string m_help_param;
         std::string m_help_text;
-        unsigned int m_flags;
+        bool m_debug_only;
+
+        Arg(const std::string& help_param, const std::string& help_text, bool debug_only) : m_help_param(help_param), m_help_text(help_text), m_debug_only(debug_only) {};
     };
 
     mutable CCriticalSection cs_args;
-    std::map<std::string, std::vector<std::string>> m_override_args GUARDED_BY(cs_args);
-    std::map<std::string, std::vector<std::string>> m_config_args GUARDED_BY(cs_args);
-    std::string m_network GUARDED_BY(cs_args);
-    std::set<std::string> m_network_only_args GUARDED_BY(cs_args);
-    std::map<OptionsCategory, std::map<std::string, Arg>> m_available_args GUARDED_BY(cs_args);
-    std::list<SectionInfo> m_config_sections GUARDED_BY(cs_args);
+    std::map<std::string, std::vector<std::string>> m_override_args;
+    std::map<std::string, std::vector<std::string>> m_config_args;
+    std::string m_network;
+    std::set<std::string> m_network_only_args;
+    std::map<OptionsCategory, std::map<std::string, Arg>> m_available_args;
 
-    NODISCARD bool ReadConfigStream(std::istream& stream, const std::string& filepath, std::string& error, bool ignore_invalid_keys = false);
+    bool ReadConfigStream(std::istream& stream, std::string& error, bool ignore_invalid_keys = false);
 
 public:
     ArgsManager();
@@ -174,8 +169,8 @@ public:
      */
     void SelectConfigNetwork(const std::string& network);
 
-    NODISCARD bool ParseParameters(int argc, const char* const argv[], std::string& error);
-    NODISCARD bool ReadConfigFiles(std::string& error, bool ignore_invalid_keys = false);
+    bool ParseParameters(int argc, const char* const argv[], std::string& error);
+    bool ReadConfigFiles(std::string& error, bool ignore_invalid_keys = false);
 
     /**
      * Log warnings for options in m_section_only_args when
@@ -183,12 +178,7 @@ public:
      * on the command line or in a network-specific section in the
      * config file.
      */
-    const std::set<std::string> GetUnsuitableSectionOnlyArgs() const;
-
-    /**
-     * Log warnings for unrecognized section names in the config file.
-     */
-    const std::list<SectionInfo> GetUnrecognizedSections() const;
+    void WarnForSectionOnlyArgs();
 
     /**
      * Return a vector of strings of the given argument
@@ -273,7 +263,7 @@ public:
     /**
      * Add argument
      */
-    void AddArg(const std::string& name, const std::string& help, unsigned int flags, const OptionsCategory& cat);
+    void AddArg(const std::string& name, const std::string& help, const bool debug_only, const OptionsCategory& cat);
 
     /**
      * Add many hidden arguments
@@ -283,22 +273,17 @@ public:
     /**
      * Clear available arguments
      */
-    void ClearArgs() {
-        LOCK(cs_args);
-        m_available_args.clear();
-        m_network_only_args.clear();
-    }
+    void ClearArgs() { m_available_args.clear(); }
 
     /**
      * Get the help string
      */
-    std::string GetHelpMessage() const;
+    std::string GetHelpMessage();
 
     /**
-     * Return Flags for known arg.
-     * Return ArgsManager::NONE for unknown arg.
+     * Check whether we know of this arg
      */
-    unsigned int FlagsOfKnownArg(const std::string& key) const;
+    bool IsArgKnown(const std::string& key, std::string& error);
 };
 
 extern ArgsManager gArgs;
@@ -307,9 +292,6 @@ extern ArgsManager gArgs;
  * @return true if help has been requested via a command-line arg
  */
 bool HelpRequested(const ArgsManager& args);
-
-/** Add help options to the args manager */
-void SetupHelpOptions(ArgsManager& args);
 
 /**
  * Format a string to be used as group of options in help messages
@@ -334,12 +316,27 @@ std::string HelpMessageOpt(const std::string& option, const std::string& message
  */
 int GetNumCores();
 
+void RenameThread(const char* name);
+
+static inline bool NewThread(void(*pfn)(void*), void* parg)
+{
+    try
+    {
+        boost::thread(pfn, parg); // thread detaches when out of scope
+    } catch(boost::thread_resource_error &e) {
+        printf("Error creating thread: %s\n", e.what());
+        return false;
+    }
+    return true;
+}
+
 /**
  * .. and a wrapper that just calls func once
  */
 template <typename Callable> void TraceThread(const char* name,  Callable func)
 {
-    util::ThreadRename(name);
+    std::string s = strprintf("verge-%s", name);
+    RenameThread(s.c_str());
     try
     {
         LogPrintf("%s thread start\n", name);
@@ -370,35 +367,6 @@ std::string CopyrightHolders(const std::string& strPrefix);
  * @return The return value of sched_setschedule(), or 1 on systems without
  * sched_setschedule().
  */
-int ScheduleBatchPriority();
+int ScheduleBatchPriority(void);
 
-namespace util {
-
-//! Simplification of std insertion
-template <typename Tdst, typename Tsrc>
-inline void insert(Tdst& dst, const Tsrc& src) {
-    dst.insert(dst.begin(), src.begin(), src.end());
-}
-template <typename TsetT, typename Tsrc>
-inline void insert(std::set<TsetT>& dst, const Tsrc& src) {
-    dst.insert(src.begin(), src.end());
-}
-
-#ifdef WIN32
-class WinCmdLineArgs
-{
-public:
-    WinCmdLineArgs();
-    ~WinCmdLineArgs();
-    std::pair<int, char**> get();
-
-private:
-    int argc;
-    char** argv;
-    std::vector<std::string> args;
-};
-#endif
-
-} // namespace util
-
-#endif // BITCOIN_UTIL_SYSTEM_H
+#endif // VERGE_UTIL_SYSTEM_H

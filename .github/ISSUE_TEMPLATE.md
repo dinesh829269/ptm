@@ -1,23 +1,67 @@
-<!-- This issue tracker is only for technical issues related to Bitcoin Core.
+# Issue Template
 
-General bitcoin questions and/or support requests are best directed to the Bitcoin StackExchange at https://bitcoin.stackexchange.com.
+## Context
 
-For reporting security issues, please read instructions at https://bitcoincore.org/en/contact/.
+<!-- How has this issue affected you? What are you trying to accomplish?
 
-If the node is "stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardware is stable by running memtest and observe CPU temperature with a load-test tool such as linpack before creating an issue! -->
+Providing context helps us come up with a solution that is most useful in the real world -->
 
-<!-- Describe the issue -->
-<!--- What behavior did you expect? -->
+## Prerequisites
 
-<!--- What was the actual behavior (provide screenshots if the issue is GUI-related)? -->
+* [ ] Are you running the latest version?
 
-<!--- How reliably can you reproduce the issue, what are the steps to do so? -->
+## User Story:
 
-<!-- What version of Bitcoin Core are you using, where did you get it (website, self-compiled, etc)? -->
+* "I'm submitting a ... "
+  - [ ] bug report
+  - [ ] feature request
+  - [ ] support request 
+  - [ ] translation request 
 
-<!-- What type of machine are you observing the error on (OS/CPU and disk type)? -->
+<!-- Please delete (for bugs) or (for features) sections that are not relevant to the Issue you are creating.
 
-<!-- For the GUI-related issue on Linux provide names and versions of a distro, a desktop environment and a graphical shell (if relevant). -->
+Please provide any relevant information about your setup. This is important in case the issue is not reproducible except for under certain conditions. Provide a general summary of the issue in the title of your issue -->
 
-<!-- Any extra information that might be useful in the debugging process. -->
-<!--- This is normally the contents of a `debug.log` or `config.log` file. Raw text or a link to a pastebin type site are preferred. -->
+## Expected Behavior
+
+<!-- If you're describing a bug, tell us what should happen. If you're suggesting a change/improvement, tell us how it should work. -->
+
+## Current Behavior
+
+<!-- If describing a bug, tell us what happens instead of the expected behavior. If suggesting a change/improvement, explain the difference from current behavior. -->
+
+## Screenshots
+
+<!-- If the issue is related to the GUI, screenshots can be added to this issue via drag & drop. -->
+
+## Possible Solution
+
+<!-- Not obligatory, but suggest a fix/reason for the bug or ideas how to implement the addition or change. -->
+
+## Steps to Reproduce (for bugs)
+
+<!-- Provide a link to a live example, or an unambiguous set of steps to reproduce this bug. Include code to reproduce, if relevant. -->
+
+* Steps :
+1.
+2.
+3.
+4.
+
+## Your Environment
+
+<!-- Include as many relevant details about the environment you experienced the bug in. -->
+
+* Verge Release:
+* CPU:
+* GPU:
+* RAM:
+* OS:
+    - [ ] I'm using Mac
+    - [ ] I'm using Linux
+    - [ ] I'm using Mac
+
+## Any extra information that might be useful in the debugging process.
+
+<!-- This is normally the contents of a `debug.log` or `config.log` file. -->
+

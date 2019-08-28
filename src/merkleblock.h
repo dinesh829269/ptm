@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_MERKLEBLOCK_H
-#define BITCOIN_MERKLEBLOCK_H
+#ifndef VERGE_MERKLEBLOCK_H
+#define VERGE_MERKLEBLOCK_H
 
 #include <serialize.h>
 #include <uint256.h>
@@ -115,12 +116,6 @@ public:
      * returns the merkle root, or 0 in case of failure
      */
     uint256 ExtractMatches(std::vector<uint256> &vMatch, std::vector<unsigned int> &vnIndex);
-
-    /** Get number of transactions the merkle proof is indicating for cross-reference with
-     * local blockchain knowledge.
-     */
-    unsigned int GetNumTransactions() const { return nTransactions; };
-
 };
 
 
@@ -170,4 +165,4 @@ private:
     CMerkleBlock(const CBlock& block, CBloomFilter* filter, const std::set<uint256>* txids);
 };
 
-#endif // BITCOIN_MERKLEBLOCK_H
+#endif // VERGE_MERKLEBLOCK_H

@@ -1,4 +1,5 @@
-// Copyright (c) 2012-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +7,6 @@
 #include <streams.h>
 #include <hash.h>
 #include <test/setup_common.h>
-#include <util/strencodings.h>
 
 #include <stdint.h>
 
@@ -183,13 +183,13 @@ BOOST_AUTO_TEST_CASE(varints)
     CDataStream::size_type size = 0;
     for (int i = 0; i < 100000; i++) {
         ss << VARINT(i, VarIntMode::NONNEGATIVE_SIGNED);
-        size += ::GetSerializeSize(VARINT(i, VarIntMode::NONNEGATIVE_SIGNED), 0);
+        size += ::GetSerializeSize(VARINT(i, VarIntMode::NONNEGATIVE_SIGNED), 0, 0);
         BOOST_CHECK(size == ss.size());
     }
 
     for (uint64_t i = 0;  i < 100000000000ULL; i += 999999937) {
         ss << VARINT(i);
-        size += ::GetSerializeSize(VARINT(i), 0);
+        size += ::GetSerializeSize(VARINT(i), 0, 0);
         BOOST_CHECK(size == ss.size());
     }
 
@@ -253,19 +253,11 @@ static bool isCanonicalException(const std::ios_base::failure& ex)
 
     // The string returned by what() can be different for different platforms.
     // Instead of directly comparing the ex.what() with an expected string,
-    // create an instance of exception to see if ex.what() matches
-    // the expected explanatory string returned by the exception instance.
+    // create an instance of exception to see if ex.what() matches 
+    // the expected explanatory string returned by the exception instance. 
     return strcmp(expectedException.what(), ex.what()) == 0;
 }
 
-BOOST_AUTO_TEST_CASE(vector_bool)
-{
-    std::vector<uint8_t> vec1{1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1};
-    std::vector<bool> vec2{1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1};
-
-    BOOST_CHECK(vec1 == std::vector<uint8_t>(vec2.begin(), vec2.end()));
-    BOOST_CHECK(SerializeHash(vec1) == SerializeHash(vec2));
-}
 
 BOOST_AUTO_TEST_CASE(noncanonical)
 {

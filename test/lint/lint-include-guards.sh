@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Copyright (c) 2018 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
@@ -7,7 +7,7 @@
 # Check include guards.
 
 export LC_ALL=C
-HEADER_ID_PREFIX="BITCOIN_"
+HEADER_ID_PREFIX="VERGE_"
 HEADER_ID_SUFFIX="_H"
 
 REGEXP_EXCLUDE_FILES_WITH_PREFIX="src/(crypto/ctaes/|leveldb/|secp256k1/|tinyformat.h|univalue/)"

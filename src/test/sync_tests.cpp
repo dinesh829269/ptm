@@ -1,13 +1,11 @@
-// Copyright (c) 2012-2019 The Bitcoin Core developers
+// Copyright (c) 2012-2017 The Bitcoin Core developers
+// Copyright (c) 2012-2018 Verge Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
-#include <sync.h>
+ #include <sync.h>
 #include <test/setup_common.h>
-
-#include <boost/test/unit_test.hpp>
-
-namespace {
+ #include <boost/test/unit_test.hpp>
+ namespace {
 template <typename MutexType>
 void TestPotentialDeadLockDetected(MutexType& mutex1, MutexType& mutex2)
 {
@@ -28,25 +26,19 @@ void TestPotentialDeadLockDetected(MutexType& mutex1, MutexType& mutex2)
     #endif
 }
 } // namespace
-
-BOOST_FIXTURE_TEST_SUITE(sync_tests, BasicTestingSetup)
-
-BOOST_AUTO_TEST_CASE(potential_deadlock_detected)
+ BOOST_FIXTURE_TEST_SUITE(sync_tests, BasicTestingSetup)
+ BOOST_AUTO_TEST_CASE(potential_deadlock_detected)
 {
     #ifdef DEBUG_LOCKORDER
     bool prev = g_debug_lockorder_abort;
     g_debug_lockorder_abort = false;
     #endif
-
-    CCriticalSection rmutex1, rmutex2;
+     CCriticalSection rmutex1, rmutex2;
     TestPotentialDeadLockDetected(rmutex1, rmutex2);
-
-    Mutex mutex1, mutex2;
+     Mutex mutex1, mutex2;
     TestPotentialDeadLockDetected(mutex1, mutex2);
-
-    #ifdef DEBUG_LOCKORDER
+     #ifdef DEBUG_LOCKORDER
     g_debug_lockorder_abort = prev;
     #endif
 }
-
-BOOST_AUTO_TEST_SUITE_END()
+ BOOST_AUTO_TEST_SUITE_END()

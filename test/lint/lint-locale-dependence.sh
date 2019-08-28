@@ -1,23 +1,39 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 export LC_ALL=C
 KNOWN_VIOLATIONS=(
-    "src/bitcoin-tx.cpp.*stoul"
-    "src/bitcoin-tx.cpp.*trim_right"
+    "src/base58.cpp:.*isspace"
+    "src/verge-tx.cpp.*stoul"
+    "src/verge-tx.cpp.*trim_right"
+    "src/verge-tx.cpp:.*atoi"
+    "src/core_read.cpp.*is_digit"
     "src/dbwrapper.cpp.*stoul"
     "src/dbwrapper.cpp:.*vsnprintf"
     "src/httprpc.cpp.*trim"
     "src/init.cpp:.*atoi"
+    "src/netbase.cpp.*to_lower"
     "src/qt/rpcconsole.cpp:.*atoi"
+    "src/qt/rpcconsole.cpp:.*isdigit"
     "src/rest.cpp:.*strtol"
+    "src/rpc/server.cpp.*to_upper"
     "src/test/dbwrapper_tests.cpp:.*snprintf"
+    "src/test/getarg_tests.cpp.*split"
     "src/torcontrol.cpp:.*atoi"
     "src/torcontrol.cpp:.*strtol"
-    "src/util/strencodings.cpp:.*atoi"
-    "src/util/strencodings.cpp:.*strtol"
-    "src/util/strencodings.cpp:.*strtoul"
-    "src/util/strencodings.h:.*atoi"
+    "src/uint256.cpp:.*isspace"
+    "src/uint256.cpp:.*tolower"
     "src/util/system.cpp:.*atoi"
+    "src/util/system.cpp:.*fprintf"
+    "src/util/system.cpp:.*tolower"
+    "src/util/moneystr.cpp:.*isdigit"
+    "src/util/moneystr.cpp:.*isspace"
+    "src/util/strencodings.cpp:.*atoi"
+    "src/util/strencodings.cpp:.*isspace"
+    "src/util/strencodings.cpp:.*strtol"
+    "src/util/strencodings.cpp:.*strtoll"
+    "src/util/strencodings.cpp:.*strtoul"
+    "src/util/strencodings.cpp:.*strtoull"
+    "src/util/strencodings.h:.*atoi"
 )
 
 REGEXP_IGNORE_EXTERNAL_DEPENDENCIES="^src/(crypto/ctaes/|leveldb/|secp256k1/|tinyformat.h|univalue/)"
@@ -84,7 +100,7 @@ LOCALE_DEPENDENT_FUNCTIONS=(
     mbtowc       # LC_CTYPE
     mktime
     normalize    # boost::locale::normalize
-    printf       # LC_NUMERIC
+#   printf       # LC_NUMERIC
     putwc
     putwchar
     scanf        # LC_NUMERIC
@@ -183,12 +199,13 @@ REGEXP_IGNORE_KNOWN_VIOLATIONS=$(join_array "|" "${KNOWN_VIOLATIONS[@]}")
 
 # Invoke "git grep" only once in order to minimize run-time
 REGEXP_LOCALE_DEPENDENT_FUNCTIONS=$(join_array "|" "${LOCALE_DEPENDENT_FUNCTIONS[@]}")
-GIT_GREP_OUTPUT=$(git grep -E "[^a-zA-Z0-9_\`'\"<>](${REGEXP_LOCALE_DEPENDENT_FUNCTIONS}(_r|_s)?)[^a-zA-Z0-9_\`'\"<>]" -- "*.cpp" "*.h")
+GIT_GREP_OUTPUT=$(git grep -E "[^a-zA-Z0-9_\`'\"<>](${REGEXP_LOCALE_DEPENDENT_FUNCTIONS}(|_r|_s))[^a-zA-Z0-9_\`'\"<>]" -- "*.cpp" "*.h")
 
 EXIT_CODE=0
 for LOCALE_DEPENDENT_FUNCTION in "${LOCALE_DEPENDENT_FUNCTIONS[@]}"; do
-    MATCHES=$(grep -E "[^a-zA-Z0-9_\`'\"<>]${LOCALE_DEPENDENT_FUNCTION}(_r|_s)?[^a-zA-Z0-9_\`'\"<>]" <<< "${GIT_GREP_OUTPUT}" | \
-        grep -vE "\.(c|cpp|h):\s*(//|\*|/\*|\").*${LOCALE_DEPENDENT_FUNCTION}")
+    MATCHES=$(grep -E "[^a-zA-Z0-9_\`'\"<>]${LOCALE_DEPENDENT_FUNCTION}(|_r|_s)[^a-zA-Z0-9_\`'\"<>]" <<< "${GIT_GREP_OUTPUT}" | \
+        grep -vE "\.(c|cpp|h):\s*(//|\*|/\*|\").*${LOCALE_DEPENDENT_FUNCTION}" | \
+        grep -vE 'fprintf\(.*(stdout|stderr)')
     if [[ ${REGEXP_IGNORE_EXTERNAL_DEPENDENCIES} != "" ]]; then
         MATCHES=$(grep -vE "${REGEXP_IGNORE_EXTERNAL_DEPENDENCIES}" <<< "${MATCHES}")
     fi

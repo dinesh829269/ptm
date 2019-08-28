@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -129,11 +130,24 @@ bool CMessageHeader::IsValid(const MessageStartChars& pchMessageStartIn) const
 }
 
 
+ServiceFlags GetDesirableServiceFlags(ServiceFlags services, int nVersion) {
+    if ((services & NODE_NETWORK_LIMITED) && g_initial_block_download_completed) {
+        return nVersion < 90007 
+            ? ServiceFlags(NODE_NETWORK_LIMITED | NODE_BLOOM)
+            : ServiceFlags(NODE_NETWORK_LIMITED | NODE_WITNESS); 
+    } 
+
+    return nVersion < 90007 
+        ? ServiceFlags(NODE_NETWORK | NODE_BLOOM) 
+        : ServiceFlags(NODE_NETWORK | NODE_WITNESS);
+}
+
 ServiceFlags GetDesirableServiceFlags(ServiceFlags services) {
     if ((services & NODE_NETWORK_LIMITED) && g_initial_block_download_completed) {
-        return ServiceFlags(NODE_NETWORK_LIMITED | NODE_WITNESS);
+        return ServiceFlags(NODE_NETWORK_LIMITED | NODE_GETUTXO);
     }
-    return ServiceFlags(NODE_NETWORK | NODE_WITNESS);
+
+    return ServiceFlags(NODE_NETWORK | NODE_GETUTXO);
 }
 
 void SetServiceFlagsIBDCache(bool state) {
@@ -174,8 +188,8 @@ bool operator<(const CInv& a, const CInv& b)
 std::string CInv::GetCommand() const
 {
     std::string cmd;
-    if (type & MSG_WITNESS_FLAG)
-        cmd.append("witness-");
+    /*if (type & MSG_WITNESS_FLAG)
+        cmd.append("witness-");*/
     int masked = type & MSG_TYPE_MASK;
     switch (masked)
     {

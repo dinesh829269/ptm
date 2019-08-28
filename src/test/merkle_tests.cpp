@@ -1,4 +1,5 @@
-// Copyright (c) 2015-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The VERGE Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,9 +14,9 @@ static uint256 ComputeMerkleRootFromBranch(const uint256& leaf, const std::vecto
     uint256 hash = leaf;
     for (std::vector<uint256>::const_iterator it = vMerkleBranch.begin(); it != vMerkleBranch.end(); ++it) {
         if (nIndex & 1) {
-            hash = Hash(it->begin(), it->end(), hash.begin(), hash.end());
+            hash = Hash(BEGIN(*it), END(*it), BEGIN(hash), END(hash));
         } else {
-            hash = Hash(hash.begin(), hash.end(), it->begin(), it->end());
+            hash = Hash(BEGIN(hash), END(hash), BEGIN(*it), END(*it));
         }
         nIndex >>= 1;
     }
@@ -81,7 +82,7 @@ static void MerkleComputation(const std::vector<uint256>& leaves, uint256* proot
     bool matchh = matchlevel == level;
     while (count != (((uint32_t)1) << level)) {
         // If we reach this point, h is an inner value that is not the top.
-        // We combine it with itself (Bitcoin's special rule for odd levels in
+        // We combine it with itself (VERGE's special rule for odd levels in
         // the tree) to produce a higher level one.
         if (pbranch && matchh) {
             pbranch->push_back(h);
