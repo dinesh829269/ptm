@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_COMPAT_BYTESWAP_H
-#define VERGE_COMPAT_BYTESWAP_H
+#ifndef bitphantom_COMPAT_BYTESWAP_H
+#define bitphantom_COMPAT_BYTESWAP_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/verge-config.h>
+#include <config/bitphantom-config.h>
 #endif
 
 #include <stdint.h>
@@ -64,4 +64,4 @@ inline uint64_t bswap_64(uint64_t x)
 
 #endif // defined(__APPLE__)
 
-#endif // VERGE_COMPAT_BYTESWAP_H
+#endif // bitphantom_COMPAT_BYTESWAP_H

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_WALLETMODEL_H
-#define VERGE_QT_WALLETMODEL_H
+#ifndef bitphantom_QT_WALLETMODEL_H
+#define bitphantom_QT_WALLETMODEL_H
 
 #include <amount.h>
 #include <key.h>
@@ -106,7 +106,7 @@ public:
     }
 };
 
-/** Interface to VERGE wallet from Qt view code. */
+/** Interface to bitphantom wallet from Qt view code. */
 class WalletModel : public QObject
 {
     Q_OBJECT
@@ -275,4 +275,4 @@ public Q_SLOTS:
     void pollBalanceChanged();
 };
 
-#endif // VERGE_QT_WALLETMODEL_H
+#endif // bitphantom_QT_WALLETMODEL_H

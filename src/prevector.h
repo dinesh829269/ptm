@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_PREVECTOR_H
-#define VERGE_PREVECTOR_H
+#ifndef bitphantom_PREVECTOR_H
+#define bitphantom_PREVECTOR_H
 
 #include <assert.h>
 #include <stdlib.h>
@@ -527,4 +527,4 @@ public:
 };
 #pragma pack(pop)
 
-#endif // VERGE_PREVECTOR_H
+#endif // bitphantom_PREVECTOR_H

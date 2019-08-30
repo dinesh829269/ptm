@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <qt/overviewpage.h>
 #include <qt/forms/ui_overviewpage.h>
 
-#include <qt/vergeunits.h>
+#include <qt/bitphantomunits.h>
 #include <qt/clientmodel.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
@@ -29,7 +29,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     explicit TxViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-        QAbstractItemDelegate(parent), unit(VERGEUnits::XVG),
+        QAbstractItemDelegate(parent), unit(bitphantomUnits::XVG),
         platformStyle(_platformStyle)
     {
 
@@ -87,7 +87,7 @@ public:
             foreground = option.palette.color(QPalette::Text);
         }
         painter->setPen(foreground);
-        QString amountText = VERGEUnits::formatWithUnit(unit, amount, true, VERGEUnits::separatorAlways);
+        QString amountText = bitphantomUnits::formatWithUnit(unit, amount, true, bitphantomUnits::separatorAlways);
         if(!confirmed)
         {
             amountText = QString("[") + amountText + QString("]");
@@ -162,14 +162,14 @@ void OverviewPage::setBalance(const interfaces::WalletBalances& balances)
 {
     int unit = walletModel->getOptionsModel()->getDisplayUnit();
     m_balances = balances;
-    ui->labelBalance->setText(VERGEUnits::formatWithUnit(unit, balances.balance, false, VERGEUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(VERGEUnits::formatWithUnit(unit, balances.unconfirmed_balance, false, VERGEUnits::separatorAlways));
-    ui->labelImmature->setText(VERGEUnits::formatWithUnit(unit, balances.immature_balance, false, VERGEUnits::separatorAlways));
-    ui->labelTotal->setText(VERGEUnits::formatWithUnit(unit, balances.balance + balances.unconfirmed_balance + balances.immature_balance, false, VERGEUnits::separatorAlways));
-    ui->labelWatchAvailable->setText(VERGEUnits::formatWithUnit(unit, balances.watch_only_balance, false, VERGEUnits::separatorAlways));
-    ui->labelWatchPending->setText(VERGEUnits::formatWithUnit(unit, balances.unconfirmed_watch_only_balance, false, VERGEUnits::separatorAlways));
-    ui->labelWatchImmature->setText(VERGEUnits::formatWithUnit(unit, balances.immature_watch_only_balance, false, VERGEUnits::separatorAlways));
-    ui->labelWatchTotal->setText(VERGEUnits::formatWithUnit(unit, balances.watch_only_balance + balances.unconfirmed_watch_only_balance + balances.immature_watch_only_balance, false, VERGEUnits::separatorAlways));
+    ui->labelBalance->setText(bitphantomUnits::formatWithUnit(unit, balances.balance, false, bitphantomUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(bitphantomUnits::formatWithUnit(unit, balances.unconfirmed_balance, false, bitphantomUnits::separatorAlways));
+    ui->labelImmature->setText(bitphantomUnits::formatWithUnit(unit, balances.immature_balance, false, bitphantomUnits::separatorAlways));
+    ui->labelTotal->setText(bitphantomUnits::formatWithUnit(unit, balances.balance + balances.unconfirmed_balance + balances.immature_balance, false, bitphantomUnits::separatorAlways));
+    ui->labelWatchAvailable->setText(bitphantomUnits::formatWithUnit(unit, balances.watch_only_balance, false, bitphantomUnits::separatorAlways));
+    ui->labelWatchPending->setText(bitphantomUnits::formatWithUnit(unit, balances.unconfirmed_watch_only_balance, false, bitphantomUnits::separatorAlways));
+    ui->labelWatchImmature->setText(bitphantomUnits::formatWithUnit(unit, balances.immature_watch_only_balance, false, bitphantomUnits::separatorAlways));
+    ui->labelWatchTotal->setText(bitphantomUnits::formatWithUnit(unit, balances.watch_only_balance + balances.unconfirmed_watch_only_balance + balances.immature_watch_only_balance, false, bitphantomUnits::separatorAlways));
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users

@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_WALLET_WALLETDB_H
-#define VERGE_WALLET_WALLETDB_H
+#ifndef bitphantom_WALLET_WALLETDB_H
+#define bitphantom_WALLET_WALLETDB_H
 
 #include <stealth.h>
 #include <amount.h>
@@ -284,4 +284,4 @@ private:
 //! Compacts BDB state so that wallet.dat is self-contained (if there are changes)
 void MaybeCompactWalletDB();
 
-#endif // VERGE_WALLET_WALLETDB_H
+#endif // bitphantom_WALLET_WALLETDB_H

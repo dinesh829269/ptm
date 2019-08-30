@@ -1,15 +1,15 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/verge-config.h>
+#include <config/bitphantom-config.h>
 #endif
 
 #include <qt/optionsmodel.h>
 
-#include <qt/vergeunits.h>
+#include <qt/bitphantomunits.h>
 #include <qt/guiutil.h>
 
 #include <interfaces/node.h>
@@ -69,7 +69,7 @@ void OptionsModel::Init(bool resetSettings)
 
     // Display
     if (!settings.contains("nDisplayUnit"))
-        settings.setValue("nDisplayUnit", VERGEUnits::XVG);
+        settings.setValue("nDisplayUnit", bitphantomUnits::XVG);
     nDisplayUnit = settings.value("nDisplayUnit").toInt();
 
     if (!settings.contains("strThirdPartyTxUrls"))

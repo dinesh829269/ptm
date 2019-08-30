@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2019 The VERGE Core developers
+// Copyright (c) 2018-2019 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,10 +10,10 @@
 
 /**
  * Name of client reported in the 'version' message. Report the same name
- * for both verged and verge-qt, to make it harder for attackers to
+ * for both bitphantomd and bitphantom-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("verge");
+const std::string CLIENT_NAME("bitphantom");
 
 /**
  * Client version number

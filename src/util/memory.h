@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef VERGE_UTIL_MEMORY_H
-#define VERGE_UTIL_MEMORY_H
+#ifndef bitphantom_UTIL_MEMORY_H
+#define bitphantom_UTIL_MEMORY_H
 #include <memory>
 #include <utility>
  //! Substitute for C++14 std::make_unique.

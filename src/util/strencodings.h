@@ -1,14 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Utilities for converting data from/to strings.
  */
-#ifndef VERGE_UTIL_STRENCODINGS_H
-#define VERGE_UTIL_STRENCODINGS_H
+#ifndef bitphantom_UTIL_STRENCODINGS_H
+#define bitphantom_UTIL_STRENCODINGS_H
 
 #include <stdint.h>
 #include <string>
@@ -232,4 +232,4 @@ constexpr unsigned char ToUpper(unsigned char c)
  */
 std::string Capitalize(std::string str);
 
-#endif // VERGE_UTIL_STRENCODINGS_H
+#endif // bitphantom_UTIL_STRENCODINGS_H

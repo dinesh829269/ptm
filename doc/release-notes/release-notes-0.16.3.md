@@ -20,13 +20,13 @@ Important Notice
 
 The information contained in this document originated from the Bitcoin Core project. 
 
-This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+This document is to serve as a reference to the changes that where implemented during the most recent bitphantom code base migration. 
 
 ---
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/vergecurrency/VERGE/issues>
+  <https://github.com/bitphantomcurrency/bitphantom/issues>
 
 How to Upgrade
 ==============
@@ -34,8 +34,8 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then create a directory in the same root folder as you setup previously, and unzip. 
 It is good practice to call the folder you create the version number. 
-On Mac, copy over `/Applications/VERGE-Qt` 
-or on Linux `verged`/`verge-qt`.
+On Mac, copy over `/Applications/bitphantom-Qt` 
+or on Linux `bitphantomd`/`bitphantom-qt`.
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
@@ -52,10 +52,10 @@ wallets that were created with older versions are not affected by this.
 Compatibility
 ==============
 
-VERGE is extensively tested on multiple operating systems using
+bitphantom is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-VERGE should also work on most other Unix-like systems but is not
+bitphantom should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 

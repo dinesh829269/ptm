@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_LIMITEDMAP_H
-#define VERGE_LIMITEDMAP_H
+#ifndef bitphantom_LIMITEDMAP_H
+#define bitphantom_LIMITEDMAP_H
 
 #include <assert.h>
 #include <map>
@@ -98,4 +98,4 @@ public:
     }
 };
 
-#endif // VERGE_LIMITEDMAP_H
+#endif // bitphantom_LIMITEDMAP_H

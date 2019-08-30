@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2016 The ShadowCoin developers
 // Copyright (c) 2017-2018 The Particl Core developers
-// Copyright (c) 2017-2018 The Verge Core developers
+// Copyright (c) 2017-2018 The bitphantom Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1707,7 +1707,7 @@ static bool ScanBlock(CSMSG &smsg, const CBlock &block, SecMsgDB &addrpkdb,
     for (const auto &tx : block.vtx) {
         // Harvest public keys from coinstake txns
 
-        if (!tx->IsVergeVersion()) // skip legacy txns
+        if (!tx->IsbitphantomVersion()) // skip legacy txns
             continue;
 
         for (const auto &txin : tx->vin) {
@@ -3709,7 +3709,7 @@ int CSMSG::FundMsg(SecureMessage &smsg, std::string &sError, bool fTestFee, CAmo
         return errorN(SMSG_GENERAL_ERROR, sError, __func__, "Message hash failed.");
     }
 
-    txFund.nVersion = VERGE_TXN_VERSION;
+    txFund.nVersion = bitphantom_TXN_VERSION;
 
     size_t nMsgBytes = SMSG_HDR_LEN + smsg.nPayload;
 

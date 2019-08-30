@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_MESSAGEPAGE_H
-#define VERGE_QT_MESSAGEPAGE_H
+#ifndef bitphantom_QT_MESSAGEPAGE_H
+#define bitphantom_QT_MESSAGEPAGE_H
  #include <QWidget>
  namespace Ui {
     class MessagePage;
@@ -57,4 +57,4 @@ class MessagePage : public QWidget
  signals:
 };
 
-#endif // VERGE_QT_MESSAGEPAGE_H
+#endif // bitphantom_QT_MESSAGEPAGE_H

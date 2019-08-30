@@ -21,8 +21,8 @@
 ** $QT_END_LICENSE$
 */
 
-#ifndef VERGE_QT_PLUGINS_MRICHTEXTEDITOR_MRICHTEXTEDIT_H
-#define VERGE_QT_PLUGINS_MRICHTEXTEDITOR_MRICHTEXTEDIT_H
+#ifndef bitphantom_QT_PLUGINS_MRICHTEXTEDITOR_MRICHTEXTEDIT_H
+#define bitphantom_QT_PLUGINS_MRICHTEXTEDITOR_MRICHTEXTEDIT_H
 
 #include <QPointer>
 #include <ui_mrichtextedit.h>
@@ -89,4 +89,4 @@ class MRichTextEdit : public QWidget, protected Ui::MRichTextEdit {
     QPointer<QTextList> m_lastBlockList;
 };
 
-#endif // VERGE_QT_PLUGINS_MRICHTEXTEDITOR_MRICHTEXTEDIT_H
+#endif // bitphantom_QT_PLUGINS_MRICHTEXTEDITOR_MRICHTEXTEDIT_H

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2018 The Bitcoin Core developers
-# Copyright (c) 2014-2018 The Verge Core developers
+# Copyright (c) 2014-2018 The bitphantom Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Run regression test suite.
@@ -11,7 +11,7 @@ forward all unrecognized arguments onto the individual test scripts.
 Functional tests are disabled on Windows by default. Use --force to run them anyway.
 
 For a description of arguments recognized by test scripts, see
-`test/functional/test_framework/test_framework.py:VergeTestFramework.main`.
+`test/functional/test_framework/test_framework.py:bitphantomTestFramework.main`.
 
 """
 
@@ -106,7 +106,7 @@ BASE_SCRIPTS = [
     # vv Tests less than 30s vv
     'wallet_keypool_topup.py',
     'interface_zmq.py',
-    'interface_verge_cli.py',
+    'interface_bitphantom_cli.py',
     'mempool_resurrect.py',
     'wallet_txn_doublespend.py --mineblock',
     'wallet_txn_clone.py',
@@ -257,11 +257,11 @@ def main():
 
     logging.debug("Temporary test directory at %s" % tmpdir)
 
-    enable_verged = config["components"].getboolean("ENABLE_verged")
+    enable_bitphantomd = config["components"].getboolean("ENABLE_bitphantomd")
 
     if config["environment"]["EXEEXT"] == ".exe" and not args.force:
-        # https://github.com/verge/verge/commit/d52802551752140cf41f0d9a225a43e84404d3e9
-        # https://github.com/verge/verge/pull/5677#issuecomment-136646964
+        # https://github.com/bitphantom/bitphantom/commit/d52802551752140cf41f0d9a225a43e84404d3e9
+        # https://github.com/bitphantom/bitphantom/pull/5677#issuecomment-136646964
         print("Tests currently disabled on Windows by default. Use --force option to enable")
         sys.exit(0)
 
@@ -327,10 +327,10 @@ def main():
 def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=False, args=None, combined_logs_len=0, failfast=False, runs_ci):
     args = args or []
 
-    # Warn if verged is already running (unix only)
+    # Warn if bitphantomd is already running (unix only)
     try:
-        if subprocess.check_output(["pidof", "verged"]) is not None:
-            print("%sWARNING!%s There is already a verged process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "bitphantomd"]) is not None:
+            print("%sWARNING!%s There is already a bitphantomd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -587,7 +587,7 @@ class RPCCoverage():
     Coverage calculation works by having each test script subprocess write
     coverage files into a particular directory. These files contain the RPC
     commands invoked during testing, as well as a complete listing of RPC
-    commands per `verge-cli help` (`rpc_interface.txt`).
+    commands per `bitphantom-cli help` (`rpc_interface.txt`).
 
     After all tests complete, the commands run are combined and diff'd against
     the complete list to calculate uncovered RPC commands.

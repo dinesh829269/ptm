@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -173,7 +173,7 @@ static UniValue verifymessage(const JSONRPCRequest& request)
             "verifymessage \"address\" \"signature\" \"message\"\n"
             "\nVerify a signed message\n"
             "\nArguments:\n"
-            "1. \"address\"         (string, required) The VERGE address to use for the signature.\n"
+            "1. \"address\"         (string, required) The bitphantom address to use for the signature.\n"
             "2. \"signature\"       (string, required) The signature provided by the signer in base 64 encoding (see signmessage).\n"
             "3. \"message\"         (string, required) The message that was signed.\n"
             "\nResult:\n"
@@ -461,7 +461,7 @@ static UniValue echo(const JSONRPCRequest& request)
             "echo|echojson \"message\" ...\n"
             "\nSimply echo back the input arguments. This command is for testing.\n"
             "\nThe difference between echo and echojson is that echojson has argument conversion enabled in the client-side table in"
-            "verge-cli and the GUI. There is no server-side difference."
+            "bitphantom-cli and the GUI. There is no server-side difference."
         );
 
     return request.params;
@@ -486,7 +486,7 @@ UniValue setalgo(const JSONRPCRequest& request)
     throw std::runtime_error(
         "setalgo \"algo\"\n"
         "\nSets algo and returns current and previous algo\n"
-        "Uses the same input as commandline parameters or verge.conf\n"
+        "Uses the same input as commandline parameters or bitphantom.conf\n"
         "If it's invalid the ALGO will be set to scrypt"
     );
     UniValue obj(UniValue::VOBJ);
@@ -523,7 +523,7 @@ UniValue getinfo(const JSONRPCRequest& request)
             "  \"version\": xxxxx,           (numeric) the server version\n"
             "  \"protocolversion\": xxxxx,   (numeric) the protocol version\n"
             "  \"walletversion\": xxxxx,     (numeric) the wallet version\n"
-            "  \"balance\": xxxxxxx,         (numeric) the total VERGE balance of the wallet\n"
+            "  \"balance\": xxxxxxx,         (numeric) the total bitphantom balance of the wallet\n"
             "  \"blocks\": xxxxxx,           (numeric) the current number of blocks processed in the server\n"
             "  \"timeoffset\": xxxxx,        (numeric) the time offset\n"
             "  \"connections\": xxxxx,       (numeric) the number of connections\n"

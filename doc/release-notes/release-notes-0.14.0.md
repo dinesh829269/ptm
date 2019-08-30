@@ -20,13 +20,13 @@ Important Notice
 
 The information contained in this document originated from the Bitcoin Core project. 
 
-This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+This document is to serve as a reference to the changes that where implemented during the most recent bitphantom code base migration. 
 
 ---
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/vergecurrency/VERGE/issues>
+  <https://github.com/bitphantomcurrency/bitphantom/issues>
 
 
 Notable changes
@@ -57,7 +57,7 @@ improved, leading to much shorter sync and initial block download times.
 Manual Pruning
 --------------
 
-VERGE has supported automatically pruning the blockchain since 0.11. Pruning
+bitphantom has supported automatically pruning the blockchain since 0.11. Pruning
 the blockchain allows for significant storage space savings as the vast majority of
 the downloaded data can be discarded after processing so very little of it remains
 on the disk.
@@ -131,7 +131,7 @@ the same thing as the GUI icon. The command takes one boolean parameter,
 Out-of-sync Modal Info Layer
 ----------------------------
 
-When VERGE is out-of-sync on startup, a semi-transparent information
+When bitphantom is out-of-sync on startup, a semi-transparent information
 layer will be shown over top of the normal display. This layer contains
 details about the current sync progress and estimates the amount of time
 remaining to finish syncing. This layer can also be hidden and subsequently
@@ -140,19 +140,19 @@ unhidden by clicking on the progress bar at the bottom of the window.
 Support for JSON-RPC Named Arguments
 ------------------------------------
 
-Commands sent over the JSON-RPC interface and through the `verge-cli` binary
+Commands sent over the JSON-RPC interface and through the `bitphantom-cli` binary
 can now use named arguments. This follows the [JSON-RPC specification](http://www.jsonrpc.org/specification)
 for passing parameters by-name with an object.
 
-`verge-cli` has been updated to support this by parsing `name=value` arguments
+`bitphantom-cli` has been updated to support this by parsing `name=value` arguments
 when the `-named` option is given.
 
 Some examples:
 
-    src/verge-cli -named help command="help"
-    src/verge-cli -named getblockhash height=0
-    src/verge-cli -named getblock blockhash=000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
-    src/verge-cli -named sendtoaddress address="(snip)" amount="1.0" subtractfeefromamount=true
+    src/bitphantom-cli -named help command="help"
+    src/bitphantom-cli -named getblockhash height=0
+    src/bitphantom-cli -named getblock blockhash=000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+    src/bitphantom-cli -named sendtoaddress address="(snip)" amount="1.0" subtractfeefromamount=true
 
 The order of arguments doesn't matter in this case. Named arguments are also
 useful to leave out arguments that should stay at their default value. The
@@ -216,7 +216,7 @@ Low-level RPC changes
    the mempool or if `txindex` is enabled.
 
  - A new RPC command `getmemoryinfo` has been added which will return information
-   about the memory usage of VERGE. This was added in conjunction with
+   about the memory usage of bitphantom. This was added in conjunction with
    optimizations to memory management. See #8753.
    for more information.
 

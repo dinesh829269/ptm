@@ -1,14 +1,14 @@
-<p align="center"><img src="https://raw.githubusercontent.com/vergecurrency/VERGE/master/readme-header.png" alt="Verge Source Code"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/bitphantomcurrency/bitphantom/master/readme-header.png" alt="bitphantom Source Code"></p>
 <p align="center">
-  <a href="https://circleci.com/gh/vergecurrency/VERGE/tree/master" target="_blank"><img src="https://circleci.com/gh/vergecurrency/VERGE/tree/master.svg?style=svg"></a>
+  <a href="https://circleci.com/gh/bitphantomcurrency/bitphantom/tree/master" target="_blank"><img src="https://circleci.com/gh/bitphantomcurrency/bitphantom/tree/master.svg?style=svg"></a>
   <img src="https://img.shields.io/badge/status-stable-green.svg">
   <img src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <a href="https://codecov.io/gh/vergecurrency/VERGE">
-    <img src="https://codecov.io/gh/vergecurrency/VERGE/branch/develop/graph/badge.svg" />
+  <a href="https://codecov.io/gh/bitphantomcurrency/bitphantom">
+    <img src="https://codecov.io/gh/bitphantomcurrency/bitphantom/branch/develop/graph/badge.svg" />
   </a>
 </p>
 
-# VERGE Source Code [XVG]
+# bitphantom Source Code [XVG]
 
 ## Specifications
 Specification | Value
@@ -16,9 +16,9 @@ Specification | Value
 Protocol | PoW (proof of Work)
 Algorithms | scrypt, x17, Lyra2rev2, myr-groestl, & blake2s
 Blocktime | 30 seconds
-Total Supply | 16,500,000,000 XVG
-RPC port | 20102
-P2P port | 21102
+Total Supply | 100,000,000,000 XVG
+RPC port | 80122
+P2P port | 80111
 pre-mine | N/A
 ICO | N/A
 
@@ -37,100 +37,100 @@ Block Number | Reward
 
 ## Resources
 
-* [Blockchain Explorer](https://verge-blockchain.info/)
-* [Mining Pool List](https://vergecurrency.com/community/xvg-mining-pools/)
-* [Black Paper](https://vergecurrency.com/static/blackpaper/Verge-Anonymity-Centric-CryptoCurrency.pdf)
+* [Blockchain Explorer](https://bitphantom-blockchain.info/)
+* [Mining Pool List](https://bitphantomcurrency.com/community/xvg-mining-pools/)
+* [Black Paper](https://bitphantomcurrency.com/static/blackpaper/bitphantom-Anonymity-Centric-CryptoCurrency.pdf)
 
 ### Community
 
-* [Telegram](https://t.me/VERGExvg)
-* [Discord](https://discord.gg/vergecurrency)
-* [Twitter](https://www.twitter.com/vergecurrency)
-* [Facebook](https://www.facebook.com/VERGEcurrency/)
-* [Reddit](https://www.reddit.com/r/vergecurrency/)
+* [Telegram](https://t.me/bitphantomxvg)
+* [Discord](https://discord.gg/bitphantomcurrency)
+* [Twitter](https://www.twitter.com/bitphantomcurrency)
+* [Facebook](https://www.facebook.com/bitphantomcurrency/)
+* [Reddit](https://www.reddit.com/r/bitphantomcurrency/)
 
 ## Wallets
 
-Binary (pre-compiled) wallets are available on all platforms at [https://vergecurrency.com](https://vergecurrency.com/#wallets).
+Binary (pre-compiled) wallets are available on all platforms at [https://bitphantomcurrency.com](https://bitphantomcurrency.com/#wallets).
 
-> **Note:** **Important!** Only download pre-compiled wallets from the official Verge website or official Github repos.
+> **Note:** **Important!** Only download pre-compiled wallets from the official bitphantom website or official Github repos.
 
-> **Note:** For a fresh wallet install you can reduce the blockchain syncing time by downloading [a nightly snapshot](https://verge-blockchain.com/down) and following the [setup instructions](https://verge-blockchain.com/howto).
+> **Note:** For a fresh wallet install you can reduce the blockchain syncing time by downloading [a nightly snapshot](https://bitphantom-blockchain.com/down) and following the [setup instructions](https://bitphantom-blockchain.com/howto).
 
 ### Windows Wallet Usage
 
 1. Download the pre-compiled software.
 2. Install
-3. In windows file explorer, open `c:\Users\XXX\AppData\Roaming\VERGE` (be sure to change XXX to your windows user)
-4. Right click and create a new file `verge.txt`
+3. In windows file explorer, open `c:\Users\XXX\AppData\Roaming\bitphantom` (be sure to change XXX to your windows user)
+4. Right click and create a new file `bitphantom.txt`
 5. Edit the file to have the following contents (be sure to change the password)
 
     ```
-    rpcuser=vergerpcusername
+    rpcuser=bitphantomrpcusername
     rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
-    rpcport=20102
-    port=21102
+    rpcport=80122
+    port=80111
     daemon=1
     algo=groestl
     ```
 
 6. Save and close the file
-7. Rename the file to `verge.conf`
-8. Start the VERGE-qt program.
-9. Open up VERGE-qt console and run `getinfo` (or `getmininginfo`) to verify settings.
+7. Rename the file to `bitphantom.conf`
+8. Start the bitphantom-qt program.
+9. Open up bitphantom-qt console and run `getinfo` (or `getmininginfo`) to verify settings.
 
-> **Note:** You must re-start the wallet after making changes to `verge.conf`.
+> **Note:** You must re-start the wallet after making changes to `bitphantom.conf`.
 
 ### OS X Wallet
 
 1. Download the pre-compiled software.
 2. Double click the DMG
-3. Drag the Verge-Qt to your Applications folder
-4. Double click the Verge-Qt application to open it.
+3. Drag the bitphantom-Qt to your Applications folder
+4. Double click the bitphantom-Qt application to open it.
 5. Go grab a :coffee: while it syncs with the blockchain
 
 > **Note:** It may look like it is frozen or hung while it is indexing and syncing the blockchain. It's not. It's chugging away, but currently the UI doesn't give you a lot of feedback on status. We're working to fix that. Syncing takes a while to complete (ie. > 10 minutes or more) so just be patient.
 
-> **Note:** If you want to change your configuration the file is located at `~/Library/Application\ Support\VERGE\VERGE.conf`. This isn't required by default.
+> **Note:** If you want to change your configuration the file is located at `~/Library/Application\ Support\bitphantom\bitphantom.conf`. This isn't required by default.
 
 ### Unix Wallet
 
 1. Compile using [Unix instructions](doc/build-unix.md).
-2. The wallet GUI is in `./verge/src/qt` and the daemon in `./verge/src`.
+2. The wallet GUI is in `./bitphantom/src/qt` and the daemon in `./bitphantom/src`.
 3. **Optional** - the binaries to your favorite location. for use by all users, run the following commands:
 
     ```shell
-    sudo cp src/VERGEd /usr/bin/
-    sudo cp src/qt/VERGE-qt /usr/bin/
+    sudo cp src/bitphantomd /usr/bin/
+    sudo cp src/qt/bitphantom-qt /usr/bin/
     ```
 
-4. Run `./VERGEd` from wherever you put it. The output from this command will tell you that you need to make a `VERGE.conf` file and will suggest some good starting values.
+4. Run `./bitphantomd` from wherever you put it. The output from this command will tell you that you need to make a `bitphantom.conf` file and will suggest some good starting values.
 5.  Open up your new config file that was created in your home directory in your favorite text editor
 
     ```shell
-    nano ~/.VERGE/VERGE.conf
+    nano ~/.bitphantom/bitphantom.conf
     ```
 
-6. Paste the output from the `VERGEd` command into the VERGE.conf like this: (It is recommended to change the password to something unique.)
+6. Paste the output from the `bitphantomd` command into the bitphantom.conf like this: (It is recommended to change the password to something unique.)
 
     ```
-    rpcuser=vergerpcusername
+    rpcuser=bitphantomrpcusername
     rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
-    rpcport=20102
-    port=21102
+    rpcport=80122
+    port=80111
     daemon=1
     algo=groestl
     ```
 
-7. Save the file and exit your editor. If using `nano` type `ctrl + x` on your keyboard and the `y` and hitting enter. This should have created a `VERGE.conf` file with what you just added.
+7. Save the file and exit your editor. If using `nano` type `ctrl + x` on your keyboard and the `y` and hitting enter. This should have created a `bitphantom.conf` file with what you just added.
 
-8. Start the Verge daemon again
+8. Start the bitphantom daemon again
 
     ```shell
-    ./path/to/VERGEd
+    ./path/to/bitphantomd
     ```
 
-> **Note:** To check the status of how much of the blockchain has been downloaded (aka synced) type `./path/to/VERGEd getinfo`.
+> **Note:** To check the status of how much of the blockchain has been downloaded (aka synced) type `./path/to/bitphantomd getinfo`.
 
 > **Note**: If you see something like 'Killed (program cc1plus)' run ```dmesg``` to see the error(s)/problems(s). This is most likely caused by running out of resources. You may need to add some RAM or add some swap space.
 
@@ -149,8 +149,8 @@ The Easy Method:
 > **Note**: Sometimes linux user permissions are not set up properly, and causes failed compiling in linux. Please ensure your user has access or do the install from root if these problems arise.
 
 ```shell
-sudo rm -Rf ~/VERGE  #(if you already have it)
-sudo apt-get -y install git && cd ~ && git clone https://github.com/vergecurrency/VERGE && cd VERGE && sh go.sh
+sudo rm -Rf ~/bitphantom  #(if you already have it)
+sudo apt-get -y install git && cd ~ && git clone https://github.com/bitphantomcurrency/bitphantom && cd bitphantom && sh go.sh
 ```
 
 The _slightly_ longer version:
@@ -172,7 +172,7 @@ The _slightly_ longer version:
 2. Clone the git repository and compile the daemon and gui wallet:
 
     ```shell
-    git clone https://github.com/vergecurrency/VERGE && cd VERGE && ./autogen.sh && ./configure && make
+    git clone https://github.com/bitphantomcurrency/bitphantom && cd bitphantom && ./autogen.sh && ./configure && make
     ```
 
 > **Note**: If you get a "memory exhausted" error, make a swap file. (https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
@@ -197,7 +197,7 @@ The _slightly_ longer version:
 3. Export the required environment variables
 
     ```shell
-    export VERGE_PLATFORM='mac'
+    export bitphantom_PLATFORM='mac'
     export CXX=clang++
     export CC=clang
     ```
@@ -224,7 +224,7 @@ TODO. Take a look at [building/windows](./building/windows).
 
 ## Docker Images
 
-Check out the [`contrib/readme`](https://github.com/vergecurrency/VERGE/tree/master/contrib/docker) for more information.
+Check out the [`contrib/readme`](https://github.com/bitphantomcurrency/bitphantom/tree/master/contrib/docker) for more information.
 
 ## Mining
 
@@ -251,23 +251,23 @@ ddvnucmtvyiemiuk.onion (sunerok)
 
 ## Donations
 
-We believe in keeping Verge free and open. Any donations to help fuel the development effort are greatly appreciated! :smile:
+We believe in keeping bitphantom free and open. Any donations to help fuel the development effort are greatly appreciated! :smile:
 
-* Address for donations in Verge (XVG): `DDd1pVWr8PPAw1z7DRwoUW6maWh5SsnCcp`
+* Address for donations in bitphantom (XVG): `DDd1pVWr8PPAw1z7DRwoUW6maWh5SsnCcp`
 * Address for donations in Bitcoin (BTC): `142r3vCAH3AzABiQjFPmcrSCp6TDzEDuB1`
 
 ## Special Shout Outs
 
-Special thanks to the following people that have helped make Verge possible. :raised_hands:
+Special thanks to the following people that have helped make bitphantom possible. :raised_hands:
 
-Sunerok, CryptoRekt, MKinney, BearSylla, Hypermist, Pallas1, FuzzBawls, BuZz, glodfinch, InfernoMan, AhmedBodi, BitSpill, MentalCollatz, ekryski and the **entire** #VERGE community!
+Sunerok, CryptoRekt, MKinney, BearSylla, Hypermist, Pallas1, FuzzBawls, BuZz, glodfinch, InfernoMan, AhmedBodi, BitSpill, MentalCollatz, ekryski and the **entire** #bitphantom community!
 
 
 
 
 # Bug Reporting
 
-If you think you've found a bug or a problem with VERGE, please let us know! First, search our issue tracker to see if someone has already reported the problem. If they haven't, open a new issue, and fill out the template with as much information as possible. The more you can tell us about the problem and how it occurred, the more likely we are to fix it.
+If you think you've found a bug or a problem with bitphantom, please let us know! First, search our issue tracker to see if someone has already reported the problem. If they haven't, open a new issue, and fill out the template with as much information as possible. The more you can tell us about the problem and how it occurred, the more likely we are to fix it.
 
 ## _Please do not report security vulnerabilities publicly._
 
@@ -278,9 +278,9 @@ If you think you've found a bug or a problem with VERGE, please let us know! Fir
 
 Since we are a 100% open-source project we strongly prefer if you create a pull-request on Github in the proper repository with the necessary fix.
 
-Alternatively, if you would like to make a suggestion regarding a potential fix please send an email to contact@vergecurrency.com
+Alternatively, if you would like to make a suggestion regarding a potential fix please send an email to contact@bitphantomcurrency.com
 
 
 ### Security-related issues
 
-Contact the developers privately by sending an e-mail to contact@vergecurrency.com with the details of the issue. Do not post the issue on github or anywhere else until the issue has been resolved.
+Contact the developers privately by sending an e-mail to contact@bitphantomcurrency.com with the details of the issue. Do not post the issue on github or anywhere else until the issue has been resolved.

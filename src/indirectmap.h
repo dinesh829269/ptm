@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_INDIRECTMAP_H
-#define VERGE_INDIRECTMAP_H
+#ifndef bitphantom_INDIRECTMAP_H
+#define bitphantom_INDIRECTMAP_H
 
 template <class T>
 struct DereferencingComparator { bool operator()(const T a, const T b) const { return *a < *b; } };
@@ -54,4 +54,4 @@ public:
     const_iterator cend() const     { return m.cend(); }
 };
 
-#endif // VERGE_INDIRECTMAP_H
+#endif // bitphantom_INDIRECTMAP_H

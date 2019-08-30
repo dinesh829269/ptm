@@ -29,7 +29,7 @@ SendMessagesDialog::SendMessagesDialog(Mode mode, Type type, QWidget* parent) : 
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
     if (mode == SendMessagesDialog::Encrypted)
-        ui->addressFrom->setPlaceholderText(tr("Enter a Verge address (e.g. DHe3mTNQztY1wWokdtMprdeCKNoMxyThoV)"));
+        ui->addressFrom->setPlaceholderText(tr("Enter a bitphantom address (e.g. DHe3mTNQztY1wWokdtMprdeCKNoMxyThoV)"));
 #endif
     addEntry();
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addEntry()));

@@ -1,9 +1,9 @@
 // Copyright (c) 2014 The ShadowCoin developers
-// Copyright (c) 2018 Verge
+// Copyright (c) 2018 bitphantom
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef VERGE_SMESSAGE_H
-#define VERGE_SMESSAGE_H
+#ifndef bitphantom_SMESSAGE_H
+#define bitphantom_SMESSAGE_H
 
 #include <leveldb/db.h>
 #include <leveldb/write_batch.h>
@@ -375,4 +375,4 @@ int SecureMsgEncrypt(SecureMessage& smsg, std::string& addressFrom, std::string&
 int SecureMsgDecrypt(bool fTestOnly, std::string& address, unsigned char *pHeader, unsigned char *pPayload, uint32_t nPayload, MessageData& msg);
 int SecureMsgDecrypt(bool fTestOnly, std::string& address, SecureMessage& smsg, MessageData& msg);
 
-#endif // VERGE_SMESSAGE_H
+#endif // bitphantom_SMESSAGE_H

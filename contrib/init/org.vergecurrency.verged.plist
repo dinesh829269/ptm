@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>org.verge.verged</string>
+	<string>org.bitphantom.bitphantomd</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/bin/verged</string>
+		<string>/usr/local/bin/bitphantomd</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>

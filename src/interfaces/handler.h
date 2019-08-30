@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_INTERFACES_HANDLER_H
-#define VERGE_INTERFACES_HANDLER_H
+#ifndef bitphantom_INTERFACES_HANDLER_H
+#define bitphantom_INTERFACES_HANDLER_H
 
 #include <memory>
 
@@ -33,4 +33,4 @@ std::unique_ptr<Handler> MakeHandler(boost::signals2::connection connection);
 
 } // namespace interfaces
 
-#endif // VERGE_INTERFACES_HANDLER_H
+#endif // bitphantom_INTERFACES_HANDLER_H

@@ -33,8 +33,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef VERGE_CRYPTO_POW_SPH_JH_H
-#define VERGE_CRYPTO_POW_SPH_JH_H
+#ifndef bitphantom_CRYPTO_POW_SPH_JH_H
+#define bitphantom_CRYPTO_POW_SPH_JH_H
 
 #ifdef __cplusplus
 extern "C"{
@@ -295,4 +295,4 @@ void sph_jh512_addbits_and_close(
 }
 #endif
 
-#endif // VERGE_CRYPTO_POW_SPH_JH_H
+#endif // bitphantom_CRYPTO_POW_SPH_JH_H

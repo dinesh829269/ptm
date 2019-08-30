@@ -1,10 +1,10 @@
 // Copyright (c) 2018 The Bitcoin Core developers
-// Copyright (c) 2018 Verge Core developers
+// Copyright (c) 2018 bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_BLOCKFILTER_H
-#define VERGE_BLOCKFILTER_H
+#ifndef bitphantom_BLOCKFILTER_H
+#define bitphantom_BLOCKFILTER_H
 
 #include <stdint.h>
 #include <unordered_set>
@@ -144,4 +144,4 @@ public:
     }
 };
 
-#endif // VERGE_BLOCKFILTER_H
+#endif // bitphantom_BLOCKFILTER_H

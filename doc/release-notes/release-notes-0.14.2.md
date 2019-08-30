@@ -20,13 +20,13 @@ Important Notice
 
 The information contained in this document originated from the Bitcoin Core project. 
 
-This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+This document is to serve as a reference to the changes that where implemented during the most recent bitphantom code base migration. 
 
 ---
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/vergecurrency/VERGE/issues>
+  <https://github.com/bitphantomcurrency/bitphantom/issues>
 
 
 Notable changes
@@ -42,7 +42,7 @@ other impact.
 
 This only affects users that have explicitly enabled UPnP through the GUI
 setting or through the `-upnp` option, as since the last UPnP vulnerability
-(in VERGE 0.10.3) it has been disabled by default.
+(in bitphantom 0.10.3) it has been disabled by default.
 
 If you use this option, it is recommended to upgrade to this version as soon as
 possible.
@@ -51,7 +51,7 @@ possible.
 Known Bugs
 ==========
 
-Since 0.14.0 the approximate transaction fee shown in VERGE-Qt when using coin
+Since 0.14.0 the approximate transaction fee shown in bitphantom-Qt when using coin
 control and smart fee estimation does not reflect any change in target from the
 smart fee slider. It will only present an approximate fee calculated using the
 default target. The fee calculated using the correct target is still applied to

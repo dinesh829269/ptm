@@ -1,9 +1,9 @@
 // Copyright (c) 2018 The Bitcoin Core developers
-// Copyright (c) 2018 Verge Core developers
+// Copyright (c) 2018 bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef VERGE_UTIL_BYTEVECTORHASH_H
-#define VERGE_UTIL_BYTEVECTORHASH_H
+#ifndef bitphantom_UTIL_BYTEVECTORHASH_H
+#define bitphantom_UTIL_BYTEVECTORHASH_H
 #include <stdint.h>
 #include <vector>
  /**
@@ -19,4 +19,4 @@ private:
     ByteVectorHash();
     size_t operator()(const std::vector<unsigned char>& input) const;
 };
- #endif // VERGE_UTIL_BYTEVECTORHASH_H
+ #endif // bitphantom_UTIL_BYTEVECTORHASH_H

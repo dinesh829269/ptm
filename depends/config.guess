@@ -1144,10 +1144,10 @@ EOF
 	exit ;;
     mini*:CTIX:SYS*5:*)
 	# "miniframe"
-	echo m68010-convergent-sysv
+	echo m68010-conbitphantomnt-sysv
 	exit ;;
     mc68k:UNIX:SYSTEM5:3.51m)
-	echo m68k-convergent-sysv
+	echo m68k-conbitphantomnt-sysv
 	exit ;;
     M680?0:D-NIX:5.3:*)
 	echo m68k-diab-dnix

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_FLATFILE_H
-#define VERGE_FLATFILE_H
+#ifndef bitphantom_FLATFILE_H
+#define bitphantom_FLATFILE_H
 
 #include <string>
 
@@ -93,4 +93,4 @@ public:
     bool Flush(const FlatFilePos& pos, bool finalize = false);
 };
 
-#endif // VERGE_FLATFILE_H
+#endif // bitphantom_FLATFILE_H

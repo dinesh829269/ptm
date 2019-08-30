@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_INTERFACES_NODE_H
-#define VERGE_INTERFACES_NODE_H
+#ifndef bitphantom_INTERFACES_NODE_H
+#define bitphantom_INTERFACES_NODE_H
 
 #include <addrdb.h>     // For banmap_t
 #include <amount.h>     // For CAmount
@@ -32,7 +32,7 @@ namespace interfaces {
 class Handler;
 class Wallet;
 
-//! Top-level interface for a verge node (verged process).
+//! Top-level interface for a bitphantom node (bitphantomd process).
 class Node
 {
 public:
@@ -233,4 +233,4 @@ std::unique_ptr<Node> MakeNode();
 
 } // namespace interfaces
 
-#endif // VERGE_INTERFACES_NODE_H
+#endif // bitphantom_INTERFACES_NODE_H

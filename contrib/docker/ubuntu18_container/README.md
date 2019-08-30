@@ -1,6 +1,6 @@
 ## Build and start with any other you need
 
-docker build -t my/container_verge .
+docker build -t my/container_bitphantom .
 
 docker-compose stop && docker-compose down && docker-compose up -d  
 
@@ -21,7 +21,7 @@ docker-compose ps
 
 ## Docker direct access
 
-docker exec -i -t container_verge /bin/bash
+docker exec -i -t container_bitphantom /bin/bash
 
 
 

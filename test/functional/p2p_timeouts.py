@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test various net timeouts.
 
-- Create three verged nodes:
+- Create three bitphantomd nodes:
 
     no_verack_node - we never send a verack in response to their version
     no_version_node - we never send a version (only a ping)
@@ -24,7 +24,7 @@
 from time import sleep
 
 from test_framework.mininode import *
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import *
 
 class TestP2PConn(P2PInterface):
@@ -32,7 +32,7 @@ class TestP2PConn(P2PInterface):
         # Don't send a verack in response
         pass
 
-class TimeoutsTest(VergeTestFramework):
+class TimeoutsTest(bitphantomTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

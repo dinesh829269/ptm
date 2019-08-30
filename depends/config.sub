@@ -160,7 +160,7 @@ case $1 in
 			dec* | mips* | sequent* | encore* | pc532* | sgi* | sony* \
 			| att* | 7300* | 3300* | delta* | motorola* | sun[234]* \
 			| unicom* | ibm* | next | hp | isi* | apollo | altos* \
-			| convergent* | ncr* | news | 32* | 3600* | 3100* | hitachi* \
+			| conbitphantomnt* | ncr* | news | 32* | 3600* | 3100* | hitachi* \
 			| c[123]* | convex* | sun | crds | omron* | dg | ultra | tti* \
 			| harris | dolphin | highlevel | gould | cbm | ns | masscomp \
 			| apple | axis | knuth | cray | microblaze* \
@@ -992,7 +992,7 @@ case $basic_machine in
 		basic_machine=microblaze-xilinx
 		;;
 	miniframe)
-		basic_machine=m68000-convergent
+		basic_machine=m68000-conbitphantomnt
 		;;
 	*mint | mint[0-9]* | *MiNT | *MiNT[0-9]*)
 		basic_machine=m68k-atari
@@ -1645,7 +1645,7 @@ case $basic_machine in
 	*-hitachi)
 		os=hiux
 		;;
-	i860-* | *-att | *-ncr | *-altos | *-motorola | *-convergent)
+	i860-* | *-att | *-ncr | *-altos | *-motorola | *-conbitphantomnt)
 		os=sysv
 		;;
 	*-cbm)

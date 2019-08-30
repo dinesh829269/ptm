@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_RPC_UTIL_H
-#define VERGE_RPC_UTIL_H
+#ifndef bitphantom_RPC_UTIL_H
+#define bitphantom_RPC_UTIL_H
 
 #include <pubkey.h>
 #include <script/standard.h>
@@ -25,4 +25,4 @@ CScript CreateMultisigRedeemscript(const int required, const std::vector<CPubKey
 
 UniValue DescribeAddress(const CTxDestination& dest);
 
-#endif // VERGE_RPC_UTIL_H
+#endif // bitphantom_RPC_UTIL_H

@@ -1,7 +1,7 @@
-// Copyright (c) 2016 VERGE Developers
+// Copyright (c) 2016 bitphantom Developers
 
-#ifndef VERGE_CRYPTO_POW_PBKDF2_H
-#define VERGE_CRYPTO_POW_PBKDF2_H
+#ifndef bitphantom_CRYPTO_POW_PBKDF2_H
+#define bitphantom_CRYPTO_POW_PBKDF2_H
 
 #include <openssl/sha.h>
 #include <stdint.h>
@@ -24,4 +24,4 @@ void
 PBKDF2_SHA256(const uint8_t * passwd, size_t passwdlen, const uint8_t * salt,
     size_t saltlen, uint64_t c, uint8_t * buf, size_t dkLen);
 
-#endif // VERGE_CRYPTO_POW_PBKDF2_H
+#endif // bitphantom_CRYPTO_POW_PBKDF2_H

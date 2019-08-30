@@ -20,13 +20,13 @@ Important Note
 
 The information contained in this document originated from the Bitcoin Core project. 
 
-This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+This document is to serve as a reference to the changes that where implemented during the most recent bitphantom code base migration. 
 
 ---
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/vergecurrency/VERGE/issues>
+  <https://github.com/bitphantomcurrency/bitphantom/issues>
 
 
 Notable changes
@@ -62,7 +62,7 @@ this parameter.
 
 Additional information relating to running on low-memory systems can be found
 here:
-[reducing-verged-memory-usage.md](https://gist.github.com/laanwj/efe29c7661ce9b6620a7).
+[reducing-bitphantomd-memory-usage.md](https://gist.github.com/laanwj/efe29c7661ce9b6620a7).
 
 
 0.14.1 Change log

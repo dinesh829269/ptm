@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CORE_MEMUSAGE_H
-#define VERGE_CORE_MEMUSAGE_H
+#ifndef bitphantom_CORE_MEMUSAGE_H
+#define bitphantom_CORE_MEMUSAGE_H
 
 #include <primitives/transaction.h>
 #include <primitives/block.h>
@@ -69,4 +69,4 @@ static inline size_t RecursiveDynamicUsage(const std::shared_ptr<X>& p) {
     return p ? memusage::DynamicUsage(p) + RecursiveDynamicUsage(*p) : 0;
 }
 
-#endif // VERGE_CORE_MEMUSAGE_H
+#endif // bitphantom_CORE_MEMUSAGE_H

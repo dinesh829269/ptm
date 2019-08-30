@@ -11,8 +11,8 @@
    this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 */
 #pragma once
-#ifndef VERGE_CRYPTO_POW_BLAKE2_H
-#define VERGE_CRYPTO_POW_BLAKE2_H
+#ifndef bitphantom_CRYPTO_POW_BLAKE2_H
+#define bitphantom_CRYPTO_POW_BLAKE2_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -152,5 +152,5 @@ extern "C" {
 }
 #endif
 
-#endif // VERGE_CRYPTO_POW_BLAKE2_H
+#endif // bitphantom_CRYPTO_POW_BLAKE2_H
 

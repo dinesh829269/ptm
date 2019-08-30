@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_MODALOVERLAY_H
-#define VERGE_QT_MODALOVERLAY_H
+#ifndef bitphantom_QT_MODALOVERLAY_H
+#define bitphantom_QT_MODALOVERLAY_H
 
 #include <QDateTime>
 #include <QWidget>
@@ -48,4 +48,4 @@ private:
     bool userClosed;
 };
 
-#endif // VERGE_QT_MODALOVERLAY_H
+#endif // bitphantom_QT_MODALOVERLAY_H

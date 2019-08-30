@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_WALLET_COINCONTROL_H
-#define VERGE_WALLET_COINCONTROL_H
+#ifndef bitphantom_WALLET_COINCONTROL_H
+#define bitphantom_WALLET_COINCONTROL_H
 
 #include <policy/feerate.h>
 #include <policy/fees.h>
@@ -89,4 +89,4 @@ private:
     std::set<COutPoint> setSelected;
 };
 
-#endif // VERGE_WALLET_COINCONTROL_H
+#endif // bitphantom_WALLET_COINCONTROL_H

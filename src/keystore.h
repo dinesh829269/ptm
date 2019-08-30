@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_KEYSTORE_H
-#define VERGE_KEYSTORE_H
+#ifndef bitphantom_KEYSTORE_H
+#define bitphantom_KEYSTORE_H
 
 #include <key.h>
 #include <pubkey.h>
@@ -84,4 +84,4 @@ CKeyID GetKeyForDestination(const CKeyStore& store, const CTxDestination& dest);
 /** Checks if a CKey is in the given CKeyStore compressed or otherwise*/
 bool HaveKey(const CKeyStore& store, const CKey& key);
 
-#endif // VERGE_KEYSTORE_H
+#endif // bitphantom_KEYSTORE_H

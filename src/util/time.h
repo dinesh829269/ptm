@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_UTIL_TIME_H
-#define VERGE_UTIL_TIME_H
+#ifndef bitphantom_UTIL_TIME_H
+#define bitphantom_UTIL_TIME_H
 
 #include <stdint.h>
 #include <string>
@@ -36,4 +36,4 @@ std::string FormatISO8601DateTime(int64_t nTime);
 std::string FormatISO8601Date(int64_t nTime);
 std::string FormatISO8601Time(int64_t nTime);
 
-#endif // VERGE_UTIL_TIME_H
+#endif // bitphantom_UTIL_TIME_H

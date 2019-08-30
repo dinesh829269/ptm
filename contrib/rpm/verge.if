@@ -1,10 +1,10 @@
 
-## <summary>policy for verge</summary>
+## <summary>policy for bitphantom</summary>
 
 
 ########################################
 ## <summary>
-##	Transition to verge.
+##	Transition to bitphantom.
 ## </summary>
 ## <param name="domain">
 ## <summary>
@@ -12,19 +12,19 @@
 ## </summary>
 ## </param>
 #
-interface(`verge_domtrans',`
+interface(`bitphantom_domtrans',`
 	gen_require(`
-		type verge_t, verge_exec_t;
+		type bitphantom_t, bitphantom_exec_t;
 	')
 
 	corecmd_search_bin($1)
-	domtrans_pattern($1, verge_exec_t, verge_t)
+	domtrans_pattern($1, bitphantom_exec_t, bitphantom_t)
 ')
 
 
 ########################################
 ## <summary>
-##	Execute verge server in the verge domain.
+##	Execute bitphantom server in the bitphantom domain.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -32,18 +32,18 @@ interface(`verge_domtrans',`
 ##	</summary>
 ## </param>
 #
-interface(`verge_initrc_domtrans',`
+interface(`bitphantom_initrc_domtrans',`
 	gen_require(`
-		type verge_initrc_exec_t;
+		type bitphantom_initrc_exec_t;
 	')
 
-	init_labeled_script_domtrans($1, verge_initrc_exec_t)
+	init_labeled_script_domtrans($1, bitphantom_initrc_exec_t)
 ')
 
 
 ########################################
 ## <summary>
-##	Search verge lib directories.
+##	Search bitphantom lib directories.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -51,18 +51,18 @@ interface(`verge_initrc_domtrans',`
 ##	</summary>
 ## </param>
 #
-interface(`verge_search_lib',`
+interface(`bitphantom_search_lib',`
 	gen_require(`
-		type verge_var_lib_t;
+		type bitphantom_var_lib_t;
 	')
 
-	allow $1 verge_var_lib_t:dir search_dir_perms;
+	allow $1 bitphantom_var_lib_t:dir search_dir_perms;
 	files_search_var_lib($1)
 ')
 
 ########################################
 ## <summary>
-##	Read verge lib files.
+##	Read bitphantom lib files.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -70,18 +70,18 @@ interface(`verge_search_lib',`
 ##	</summary>
 ## </param>
 #
-interface(`verge_read_lib_files',`
+interface(`bitphantom_read_lib_files',`
 	gen_require(`
-		type verge_var_lib_t;
+		type bitphantom_var_lib_t;
 	')
 
 	files_search_var_lib($1)
-	read_files_pattern($1, verge_var_lib_t, verge_var_lib_t)
+	read_files_pattern($1, bitphantom_var_lib_t, bitphantom_var_lib_t)
 ')
 
 ########################################
 ## <summary>
-##	Manage verge lib files.
+##	Manage bitphantom lib files.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -89,18 +89,18 @@ interface(`verge_read_lib_files',`
 ##	</summary>
 ## </param>
 #
-interface(`verge_manage_lib_files',`
+interface(`bitphantom_manage_lib_files',`
 	gen_require(`
-		type verge_var_lib_t;
+		type bitphantom_var_lib_t;
 	')
 
 	files_search_var_lib($1)
-	manage_files_pattern($1, verge_var_lib_t, verge_var_lib_t)
+	manage_files_pattern($1, bitphantom_var_lib_t, bitphantom_var_lib_t)
 ')
 
 ########################################
 ## <summary>
-##	Manage verge lib directories.
+##	Manage bitphantom lib directories.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -108,20 +108,20 @@ interface(`verge_manage_lib_files',`
 ##	</summary>
 ## </param>
 #
-interface(`verge_manage_lib_dirs',`
+interface(`bitphantom_manage_lib_dirs',`
 	gen_require(`
-		type verge_var_lib_t;
+		type bitphantom_var_lib_t;
 	')
 
 	files_search_var_lib($1)
-	manage_dirs_pattern($1, verge_var_lib_t, verge_var_lib_t)
+	manage_dirs_pattern($1, bitphantom_var_lib_t, bitphantom_var_lib_t)
 ')
 
 
 ########################################
 ## <summary>
 ##	All of the rules required to administrate
-##	a verge environment
+##	a bitphantom environment
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -135,23 +135,23 @@ interface(`verge_manage_lib_dirs',`
 ## </param>
 ## <rolecap/>
 #
-interface(`verge_admin',`
+interface(`bitphantom_admin',`
 	gen_require(`
-		type verge_t;
-		type verge_initrc_exec_t;
-		type verge_var_lib_t;
+		type bitphantom_t;
+		type bitphantom_initrc_exec_t;
+		type bitphantom_var_lib_t;
 	')
 
-	allow $1 verge_t:process { ptrace signal_perms };
-	ps_process_pattern($1, verge_t)
+	allow $1 bitphantom_t:process { ptrace signal_perms };
+	ps_process_pattern($1, bitphantom_t)
 
-	verge_initrc_domtrans($1)
+	bitphantom_initrc_domtrans($1)
 	domain_system_change_exemption($1)
-	role_transition $2 verge_initrc_exec_t system_r;
+	role_transition $2 bitphantom_initrc_exec_t system_r;
 	allow $2 system_r;
 
 	files_search_var_lib($1)
-	admin_pattern($1, verge_var_lib_t)
+	admin_pattern($1, bitphantom_var_lib_t)
 
 ')
 

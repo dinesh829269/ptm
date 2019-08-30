@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_TXMEMPOOL_H
-#define VERGE_TXMEMPOOL_H
+#ifndef bitphantom_TXMEMPOOL_H
+#define bitphantom_TXMEMPOOL_H
 
 #include <memory>
 #include <set>
@@ -806,4 +806,4 @@ struct DisconnectedBlockTransactions {
     }
 };
 
-#endif // VERGE_TXMEMPOOL_H
+#endif // bitphantom_TXMEMPOOL_H

@@ -314,7 +314,7 @@ Low-level RPC changes
   entries, as well as to calculate the in-mempool ancestors or descendants of a
   transaction: see `getmempoolentry`, `getmempoolancestors`, `getmempooldescendants`.
 
-- `gettxoutsetinfo` UTXO hash (`hash_serialized`) has changed. There was a divergence between
+- `gettxoutsetinfo` UTXO hash (`hash_serialized`) has changed. There was a dibitphantomnce between
   32-bit and 64-bit platforms, and the txids were missing in the hashed data. This has been
   fixed, but this means that the output will be different than from previous versions.
 
@@ -385,7 +385,7 @@ git merge commit are mentioned.
 - #7842 `d97101e` Do not print minping time in getpeerinfo when no ping received yet (paveljanik)
 - #7518 `be14ca5` Add multiple options to fundrawtransaction (promag)
 - #7756 `9e47fce` Add cursor to iterate over utxo set, use this in `gettxoutsetinfo` (laanwj)
-- #7848 `88616d2` Divergence between 32- and 64-bit when hashing >4GB affects `gettxoutsetinfo` (laanwj)
+- #7848 `88616d2` Dibitphantomnce between 32- and 64-bit when hashing >4GB affects `gettxoutsetinfo` (laanwj)
 - #7827 `4205ad7` Speed up `getchaintips` (mrbandrews)
 - #7762 `a1eb344` Append a message sequence number to every ZMQ notification (jonasschnelli)
 - #7688 `46880ed` List solvability in listunspent output and improve help (sipa)

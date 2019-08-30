@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_SENDMESSAGESDIALOG_H
-#define VERGE_QT_SENDMESSAGESDIALOG_H
+#ifndef bitphantom_QT_SENDMESSAGESDIALOG_H
+#define bitphantom_QT_SENDMESSAGESDIALOG_H
  #include <QDialog>
 #include <QString>
  namespace Ui {
@@ -54,4 +54,4 @@ class SendMessagesDialog : public QDialog
     void on_pasteButton_clicked();
 };
 
-#endif // VERGE_QT_SENDMESSAGESDIALOG_H
+#endif // bitphantom_QT_SENDMESSAGESDIALOG_H

@@ -1,7 +1,7 @@
-Verge Docker Images!
+bitphantom Docker Images!
 
 Started from this:
-   https://github.com/vergecurrency/Docker-Verge-Daemon
+   https://github.com/bitphantomcurrency/Docker-bitphantom-Daemon
 
 However, the official docker images can be found here:
-   https://hub.docker.com/r/vergecurrency/verge/contrib/
+   https://hub.docker.com/r/bitphantomcurrency/bitphantom/contrib/

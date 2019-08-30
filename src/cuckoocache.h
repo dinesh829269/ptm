@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CUCKOOCACHE_H
-#define VERGE_CUCKOOCACHE_H
+#ifndef bitphantom_CUCKOOCACHE_H
+#define bitphantom_CUCKOOCACHE_H
 
 #include <array>
 #include <algorithm>
@@ -478,4 +478,4 @@ public:
 };
 } // namespace CuckooCache
 
-#endif // VERGE_CUCKOOCACHE_H
+#endif // bitphantom_CUCKOOCACHE_H

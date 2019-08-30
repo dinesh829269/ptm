@@ -52,7 +52,7 @@ Please provide any relevant information about your setup. This is important in c
 
 <!-- Include as many relevant details about the environment you experienced the bug in. -->
 
-* Verge Release:
+* bitphantom Release:
 * CPU:
 * GPU:
 * RAM:

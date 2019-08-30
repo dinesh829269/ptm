@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_SPLASHSCREEN_H
-#define VERGE_QT_SPLASHSCREEN_H
+#ifndef bitphantom_QT_SPLASHSCREEN_H
+#define bitphantom_QT_SPLASHSCREEN_H
 
 #include <functional>
 #include <QSplashScreen>
@@ -21,7 +21,7 @@ class Wallet;
 
 /** Class for the splashscreen with information of the running client.
  *
- * @note this is intentionally not a QSplashScreen. VERGE Core initialization
+ * @note this is intentionally not a QSplashScreen. bitphantom Core initialization
  * can take a long time, and in that case a progress window that cannot be
  * moved around and minimized has turned out to be frustrating to the user.
  */
@@ -68,4 +68,4 @@ private:
     std::list<std::unique_ptr<interfaces::Handler>> m_connected_wallet_handlers;
 };
 
-#endif // VERGE_QT_SPLASHSCREEN_H
+#endif // bitphantom_QT_SPLASHSCREEN_H

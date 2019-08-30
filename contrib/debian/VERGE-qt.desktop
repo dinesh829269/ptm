@@ -1,14 +1,14 @@
 [Desktop Entry]
 Version=1.0
-Name=Verge Core
-Comment=Connect to the VERGE P2P Network
-Comment[de]=Verbinde mit dem VERGE peer-to-peer Netzwerk
-Comment[fr]=VERGE, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=VERGE, eşten eşe kriptografik sanal para birimi
-Exec=verge-qt %u
+Name=bitphantom Core
+Comment=Connect to the bitphantom P2P Network
+Comment[de]=Verbinde mit dem bitphantom peer-to-peer Netzwerk
+Comment[fr]=bitphantom, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=bitphantom, eşten eşe kriptografik sanal para birimi
+Exec=bitphantom-qt %u
 Terminal=false
 Type=Application
-Icon=verge128
-MimeType=x-scheme-handler/verge;
+Icon=bitphantom128
+MimeType=x-scheme-handler/bitphantom;
 Categories=Office;Finance;P2P;Network;Qt;
-StartupWMClass=verge-qt
+StartupWMClass=bitphantom-qt

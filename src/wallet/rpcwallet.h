@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_WALLET_RPCWALLET_H
-#define VERGE_WALLET_RPCWALLET_H
+#ifndef bitphantom_WALLET_RPCWALLET_H
+#define bitphantom_WALLET_RPCWALLET_H
 
 #include <script/script.h>
 #include <rpc/server.h>
@@ -34,4 +34,4 @@ bool EnsureWalletIsAvailable(CWallet *, bool avoidException);
 
 UniValue getaddressinfo(const JSONRPCRequest& request);
 UniValue signrawtransactionwithwallet(const JSONRPCRequest& request);
-#endif //VERGE_WALLET_RPCWALLET_H
+#endif //bitphantom_WALLET_RPCWALLET_H

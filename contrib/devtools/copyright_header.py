@@ -20,15 +20,15 @@ EXCLUDE = [
     'src/secp256k1/include/secp256k1_ecdh.h',
     'src/secp256k1/include/secp256k1_recovery.h',
     'src/secp256k1/include/secp256k1_schnorr.h',
-    'src/secp256k1/src/java/com_vergecurrency_NativeSecp256k1.c',
-    'src/secp256k1/src/java/com_vergecurrency_NativeSecp256k1.h',
-    'src/secp256k1/src/java/com_vergecurrency_Secp256k1Context.c',
-    'src/secp256k1/src/java/com_vergecurrency_Secp256k1Context.h',
+    'src/secp256k1/src/java/com_bitphantomcurrency_NativeSecp256k1.c',
+    'src/secp256k1/src/java/com_bitphantomcurrency_NativeSecp256k1.h',
+    'src/secp256k1/src/java/com_bitphantomcurrency_Secp256k1Context.c',
+    'src/secp256k1/src/java/com_bitphantomcurrency_Secp256k1Context.h',
     # univalue:
     'src/univalue/test/object.cpp',
     'src/univalue/lib/univalue_escapes.h',
     # auto generated:
-    'src/qt/vergestrings.cpp',
+    'src/qt/bitphantomstrings.cpp',
     'src/chainparamsseeds.h',
     # other external copyrights:
     'src/tinyformat.h',
@@ -85,11 +85,11 @@ def compile_copyright_regex(copyright_style, year_style, name):
 
 EXPECTED_HOLDER_NAMES = [
     "Satoshi Nakamoto\n",
-    "The VERGE Core developers\n",
-    "The VERGE Core developers \n",
-    "VERGE Core Developers\n",
-    "the VERGE Core developers\n",
-    "The VERGE developers\n",
+    "The bitphantom Core developers\n",
+    "The bitphantom Core developers \n",
+    "bitphantom Core Developers\n",
+    "the bitphantom Core developers\n",
+    "The bitphantom developers\n",
     "The LevelDB Authors\. All rights reserved\.\n",
     "BitPay Inc\.\n",
     "BitPay, Inc\.\n",
@@ -279,7 +279,7 @@ Usage:
     $ ./copyright_header.py report <base_directory> [verbose]
 
 Arguments:
-    <base_directory> - The base directory of a verge source code repository.
+    <base_directory> - The base directory of a bitphantom source code repository.
     [verbose] - Includes a list of every file of each subcategory in the report.
 """
 
@@ -342,7 +342,7 @@ def write_file_lines(filename, file_lines):
 COPYRIGHT = 'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
 YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-HOLDER = 'The Verge Core developers'
+HOLDER = 'The bitphantom Core developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
 def get_updatable_copyright_line(file_lines):
@@ -435,7 +435,7 @@ Usage:
     $ ./copyright_header.py update <base_directory>
 
 Arguments:
-    <base_directory> - The base directory of a verge source code repository.
+    <base_directory> - The base directory of a bitphantom source code repository.
 """
 
 def print_file_action_message(filename, action):
@@ -557,7 +557,7 @@ Usage:
     $ ./copyright_header.py insert <file>
 
 Arguments:
-    <file> - A source file in the verge repository.
+    <file> - A source file in the bitphantom repository.
 """
 
 def insert_cmd(argv):

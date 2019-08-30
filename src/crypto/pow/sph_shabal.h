@@ -33,8 +33,8 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef VERGE_CRYPTO_POW_SPH_SHABAL_H
-#define VERGE_CRYPTO_POW_SPH_SHABAL_H
+#ifndef bitphantom_CRYPTO_POW_SPH_SHABAL_H
+#define bitphantom_CRYPTO_POW_SPH_SHABAL_H
 
 #include <stddef.h>
 #include "sph_types.h"
@@ -341,4 +341,4 @@ void sph_shabal512_addbits_and_close(
 }
 #endif	
 	
-#endif // VERGE_CRYPTO_POW_SPH_SHABAL_H
+#endif // bitphantom_CRYPTO_POW_SPH_SHABAL_H

@@ -1,14 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Money parsing/formatting utilities.
  */
-#ifndef VERGE_UTIL_MONEYSTR_H
-#define VERGE_UTIL_MONEYSTR_H
+#ifndef bitphantom_UTIL_MONEYSTR_H
+#define bitphantom_UTIL_MONEYSTR_H
 
 #include <stdint.h>
 #include <string>
@@ -22,4 +22,4 @@ std::string FormatMoney(const CAmount& n);
 bool ParseMoney(const std::string& str, CAmount& nRet);
 bool ParseMoney(const char* pszIn, CAmount& nRet);
 
-#endif // VERGE_UTIL_MONEYSTR_H
+#endif // bitphantom_UTIL_MONEYSTR_H

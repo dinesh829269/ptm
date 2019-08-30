@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SUPPORT_EVENTS_H
-#define VERGE_SUPPORT_EVENTS_H
+#ifndef bitphantom_SUPPORT_EVENTS_H
+#define bitphantom_SUPPORT_EVENTS_H
 
 #include <ios>
 #include <memory>
@@ -54,4 +54,4 @@ inline raii_evhttp_connection obtain_evhttp_connection_base(struct event_base* b
     return result;
 }
 
-#endif // VERGE_SUPPORT_EVENTS_H
+#endif // bitphantom_SUPPORT_EVENTS_H

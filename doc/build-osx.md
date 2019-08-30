@@ -40,17 +40,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
 
-Build Verge Core
+Build bitphantom Core
 ------------------------
 
-1. Clone the verge source code and cd into `verge`
+1. Clone the bitphantom source code and cd into `bitphantom`
 
-        git clone https://github.com/vergecurrency/VERGE
-        cd verge
+        git clone https://github.com/bitphantomcurrency/bitphantom
+        cd bitphantom
 
-2.  Build verge-core:
+2.  Build bitphantom-core:
 
-    Configure and build the headless verge binaries as well as the GUI (if Qt is found).
+    Configure and build the headless bitphantom binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -71,26 +71,26 @@ Build Verge Core
 Running
 -------
 
-Verge Core is now available at `./src/verged`
+bitphantom Core is now available at `./src/bitphantomd`
 
 Before running, it's recommended you create an RPC configuration file.
 
-    echo -e "rpcuser=vergerpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Verge/verge.conf"
+    echo -e "rpcuser=bitphantomrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/bitphantom/bitphantom.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/Verge/verge.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/bitphantom/bitphantom.conf"
 
-The first time you run verged, it will start downloading the blockchain. This process could take several hours.
+The first time you run bitphantomd, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/Verge/debug.log
+    tail -f $HOME/Library/Application\ Support/bitphantom/debug.log
 
 Other commands:
 -------
 
-    ./src/verged -daemon # Starts the verge daemon.
-    ./src/verge-cli --help # Outputs a list of command-line options.
-    ./src/verge-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/bitphantomd -daemon # Starts the bitphantom daemon.
+    ./src/bitphantom-cli --help # Outputs a list of command-line options.
+    ./src/bitphantom-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----

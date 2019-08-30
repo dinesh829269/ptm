@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CONSENSUS_TX_VERIFY_H
-#define VERGE_CONSENSUS_TX_VERIFY_H
+#ifndef bitphantom_CONSENSUS_TX_VERIFY_H
+#define bitphantom_CONSENSUS_TX_VERIFY_H
 
 #include <amount.h>
 
@@ -79,4 +79,4 @@ bool EvaluateSequenceLocks(const CBlockIndex& block, std::pair<int, int64_t> loc
  */
 bool SequenceLocks(const CTransaction &tx, int flags, std::vector<int>* prevHeights, const CBlockIndex& block);
 
-#endif // VERGE_CONSENSUS_TX_VERIFY_H
+#endif // bitphantom_CONSENSUS_TX_VERIFY_H

@@ -1,6 +1,6 @@
 [Protocol]
-exec=verge-qt '%u'
-protocol=verge
+exec=bitphantom-qt '%u'
+protocol=bitphantom
 input=none
 output=none
 helper=true

@@ -3,7 +3,7 @@
 #include <sendmessagesdialog.h>
 #include <mrichtextedit.h>
 #include <messagemodel.h>
-#include <vergegui.h>
+#include <bitphantomgui.h>
 #include <csvmodelwriter.h>
 #include <guiutil.h>
 #include <QSortFilterProxyModel>

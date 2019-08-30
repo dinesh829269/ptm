@@ -1,18 +1,18 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CHAINPARAMSBASE_H
-#define VERGE_CHAINPARAMSBASE_H
+#ifndef bitphantom_CHAINPARAMSBASE_H
+#define bitphantom_CHAINPARAMSBASE_H
 
 #include <memory>
 #include <string>
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between verge-cli and verged)
- * of a given instance of the VERGE system.
+ * CBaseChainParams defines the base parameters (shared between bitphantom-cli and bitphantomd)
+ * of a given instance of the bitphantom system.
  */
 class CBaseChainParams
 {
@@ -54,4 +54,4 @@ const CBaseChainParams& BaseParams();
 /** Sets the params returned by Params() to those for the given network. */
 void SelectBaseParams(const std::string& chain);
 
-#endif // VERGE_CHAINPARAMSBASE_H
+#endif // bitphantom_CHAINPARAMSBASE_H

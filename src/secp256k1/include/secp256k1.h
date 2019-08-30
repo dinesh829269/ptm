@@ -587,7 +587,7 @@ SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ec_pubkey_tweak_mul(
  *
  * This function provides a seed which is combined into the blinding value: that
  * blinding value is added before each multiplication (and removed afterwards) so
- * that it does not affect function results, but verges against attacks which
+ * that it does not affect function results, but bitphantoms against attacks which
  * rely on any input-dependent behaviour.
  *
  * You should call this after secp256k1_context_create or

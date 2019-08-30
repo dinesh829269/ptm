@@ -1,10 +1,10 @@
 // Copyright (c) 2014 The ShadowCoin developers
-// Copyright (c) 2018 Verge
+// Copyright (c) 2018 bitphantom
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_STEALTH_H
-#define VERGE_STEALTH_H
+#ifndef bitphantom_STEALTH_H
+#define bitphantom_STEALTH_H
 
 #include <serialize.h>
 #include <logging.h>
@@ -117,4 +117,4 @@ int StealthSharedToSecretSpend(ec_secret& sharedS, ec_secret& spendSecret, ec_se
 bool IsStealthAddress(const std::string& encodedAddress);
 bool GenerateNewStealthAddress(std::string& sError, std::string& sLabel, CStealthAddress& sxAddr);
 
-#endif // VERGE_STEALTH_H
+#endif // bitphantom_STEALTH_H

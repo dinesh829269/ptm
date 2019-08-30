@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CRYPTO_COMMON_H
-#define VERGE_CRYPTO_COMMON_H
+#ifndef bitphantom_CRYPTO_COMMON_H
+#define bitphantom_CRYPTO_COMMON_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/verge-config.h>
+#include <config/bitphantom-config.h>
 #endif
 
 #include <stdint.h>
@@ -101,4 +101,4 @@ uint64_t static inline CountBits(uint64_t x)
     return ret;
 }
 
-#endif // VERGE_CRYPTO_COMMON_H
+#endif // bitphantom_CRYPTO_COMMON_H

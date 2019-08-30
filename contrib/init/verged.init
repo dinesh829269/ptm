@@ -1,36 +1,36 @@
 #!/bin/bash
 #
-#  verged The verge core server.
+#  bitphantomd The bitphantom core server.
 #
 #
 # chkconfig: 345 80 20
-# description: verged
-# processname: verged
+# description: bitphantomd
+# processname: bitphantomd
 #
 
 # Source function library.
 . /etc/init.d/functions
 
-# you can override defaults in /etc/sysconfig/verged, see below
-if [ -f /etc/sysconfig/verged ]; then
-        . /etc/sysconfig/verged
+# you can override defaults in /etc/sysconfig/bitphantomd, see below
+if [ -f /etc/sysconfig/bitphantomd ]; then
+        . /etc/sysconfig/bitphantomd
 fi
 
 RETVAL=0
 
-prog=verged
-# you can override the lockfile via VERGED_LOCKFILE in /etc/sysconfig/verged
-lockfile=${VERGED_LOCKFILE-/var/lock/subsys/verged}
+prog=bitphantomd
+# you can override the lockfile via bitphantomD_LOCKFILE in /etc/sysconfig/bitphantomd
+lockfile=${bitphantomD_LOCKFILE-/var/lock/subsys/bitphantomd}
 
-# verged defaults to /usr/bin/verged, override with VERGED_BIN
-verged=${VERGED_BIN-/usr/bin/verged}
+# bitphantomd defaults to /usr/bin/bitphantomd, override with bitphantomD_BIN
+bitphantomd=${bitphantomD_BIN-/usr/bin/bitphantomd}
 
-# verged opts default to -disablewallet, override with VERGED_OPTS
-verged_opts=${VERGED_OPTS--disablewallet}
+# bitphantomd opts default to -disablewallet, override with bitphantomD_OPTS
+bitphantomd_opts=${bitphantomD_OPTS--disablewallet}
 
 start() {
     echo -n $"Starting $prog: "
-    daemon $DAEMONOPTS $verged $verged_opts
+    daemon $DAEMONOPTS $bitphantomd $bitphantomd_opts
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile

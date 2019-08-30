@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vergecurrency;
+package com.bitphantomcurrency;
 
 public class NativeSecp256k1Util{
 

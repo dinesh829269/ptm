@@ -33,7 +33,7 @@ import time
 
 from test_framework.mininode import *
 from test_framework.script import *
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import *
 
 HTTP_DISCONNECT_ERRORS = [http.client.CannotSendRequest]
@@ -42,7 +42,7 @@ try:
 except AttributeError:
     pass
 
-class ChainstateWriteCrashTest(VergeTestFramework):
+class ChainstateWriteCrashTest(bitphantomTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.setup_clean_chain = False
@@ -84,14 +84,14 @@ class ChainstateWriteCrashTest(VergeTestFramework):
                 return utxo_hash
             except:
                 # An exception here should mean the node is about to crash.
-                # If verged exits, then try again.  wait_for_node_exit()
-                # should raise an exception if verged doesn't exit.
+                # If bitphantomd exits, then try again.  wait_for_node_exit()
+                # should raise an exception if bitphantomd doesn't exit.
                 self.wait_for_node_exit(node_index, timeout=10)
             self.crashed_on_restart += 1
             time.sleep(1)
 
-        # If we got here, verged isn't coming back up on restart.  Could be a
-        # bug in verged, or we've gotten unlucky with our dbcrash ratio --
+        # If we got here, bitphantomd isn't coming back up on restart.  Could be a
+        # bug in bitphantomd, or we've gotten unlucky with our dbcrash ratio --
         # perhaps we generated a test case that blew up our cache?
         # TODO: If this happens a lot, we should try to restart without -dbcrashratio
         # and make sure that recovery happens.

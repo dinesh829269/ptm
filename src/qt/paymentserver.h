@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_PAYMENTSERVER_H
-#define VERGE_QT_PAYMENTSERVER_H
+#ifndef bitphantom_QT_PAYMENTSERVER_H
+#define bitphantom_QT_PAYMENTSERVER_H
 
 // This class handles payment requests from clicking on
-// verge: URIs
+// bitphantom: URIs
 //
 // This is somewhat tricky, because we have to deal with
 // the situation where the user clicks on a link during
@@ -144,4 +144,4 @@ private:
     OptionsModel *optionsModel;
 };
 
-#endif // VERGE_QT_PAYMENTSERVER_H
+#endif // bitphantom_QT_PAYMENTSERVER_H

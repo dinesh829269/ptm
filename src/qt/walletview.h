@@ -1,16 +1,16 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_WALLETVIEW_H
-#define VERGE_QT_WALLETVIEW_H
+#ifndef bitphantom_QT_WALLETVIEW_H
+#define bitphantom_QT_WALLETVIEW_H
 
 #include <amount.h>
 
 #include <QStackedWidget>
 
-class VERGEGUI;
+class bitphantomGUI;
 class ClientModel;
 class OverviewPage;
 class PlatformStyle;
@@ -40,14 +40,14 @@ public:
     explicit WalletView(const PlatformStyle *platformStyle, QWidget *parent);
     ~WalletView();
 
-    void setVERGEGUI(VERGEGUI *gui);
+    void setbitphantomGUI(bitphantomGUI *gui);
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
     */
     void setClientModel(ClientModel *clientModel);
     WalletModel *getWalletModel() { return walletModel; }
     /** Set the wallet model.
-        The wallet model represents a verge wallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a bitphantom wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
     void setWalletModel(WalletModel *walletModel);
@@ -130,4 +130,4 @@ Q_SIGNALS:
     void outOfSyncWarningClicked();
 };
 
-#endif // VERGE_QT_WALLETVIEW_H
+#endif // bitphantom_QT_WALLETVIEW_H

@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_TXDB_H
-#define VERGE_TXDB_H
+#ifndef bitphantom_TXDB_H
+#define bitphantom_TXDB_H
 
 #include <coins.h>
 #include <dbwrapper.h>
@@ -99,4 +99,4 @@ public:
     bool LoadBlockIndexGuts(const Consensus::Params& consensusParams, std::function<CBlockIndex*(const uint256&)> insertBlockIndex);
 };
 
-#endif // VERGE_TXDB_H
+#endif // bitphantom_TXDB_H

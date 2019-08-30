@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_TEST_SCRIPTNUM10_H
-#define VERGE_TEST_SCRIPTNUM10_H
+#ifndef bitphantom_TEST_SCRIPTNUM10_H
+#define bitphantom_TEST_SCRIPTNUM10_H
 
 #include <algorithm>
 #include <limits>
@@ -181,4 +181,4 @@ private:
 };
 
 
-#endif // VERGE_TEST_BIGNUM_H
+#endif // bitphantom_TEST_BIGNUM_H

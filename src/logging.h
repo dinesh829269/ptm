@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_LOGGING_H
-#define VERGE_LOGGING_H
+#ifndef bitphantom_LOGGING_H
+#define bitphantom_LOGGING_H
 
 #include <fs.h>
 #include <tinyformat.h>
@@ -164,4 +164,4 @@ template<typename T, typename... Args> static inline void MarkUsed(const T& t, c
 } while(0)
 #endif
 
-#endif // VERGE_LOGGING_H
+#endif // bitphantom_LOGGING_H

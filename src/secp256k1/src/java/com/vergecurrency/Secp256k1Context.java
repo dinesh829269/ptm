@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vergecurrency;
+package com.bitphantomcurrency;
 
 /**
  * This class holds the context reference used in native methods 

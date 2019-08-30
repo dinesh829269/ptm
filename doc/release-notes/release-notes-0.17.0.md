@@ -20,13 +20,13 @@ Important Notice
 
 The information contained in this document originated from the Bitcoin Core project. 
 
-This document is to serve as a reference to the changes that where implemented during the most recent VERGE code base migration. 
+This document is to serve as a reference to the changes that where implemented during the most recent bitphantom code base migration. 
 
 ---
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/vergecurrency/VERGE/issues>
+  <https://github.com/bitphantomcurrency/bitphantom/issues>
 
 How to Upgrade
 ==============
@@ -34,8 +34,8 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then create a directory in the same root folder as you setup previously, and unzip. 
 It is good practice to call the folder you create the version number. 
-On Mac, copy over `/Applications/VERGE-Qt` 
-or on Linux `verged`/`verge-qt`.
+On Mac, copy over `/Applications/bitphantom-Qt` 
+or on Linux `bitphantomd`/`bitphantom-qt`.
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
@@ -56,10 +56,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-VERGE is extensively tested on multiple operating systems using
+bitphantom is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
 
-VERGE should also work on most other Unix-like systems but is not
+bitphantom should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't
@@ -73,7 +73,7 @@ Changed configuration options
 -----------------------------
 
 - `-includeconf=<file>` can be used to include additional configuration files.
-  Only works inside the `verge.conf` file, not inside included files or from
+  Only works inside the `bitphantom.conf` file, not inside included files or from
   command-line. Multiple files may be included. Can be disabled from command-
   line via `-noincludeconf`. Note that multi-argument commands like
   `-includeconf` will override preceding `-noincludeconf`, i.e.
@@ -82,7 +82,7 @@ Changed configuration options
   includeconf=relative.conf
   ```
 
-  as verge.conf will still include `relative.conf`.
+  as bitphantom.conf will still include `relative.conf`.
 
 GUI changes
 -----------
@@ -135,8 +135,8 @@ It is now possible for a single configuration file to set different
 options for different networks. This is done by using sections or by
 prefixing the option with the network, such as:
 
-    main.uacomment=verge
-    test.uacomment=verge-testnet
+    main.uacomment=bitphantom
+    test.uacomment=bitphantom-testnet
     regtest.uacomment=regtest
     [main]
     mempoolsize=300
@@ -155,7 +155,7 @@ outside of sections.
 
 A new 'label' API has been introduced for the wallet. This is intended as a
 replacement for the deprecated 'account' API. The 'account' can continue to
-be used in V0.17 by starting verged with the '-deprecatedrpc=accounts'
+be used in V0.17 by starting bitphantomd with the '-deprecatedrpc=accounts'
 argument, and will be fully removed in V0.18.
 
 The label RPC methods mirror the account functionality, with the following functional differences:
@@ -188,10 +188,10 @@ Here are the changes to RPC methods:
 | `listtransactions`     | The `account` named parameter has been renamed to `dummy`. If provided, the `dummy` parameter must be set to the string `*`, unless running with the `-deprecatedrpc=accounts` argument (in which case functionality is unchanged). |
 | `getbalance`           | `account`, `minconf` and `include_watchonly` parameters are deprecated, and can only be used if running with '-deprecatedrpc=accounts' |
 
-BIP 174 Partially Signed VERGE Transactions support
+BIP 174 Partially Signed bitphantom Transactions support
 -----------------------------------------------------
 
-[BIP 174 PSBT](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for VERGE transactions that are not fully signed
+[BIP 174 PSBT](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for bitphantom transactions that are not fully signed
 yet, together with relevant metadata to help entities work towards signing it.
 It is intended to simplify workflows where multiple parties need to cooperate to
 produce a transaction. Examples include hardware wallets, multisig setups, and
@@ -199,7 +199,7 @@ produce a transaction. Examples include hardware wallets, multisig setups, and
 
 ### Overall workflow
 
-Overall, the construction of a fully signed VERGE transaction goes through the
+Overall, the construction of a fully signed bitphantom transaction goes through the
 following steps:
 
 - A **Creator** proposes a particular transaction to be created. He constructs
@@ -214,7 +214,7 @@ following steps:
   partial signature for the inputs for which they have relevant key(s).
 - A **Finalizer** is run for each input to convert the partial signatures and
   possibly script information into a final `scriptSig` and/or `scriptWitness`.
-- An **Extractor** produces a valid VERGE transaction (in network format)
+- An **Extractor** produces a valid bitphantom transaction (in network format)
   from a PSBT for which all inputs are finalized.
 
 Generally, each of the above (excluding Creator and Extractor) will simply
@@ -294,9 +294,9 @@ Low-level RPC changes
    `fee`, `modifiedfee`, `ancestorfee` and `descendantfee`.
 - The new RPC `getzmqnotifications` returns information about active ZMQ
   notifications.
-- When VERGE is not started with any `-wallet=<path>` options, the name of
+- When bitphantom is not started with any `-wallet=<path>` options, the name of
   the default wallet returned by `getwalletinfo` and `listwallets` RPCs is
-  now the empty string `""` instead of `"wallet.dat"`. If VERGE is started
+  now the empty string `""` instead of `"wallet.dat"`. If bitphantom is started
   with any `-wallet=<path>` options, there is no change in behavior, and the
   name of any wallet is just its `<path>` string.
 - Passing an empty string (`""`) as the `address_type` parameter to
@@ -326,7 +326,7 @@ Low-level RPC changes
   `pubkeys`, `sigsrequired`, `pubkey`, `addresses`, `embedded`, `iscompressed`,
   `account`, `timestamp`, `hdkeypath`, `hdmasterkeyid`.
 - `signrawtransaction` is deprecated and will be fully removed in v0.18. To use
-  `signrawtransaction` in v0.17, restart verged with
+  `signrawtransaction` in v0.17, restart bitphantomd with
   `-deprecatedrpc=signrawtransaction`. Projects should transition to using
   `signrawtransactionwithkey` and `signrawtransactionwithwallet` before
   upgrading to v0.18.
@@ -340,7 +340,7 @@ Other API changes
 
 - The log timestamp format is now ISO 8601 (e.g. "2018-02-28T12:34:56Z").
 
-- When running verged with `-debug` but without `-daemon`, logging to stdout
+- When running bitphantomd with `-debug` but without `-daemon`, logging to stdout
   is now the default behavior. Setting `-printtoconsole=1` no longer implicitly
   disables logging to debug.log. Instead, logging to file can be explicitly disabled
   by setting `-debuglogfile=0`.
@@ -349,7 +349,7 @@ Transaction index changes
 -------------------------
 
 The transaction index is now built separately from the main node procedure,
-meaning the `-txindex` flag can be toggled without a full reindex. If verged
+meaning the `-txindex` flag can be toggled without a full reindex. If bitphantomd
 is run with `-txindex` on a node that is already partially or fully synced
 without one, the transaction index will be built in the background and become
 available once caught up. When switching from running `-txindex` to running

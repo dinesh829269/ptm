@@ -1,5 +1,5 @@
 //
-// Simple VERGE Payment Protocol messages
+// Simple bitphantom Payment Protocol messages
 //
 // Use fields 100+ for extensions
 //
@@ -7,10 +7,10 @@
 syntax = "proto2";
 
 package payments;
-option java_package = "org.verge.protocols.payments";
+option java_package = "org.bitphantom.protocols.payments";
 option java_outer_classname = "Protos";
 
-// Generalized form of "send payment to this/these verge addresses"
+// Generalized form of "send payment to this/these bitphantom addresses"
 message Output {
 	optional uint64 amount = 1 [default = 0]; // amount is integer-number-of-satoshis
 	required bytes script = 2; // usually one of the standard Script forms

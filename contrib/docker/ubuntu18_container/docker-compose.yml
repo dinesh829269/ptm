@@ -1,10 +1,10 @@
 version: '5.0'
 services:
-  container_verge:
-    image: my/container_verge
-    container_name: container_verge
+  container_bitphantom:
+    image: my/container_bitphantom
+    container_name: container_bitphantom
     ports:
-      - "20102:20102"
-      - "21102:21102"
+      - "80122:80122"
+      - "80111:80111"
     volumes:
-    - ./conf/VERGE.conf:/root/.VERGE/VERGE.conf
+    - ./conf/bitphantom.conf:/root/.bitphantom/bitphantom.conf

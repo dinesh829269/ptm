@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_REVERSELOCK_H
-#define VERGE_REVERSELOCK_H
+#ifndef bitphantom_REVERSELOCK_H
+#define bitphantom_REVERSELOCK_H
 
 /**
  * An RAII-style reverse lock. Unlocks on construction and locks on destruction.
@@ -32,4 +32,4 @@ private:
     Lock templock;
 };
 
-#endif // VERGE_REVERSELOCK_H
+#endif // bitphantom_REVERSELOCK_H

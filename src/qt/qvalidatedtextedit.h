@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_QVALIDATEDTEXTEDIT_H
-#define VERGE_QT_QVALIDATEDTEXTEDIT_H
+#ifndef bitphantom_QT_QVALIDATEDTEXTEDIT_H
+#define bitphantom_QT_QVALIDATEDTEXTEDIT_H
  #include <QPlainTextEdit>
  /** Text edit that can be marked as "invalid" to show input validation feedback. When marked as invalid,
    it will get a red background until it is focused.
@@ -22,4 +22,4 @@ public:
     void markValid();
 };
 
-#endif // VERGE_QT_QVALIDATEDTEXTEDIT_H
+#endif // bitphantom_QT_QVALIDATEDTEXTEDIT_H

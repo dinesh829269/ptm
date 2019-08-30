@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_POW_H
-#define VERGE_POW_H
+#ifndef bitphantom_POW_H
+#define bitphantom_POW_H
 
 #include <consensus/params.h>
 
@@ -29,4 +29,4 @@ unsigned int LwmaCalculateNextWorkRequired(const CBlockIndex* pindexLast, int al
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, int algo, const Consensus::Params& params);
 unsigned int GetAlgoWeight(int algo);
 
-#endif // VERGE_POW_H
+#endif // bitphantom_POW_H

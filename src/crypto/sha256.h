@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CRYPTO_SHA256_H
-#define VERGE_CRYPTO_SHA256_H
+#ifndef bitphantom_CRYPTO_SHA256_H
+#define bitphantom_CRYPTO_SHA256_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -39,4 +39,4 @@ std::string SHA256AutoDetect();
  */
 void SHA256D64(unsigned char* output, const unsigned char* input, size_t blocks);
 
-#endif // VERGE_CRYPTO_SHA256_H
+#endif // bitphantom_CRYPTO_SHA256_H

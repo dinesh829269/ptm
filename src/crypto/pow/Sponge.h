@@ -19,8 +19,8 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef VERGE_CRYPTO_POW_SPONGE_H
-#define VERGE_CRYPTO_POW_SPONGE_H
+#ifndef bitphantom_CRYPTO_POW_SPONGE_H
+#define bitphantom_CRYPTO_POW_SPONGE_H
 
 #include <stdint.h>
 
@@ -105,4 +105,4 @@ void printArray(unsigned char *array, unsigned int size, char *name);
 /////////////
 
 
-#endif // VERGE_CRYPTO_POW_SPONGE_H
+#endif // bitphantom_CRYPTO_POW_SPONGE_H

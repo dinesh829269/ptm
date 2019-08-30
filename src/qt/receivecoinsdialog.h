@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_RECEIVECOINSDIALOG_H
-#define VERGE_QT_RECEIVECOINSDIALOG_H
+#ifndef bitphantom_QT_RECEIVECOINSDIALOG_H
+#define bitphantom_QT_RECEIVECOINSDIALOG_H
 
 #include <qt/guiutil.h>
 
@@ -27,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
 
-/** Dialog for requesting payment of verge */
+/** Dialog for requesting payment of bitphantom */
 class ReceiveCoinsDialog : public QDialog
 {
     Q_OBJECT
@@ -78,4 +78,4 @@ private Q_SLOTS:
     void copyAmount();
 };
 
-#endif // VERGE_QT_RECEIVECOINSDIALOG_H
+#endif // bitphantom_QT_RECEIVECOINSDIALOG_H

@@ -15,7 +15,7 @@ make assumptions about execution order.
 """
 
 from test_framework.blocktools import send_to_witness
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework import blocktools
 from test_framework.messages import BIP125_SEQUENCE_NUMBER
 from test_framework.mininode import CTransaction
@@ -27,7 +27,7 @@ WALLET_PASSPHRASE = "test"
 WALLET_PASSPHRASE_TIMEOUT = 3600
 
 
-class BumpFeeTest(VergeTestFramework):
+class BumpFeeTest(bitphantomTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True

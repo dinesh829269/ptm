@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_TRANSACTIONTABLEMODEL_H
-#define VERGE_QT_TRANSACTIONTABLEMODEL_H
+#ifndef bitphantom_QT_TRANSACTIONTABLEMODEL_H
+#define bitphantom_QT_TRANSACTIONTABLEMODEL_H
 
-#include <qt/vergeunits.h>
+#include <qt/bitphantomunits.h>
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -102,7 +102,7 @@ private:
     QString formatTxDate(const TransactionRecord *wtx) const;
     QString formatTxType(const TransactionRecord *wtx) const;
     QString formatTxToAddress(const TransactionRecord *wtx, bool tooltip) const;
-    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, VERGEUnits::SeparatorStyle separators=VERGEUnits::separatorStandard) const;
+    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, bitphantomUnits::SeparatorStyle separators=bitphantomUnits::separatorStandard) const;
     QString formatTooltip(const TransactionRecord *rec) const;
     QVariant txStatusDecoration(const TransactionRecord *wtx) const;
     QVariant txWatchonlyDecoration(const TransactionRecord *wtx) const;
@@ -121,4 +121,4 @@ public Q_SLOTS:
     friend class TransactionTablePriv;
 };
 
-#endif // VERGE_QT_TRANSACTIONTABLEMODEL_H
+#endif // bitphantom_QT_TRANSACTIONTABLEMODEL_H

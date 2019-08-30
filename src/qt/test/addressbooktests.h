@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_TEST_ADDRESSBOOKTESTS_H
-#define VERGE_QT_TEST_ADDRESSBOOKTESTS_H
+#ifndef bitphantom_QT_TEST_ADDRESSBOOKTESTS_H
+#define bitphantom_QT_TEST_ADDRESSBOOKTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -12,4 +12,4 @@ private Q_SLOTS:
     void addressBookTests();
 };
 
-#endif // VERGE_QT_TEST_ADDRESSBOOKTESTS_H
+#endif // bitphantom_QT_TEST_ADDRESSBOOKTESTS_H

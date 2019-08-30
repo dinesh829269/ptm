@@ -43,7 +43,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, uint32_t nTime, uint3
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, bool isTestnet = false)
 {
-    const char* pszTimestamp = isTestnet ? "VERGE TESTNET" : "Name: Dogecoin Dark";
+    const char* pszTimestamp = isTestnet ? "bitphantom TESTNET" : "Name: Dogecoin Dark";
     return CreateGenesisBlock(pszTimestamp, nTime, nNonce, nBits, nVersion);
 }
 
@@ -120,7 +120,7 @@ public:
         pchMessageStart[1] = 0xa7;
         pchMessageStart[2] = 0x7e;
         pchMessageStart[3] = 0xff;
-        nDefaultPort = 21102;
+        nDefaultPort = 80111;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1412878964, 1473191, 0x1e0fffff, 1);
@@ -158,7 +158,7 @@ public:
             vSeeds.emplace_back("6telhbsuva4qkff2.onion");
         } else {
             vSeeds.emplace_back("seed.marpmedev.xyz"); // marples DNS seed (v4, v5)
-            vSeeds.emplace_back("seed.verge.dev"); // additional DNS seed
+            vSeeds.emplace_back("seed.bitphantom.dev"); // additional DNS seed
             vSeeds.emplace_back("185.162.9.97");
             vSeeds.emplace_back("159.89.46.252"); // v5-new-york
             vSeeds.emplace_back("139.59.34.170"); // v5-india
@@ -313,9 +313,10 @@ public:
 
         genesis = CreateGenesisBlock(1462058066, 2, 0x1e0fffff, 1, true);
         consensus.hashGenesisBlock = genesis.GetHash();
-
-        assert(consensus.hashGenesisBlock == uint256S("0x65b4e101cacf3e1e4f3a9237e3a74ffd1186e595d8b78fa8ea22c21ef5bf9347"));
-        assert(genesis.hashMerkleRoot == uint256S("0x768cc22f70bbcc4de26f83aca1b4ea2a7e25f0d100497ba47c7ff2d9b696414c"));
+        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("hashMerkleRoot.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        assert(consensus.hashGenesisBlock == uint256S("0x603f0b0464d68a635a51eb2268ea41d3f71daa950b3f797e21a717c1a8c2d15c"));
+        assert(genesis.hashMerkleRoot == uint256S("0x0e9a67c1108f32a8de747b763b131f9cf5db4307efd5cd9f708ecb27e511066a"));
 
         vFixedSeeds.clear();
         vSeeds.clear();

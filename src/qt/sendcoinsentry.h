@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_SENDCOINSENTRY_H
-#define VERGE_QT_SENDCOINSENTRY_H
+#ifndef bitphantom_QT_SENDCOINSENTRY_H
+#define bitphantom_QT_SENDCOINSENTRY_H
 
 #include <qt/walletmodel.h>
 
@@ -18,7 +18,7 @@ namespace Ui {
 }
 
 /**
- * A single entry in the dialog for sending verge.
+ * A single entry in the dialog for sending bitphantom.
  * Stacked widget, with different UIs for payment requests
  * with a strong payee identity.
  */
@@ -75,4 +75,4 @@ private:
     bool updateLabel(const QString &address);
 };
 
-#endif // VERGE_QT_SENDCOINSENTRY_H
+#endif // bitphantom_QT_SENDCOINSENTRY_H

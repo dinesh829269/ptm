@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_CALLBACK_H
-#define VERGE_QT_CALLBACK_H
+#ifndef bitphantom_QT_CALLBACK_H
+#define bitphantom_QT_CALLBACK_H
 
 #include <QObject>
 
@@ -27,4 +27,4 @@ FunctionCallback<F>* makeCallback(F f)
     return new FunctionCallback<F>(std::move(f));
 }
 
-#endif // VERGE_QT_CALLBACK_H
+#endif // bitphantom_QT_CALLBACK_H

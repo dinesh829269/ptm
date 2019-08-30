@@ -1,8 +1,8 @@
 // Copyright (c) 2016-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef VERGE_CRYPTO_SIPHASH_H
-#define VERGE_CRYPTO_SIPHASH_H
+#ifndef bitphantom_CRYPTO_SIPHASH_H
+#define bitphantom_CRYPTO_SIPHASH_H
 #include <stdint.h>
 #include <uint256.h>
 /** SipHash-2-4 */
@@ -37,4 +37,4 @@ private:
  */
 uint64_t SipHashUint256(uint64_t k0, uint64_t k1, const uint256& val);
 uint64_t SipHashUint256Extra(uint64_t k0, uint64_t k1, const uint256& val, uint32_t extra);
-#endif // VERGE_CRYPTO_SIPHASH_H
+#endif // bitphantom_CRYPTO_SIPHASH_H

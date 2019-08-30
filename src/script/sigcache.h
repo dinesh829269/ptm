@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SCRIPT_SIGCACHE_H
-#define VERGE_SCRIPT_SIGCACHE_H
+#ifndef bitphantom_SCRIPT_SIGCACHE_H
+#define bitphantom_SCRIPT_SIGCACHE_H
 
 #include <script/interpreter.h>
 
@@ -54,4 +54,4 @@ public:
 
 void InitSignatureCache();
 
-#endif // VERGE_SCRIPT_SIGCACHE_H
+#endif // bitphantom_SCRIPT_SIGCACHE_H

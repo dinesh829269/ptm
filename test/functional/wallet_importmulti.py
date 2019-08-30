@@ -3,10 +3,10 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the importmulti RPC."""
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import *
 
-class ImportMultiTest (VergeTestFramework):
+class ImportMultiTest (bitphantomTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [["-addresstype=legacy"], ["-addresstype=legacy"]]
@@ -37,7 +37,7 @@ class ImportMultiTest (VergeTestFramework):
 
         # RPC importmulti -----------------------------------------------
 
-        # Verge Address
+        # bitphantom Address
         self.log.info("Should import an address")
         address = self.nodes[0].getaddressinfo(self.nodes[0].getnewaddress())
         result = self.nodes[1].importmulti([{

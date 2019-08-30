@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -552,10 +552,10 @@ std::string SHA256AutoDetect()
         Transform = sha256_sse4::Transform;
         TransformD64 = TransformD64Wrapper<sha256_sse4::Transform>;
 #endif
-#if defined(ENABLE_SSE41) && !defined(BUILD_VERGE_INTERNAL)
+#if defined(ENABLE_SSE41) && !defined(BUILD_bitphantom_INTERNAL)
         TransformD64_4way = sha256d64_sse41::Transform_4way;
         ret = "sse4(1way+4way)";
-#if defined(ENABLE_AVX2) && !defined(BUILD_VERGE_INTERNAL)
+#if defined(ENABLE_AVX2) && !defined(BUILD_bitphantom_INTERNAL)
         cpuid(7, 0, eax, ebx, ecx, edx);
         if ((ebx >> 5) & 1) {
             TransformD64_8way = sha256d64_avx2::Transform_8way;

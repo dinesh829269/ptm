@@ -7,17 +7,17 @@ define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2019)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Verge Core]])
-AC_INIT([Verge Lumos],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/vergecurrency/VERGE/issues],[verge],[https://vergecurrency.com/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[bitphantom Core]])
+AC_INIT([bitphantom],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/bitphantomcurrency/bitphantom/issues],[bitphantom],[https://bitphantomcurrency.com/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
-AC_CONFIG_HEADERS([src/config/verge-config.h])
+AC_CONFIG_HEADERS([src/config/bitphantom-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-VERGE_DAEMON_NAME=verged
-VERGE_GUI_NAME=verge-qt
-VERGE_CLI_NAME=verge-cli
-VERGE_TX_NAME=verge-tx
+bitphantom_DAEMON_NAME=bitphantomd
+bitphantom_GUI_NAME=bitphantom-qt
+bitphantom_CLI_NAME=bitphantom-cli
+bitphantom_TX_NAME=bitphantom-tx
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -27,9 +27,9 @@ fi
 
 AC_CANONICAL_HOST
 
-AH_TOP([#ifndef VERGE_CONFIG_H])
-AH_TOP([#define VERGE_CONFIG_H])
-AH_BOTTOM([#endif //VERGE_CONFIG_H])
+AH_TOP([#ifndef bitphantom_CONFIG_H])
+AH_TOP([#define bitphantom_CONFIG_H])
+AH_BOTTOM([#endif //bitphantom_CONFIG_H])
 
 dnl faketime breaks configure and is only needed for make. Disable it here.
 unset FAKETIME
@@ -390,21 +390,21 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build verge-cli verge-tx (default=yes)])],
-  [build_verge_utils=$withval],
-  [build_verge_utils=yes])
+  [build bitphantom-cli bitphantom-tx (default=yes)])],
+  [build_bitphantom_utils=$withval],
+  [build_bitphantom_utils=yes])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
   [build libraries (default=yes)])],
-  [build_verge_libs=$withval],
-  [build_verge_libs=yes])
+  [build_bitphantom_libs=$withval],
+  [build_bitphantom_libs=yes])
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build verged daemon (default=yes)])],
-  [BUILD_VERGEd=$withval],
-  [BUILD_VERGEd=yes])
+  [build bitphantomd daemon (default=yes)])],
+  [BUILD_bitphantomd=$withval],
+  [BUILD_bitphantomd=yes])
 
 use_pkgconfig=yes
 case $host in
@@ -605,7 +605,7 @@ AC_C_BIGENDIAN
 dnl Check for pthread compile/link requirements
 AX_PTHREAD
 
-# The following macro will add the necessary defines to verge-config.h, but
+# The following macro will add the necessary defines to bitphantom-config.h, but
 # they also need to be passed down to any subprojects. Pull the results out of
 # the cache and add them to CPPFLAGS.
 AC_SYS_LARGEFILE
@@ -832,7 +832,7 @@ AC_SUBST(LIBMEMENV)
 
 if test x$enable_wallet != xno; then
     dnl Check for libdb_cxx only if wallet enabled
-    VERGE_FIND_BDB48
+    bitphantom_FIND_BDB48
 fi
 
 dnl Check for libminiupnpc (optional)
@@ -844,12 +844,12 @@ if test x$use_upnp != xno; then
   )
 fi
 
-VERGE_QT_INIT
+bitphantom_QT_INIT
 
-dnl sets $verge_enable_qt, $verge_enable_qt_test, $verge_enable_qt_dbus
-VERGE_QT_CONFIGURE([$use_pkgconfig], [qt5])
+dnl sets $bitphantom_enable_qt, $bitphantom_enable_qt_test, $bitphantom_enable_qt_dbus
+bitphantom_QT_CONFIGURE([$use_pkgconfig], [qt5])
 
-if test x$build_verge_utils$BUILD_VERGEd$verge_enable_qt$use_tests$use_bench = xnonononono; then
+if test x$build_bitphantom_utils$BUILD_bitphantomd$bitphantom_enable_qt$use_tests$use_bench = xnonononono; then
     use_boost=no
 else
     use_boost=yes
@@ -863,7 +863,7 @@ define(MINIMUM_REQUIRED_BOOST, 1.47.0)
 dnl Check for boost libs
 AX_BOOST_BASE([MINIMUM_REQUIRED_BOOST])
 if test x$want_boost = xno; then
-    AC_MSG_ERROR([[only libvergeconsensus can be built without boost]])
+    AC_MSG_ERROR([[only libbitphantomconsensus can be built without boost]])
 fi
 AX_BOOST_SYSTEM
 AX_BOOST_FILESYSTEM
@@ -1040,11 +1040,11 @@ if test x$use_pkgconfig = xyes; then
       fi
       PKG_CHECK_MODULES([SSL], [libssl],, [AC_MSG_ERROR(openssl not found.)])
       PKG_CHECK_MODULES([CRYPTO], [libcrypto],,[AC_MSG_ERROR(libcrypto not found.)])
-      VERGE_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [VERGE_QT_FAIL(libprotobuf not found)])])
+      bitphantom_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [bitphantom_QT_FAIL(libprotobuf not found)])])
       if test x$use_qr != xno; then
-        VERGE_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
+        bitphantom_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
       fi
-      if test x$build_verge_utils$BUILD_VERGEd$verge_enable_qt$use_tests != xnononono; then
+      if test x$build_bitphantom_utils$BUILD_bitphantomd$bitphantom_enable_qt$use_tests != xnononono; then
         PKG_CHECK_MODULES([EVENT], [libevent],, [AC_MSG_ERROR(libevent not found.)])
         if test x$TARGET_OS != xwindows; then
           PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads],, [AC_MSG_ERROR(libevent_pthreads not found.)])
@@ -1069,7 +1069,7 @@ else
   AC_CHECK_HEADER([openssl/ssl.h],, AC_MSG_ERROR(libssl headers missing),)
   AC_CHECK_LIB([ssl],         [main],SSL_LIBS=-lssl, AC_MSG_ERROR(libssl missing))
 
-  if test x$build_verge_utils$BUILD_VERGEd$verge_enable_qt$use_tests != xnononono; then
+  if test x$build_bitphantom_utils$BUILD_bitphantomd$bitphantom_enable_qt$use_tests != xnononono; then
     AC_CHECK_HEADER([event2/event.h],, AC_MSG_ERROR(libevent headers missing),)
     AC_CHECK_LIB([event],[main],EVENT_LIBS=-levent,AC_MSG_ERROR(libevent missing))
     if test x$TARGET_OS != xwindows; then
@@ -1100,10 +1100,10 @@ else
     esac
   fi
 
-  VERGE_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], VERGE_QT_FAIL(libprotobuf not found)))
+  bitphantom_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], bitphantom_QT_FAIL(libprotobuf not found)))
   if test x$use_qr != xno; then
-    VERGE_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
-    VERGE_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
+    bitphantom_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
+    bitphantom_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
   fi
 fi
 
@@ -1118,7 +1118,7 @@ dnl univalue check
 
 need_bundled_univalue=yes
 
-if test x$build_verge_utils$BUILD_VERGEd$verge_enable_qt$use_tests$use_bench = xnonononono; then
+if test x$build_bitphantom_utils$BUILD_bitphantomd$bitphantom_enable_qt$use_tests$use_bench = xnonononono; then
   need_bundled_univalue=no
 else
 
@@ -1162,23 +1162,23 @@ AM_CONDITIONAL([EMBEDDED_UNIVALUE],[test x$need_bundled_univalue = xyes])
 AC_SUBST(UNIVALUE_CFLAGS)
 AC_SUBST(UNIVALUE_LIBS)
 
-VERGE_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
+bitphantom_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
-AC_MSG_CHECKING([whether to build verged])
-AM_CONDITIONAL([BUILD_VERGEd], [test x$BUILD_VERGEd = xyes])
-AC_MSG_RESULT($BUILD_VERGEd)
+AC_MSG_CHECKING([whether to build bitphantomd])
+AM_CONDITIONAL([BUILD_bitphantomd], [test x$BUILD_bitphantomd = xyes])
+AC_MSG_RESULT($BUILD_bitphantomd)
 
-AC_MSG_CHECKING([whether to build utils (verge-cli verge-tx)])
-AM_CONDITIONAL([BUILD_VERGE_UTILS], [test x$build_verge_utils = xyes])
-AC_MSG_RESULT($build_verge_utils)
+AC_MSG_CHECKING([whether to build utils (bitphantom-cli bitphantom-tx)])
+AM_CONDITIONAL([BUILD_bitphantom_UTILS], [test x$build_bitphantom_utils = xyes])
+AC_MSG_RESULT($build_bitphantom_utils)
 
 AC_MSG_CHECKING([whether to build libraries])
-AM_CONDITIONAL([BUILD_VERGE_LIBS], [test x$build_verge_libs = xyes])
-if test x$build_verge_libs = xyes; then
+AM_CONDITIONAL([BUILD_bitphantom_LIBS], [test x$build_bitphantom_libs = xyes])
+if test x$build_bitphantom_libs = xyes; then
   AC_DEFINE(HAVE_CONSENSUS_LIB, 1, [Define this symbol if the consensus lib has been built])
-  AC_CONFIG_FILES([libvergeconsensus.pc:libvergeconsensus.pc.in])
+  AC_CONFIG_FILES([libbitphantomconsensus.pc:libbitphantomconsensus.pc.in])
 fi
-AC_MSG_RESULT($build_verge_libs)
+AC_MSG_RESULT($build_bitphantom_libs)
 
 AC_LANG_POP
 
@@ -1240,13 +1240,13 @@ fi
 
 dnl these are only used when qt is enabled
 BUILD_TEST_QT=""
-if test x$verge_enable_qt != xno; then
+if test x$bitphantom_enable_qt != xno; then
   dnl enable dbus support
   AC_MSG_CHECKING([whether to build GUI with support for D-Bus])
-  if test x$verge_enable_qt_dbus != xno; then
+  if test x$bitphantom_enable_qt_dbus != xno; then
     AC_DEFINE([USE_DBUS],[1],[Define if dbus support should be compiled in])
   fi
-  AC_MSG_RESULT($verge_enable_qt_dbus)
+  AC_MSG_RESULT($bitphantom_enable_qt_dbus)
 
   dnl enable qr support
   AC_MSG_CHECKING([whether to build GUI with support for QR codes])
@@ -1269,8 +1269,8 @@ if test x$verge_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
-  AC_MSG_CHECKING([whether to build test_verge-qt])
-  if test x$use_gui_tests$verge_enable_qt_test = xyesyes; then
+  AC_MSG_CHECKING([whether to build test_bitphantom-qt])
+  if test x$use_gui_tests$bitphantom_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
@@ -1280,7 +1280,7 @@ fi
 
 AM_CONDITIONAL([ENABLE_ZMQ], [test "x$use_zmq" = "xyes"])
 
-AC_MSG_CHECKING([whether to build test_verge])
+AC_MSG_CHECKING([whether to build test_bitphantom])
 if test x$use_tests = xyes; then
   AC_MSG_RESULT([yes])
   BUILD_TEST="yes"
@@ -1296,7 +1296,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test x$build_verge_utils$build_verge_libs$BUILD_VERGEd$verge_enable_qt$use_bench$use_tests = xnononononono; then
+if test x$build_bitphantom_utils$build_bitphantom_libs$BUILD_bitphantomd$bitphantom_enable_qt$use_bench$use_tests = xnononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1305,7 +1305,7 @@ AM_CONDITIONAL([BUILD_DARWIN], [test x$BUILD_OS = xdarwin])
 AM_CONDITIONAL([TARGET_WINDOWS], [test x$TARGET_OS = xwindows])
 AM_CONDITIONAL([ENABLE_WALLET],[test x$enable_wallet = xyes])
 AM_CONDITIONAL([ENABLE_TESTS],[test x$BUILD_TEST = xyes])
-AM_CONDITIONAL([ENABLE_QT],[test x$verge_enable_qt = xyes])
+AM_CONDITIONAL([ENABLE_QT],[test x$bitphantom_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$BUILD_TEST_QT = xyes])
 AM_CONDITIONAL([ENABLE_BENCH],[test x$use_bench = xyes])
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
@@ -1337,10 +1337,10 @@ AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
 AC_SUBST(COPYRIGHT_HOLDERS, "_COPYRIGHT_HOLDERS")
 AC_SUBST(COPYRIGHT_HOLDERS_SUBSTITUTION, "_COPYRIGHT_HOLDERS_SUBSTITUTION")
 AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
-AC_SUBST(VERGE_DAEMON_NAME)
-AC_SUBST(VERGE_GUI_NAME)
-AC_SUBST(VERGE_CLI_NAME)
-AC_SUBST(VERGE_TX_NAME)
+AC_SUBST(bitphantom_DAEMON_NAME)
+AC_SUBST(bitphantom_GUI_NAME)
+AC_SUBST(bitphantom_CLI_NAME)
+AC_SUBST(bitphantom_TX_NAME)
 
 AC_SUBST(RELDFLAGS)
 AC_SUBST(DEBUG_CPPFLAGS)
@@ -1380,7 +1380,7 @@ AC_CONFIG_FILES([contrib/devtools/split-debug.sh],[chmod +x contrib/devtools/spl
 AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([doc/Doxyfile])])
 AC_CONFIG_LINKS([contrib/filter-lcov.py:contrib/filter-lcov.py])
 AC_CONFIG_LINKS([test/functional/test_runner.py:test/functional/test_runner.py])
-AC_CONFIG_LINKS([test/util/verge-util-test.py:test/util/verge-util-test.py])
+AC_CONFIG_LINKS([test/util/bitphantom-util-test.py:test/util/bitphantom-util-test.py])
 AC_CONFIG_LINKS([test/util/rpcauth-test.py:test/util/rpcauth-test.py])
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
@@ -1438,9 +1438,9 @@ esac
 echo
 echo "Options used to compile and link:"
 echo "  with wallet   = $enable_wallet"
-echo "  with gui / qt = $verge_enable_qt"
-if test x$verge_enable_qt != xno; then
-    echo "    qt version  = $verge_qt_got_major_vers"
+echo "  with gui / qt = $bitphantom_enable_qt"
+if test x$bitphantom_enable_qt != xno; then
+    echo "    qt version  = $bitphantom_qt_got_major_vers"
     echo "    with qr     = $use_qr"
 fi
 echo "  with zmq      = $use_zmq"

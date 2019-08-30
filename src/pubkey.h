@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Copyright (c) 2017 The Zcash developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_PUBKEY_H
-#define VERGE_PUBKEY_H
+#ifndef bitphantom_PUBKEY_H
+#define bitphantom_PUBKEY_H
 
 #include <hash.h>
 #include <serialize.h>
@@ -265,4 +265,4 @@ public:
     ~ECCVerifyHandle();
 };
 
-#endif // VERGE_PUBKEY_H
+#endif // bitphantom_PUBKEY_H

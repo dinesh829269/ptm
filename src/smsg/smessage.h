@@ -1,11 +1,11 @@
 // Copyright (c) 2014-2016 The ShadowCoin developers
 // Copyright (c) 2017-2018 The Particl Core developers
-// Copyright (c) 2017-2018 The Verge Core developers
+// Copyright (c) 2017-2018 The bitphantom Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SMSG_SMESSAGE_H
-#define VERGE_SMSG_SMESSAGE_H
+#ifndef bitphantom_SMSG_SMESSAGE_H
+#define bitphantom_SMSG_SMESSAGE_H
 
 #include <key_io.h>
 #include <net.h>
@@ -474,5 +474,5 @@ public:
 
 extern smsg::CSMSG smsgModule;
 
-#endif // VERGE_SMSG_SMESSAGE_H
+#endif // bitphantom_SMSG_SMESSAGE_H
 

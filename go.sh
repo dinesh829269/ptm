@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#// full deployement :   wget -O - https://raw.githubusercontent.com/badbrainIRC/VERGE/master/go.sh | bash
-sudo rm -Rf ~/VERGE
+#// full deployement :   wget -O - https://raw.githubusercontent.com/badbrainIRC/bitphantom/master/go.sh | bash
+sudo rm -Rf ~/bitphantom
 # generating entropy make it harder to guess the randomness!.
 echo "Initializing random number generator..."
 random_seed=/var/run/random-seed
@@ -162,12 +162,12 @@ fi
 
 #// Clone files from repo, Permissions and make
 
-git clone --recurse-submodules https://github.com/vergecurrency/VERGE
+git clone --recurse-submodules https://github.com/bitphantomcurrency/bitphantom
 cd ~
-cd VERGE
+cd bitphantom
 ./autogen.sh
-chmod 777 ~/VERGE/share/genbuild.sh
-chmod 777 ~/VERGE/src/leveldb/build_detect_platform
+chmod 777 ~/bitphantom/share/genbuild.sh
+chmod 777 ~/bitphantom/src/leveldb/build_detect_platform
 
 grep --include=*.hpp -r '/usr/' -e "define BOOST_LIB_VERSION"
 
@@ -199,18 +199,18 @@ green=`tput setaf 2`
 reset=`tput sgr0`
 echo "${green}ARM cpu detected --disable-sse2${reset}"
 txt=$(echo "--disable-sse2")
-sed -i 's/#include <emmintrin.h>//g' ~/VERGE/src/crypto/pow/scrypt-sse2.cpp
+sed -i 's/#include <emmintrin.h>//g' ~/bitphantom/src/crypto/pow/scrypt-sse2.cpp
 else
 txt=$(echo "")
 fi
 
 if [ -d /usr/local/BerkeleyDB.4.8/include ]
 then
-cd VERGE
+cd bitphantom
 ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-gui=qt5 --with-boost-libdir=$(dirname "$(cat wrd0$answer.txt)") --disable-bench --disable-tests --disable-gui-tests --without-miniupnpc $txt
 echo "Using Berkeley Generic..."
 else
-cd VERGE
+cd bitphantom
 ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" CPPFLAGS="-O2" --with-gui=qt5 --with-boost-libdir=$(dirname "$(cat wrd0$answer.txt)") --disable-bench --disable-tests --disable-gui-tests --without-miniupnpc $txt
 
 echo "Using default system Berkeley..."
@@ -219,35 +219,35 @@ fi
 #make -j$(nproc) USE_UPNP=-
 make USE_UPNP=-
 
-if [ -e ~/VERGE/src/qt/verge-qt ]
+if [ -e ~/bitphantom/src/qt/bitphantom-qt ]
 then
-sudo strip ~/VERGE/src/verged
-sudo strip ~/VERGE/src/qt/verge-qt
+sudo strip ~/bitphantom/src/bitphantomd
+sudo strip ~/bitphantom/src/qt/bitphantom-qt
 sudo make install
 else
-echo "Compile fail not VERGE-qt present"
+echo "Compile fail not bitphantom-qt present"
 fi
 
 cd ~
 
 #// Create the config file with random user and password
 
-mkdir -p ~/.VERGE
-if [ -e ~/.VERGE/VERGE.conf ]
+mkdir -p ~/.bitphantom
+if [ -e ~/.bitphantom/bitphantom.conf ]
 then
-    cp -a ~/.VERGE/VERGE.conf ~/.VERGE/VERGE.bak
+    cp -a ~/.bitphantom/bitphantom.conf ~/.bitphantom/bitphantom.bak
 fi
-rm ~/.VERGE/VERGE.conf
-echo "rpcuser="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26) >> ~/.VERGE/VERGE.conf
-echo "rpcpassword="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26) >> ~/.VERGE/VERGE.conf
-echo "rpcport=20102" >> ~/.VERGE/VERGE.conf
-echo "port=21102" >> ~/.VERGE/VERGE.conf
-echo "daemon=1" >> ~/.VERGE/VERGE.conf
-echo "listen=1" >> ~/.VERGE/VERGE.conf
-echo "server=1" >> ~/.VERGE/VERGE.conf
-echo "deprecatedrpc=accounts" >> ~/.VERGE/VERGE.conf
+rm ~/.bitphantom/bitphantom.conf
+echo "rpcuser="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26) >> ~/.bitphantom/bitphantom.conf
+echo "rpcpassword="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26) >> ~/.bitphantom/bitphantom.conf
+echo "rpcport=80122" >> ~/.bitphantom/bitphantom.conf
+echo "port=80111" >> ~/.bitphantom/bitphantom.conf
+echo "daemon=1" >> ~/.bitphantom/bitphantom.conf
+echo "listen=1" >> ~/.bitphantom/bitphantom.conf
+echo "server=1" >> ~/.bitphantom/bitphantom.conf
+echo "deprecatedrpc=accounts" >> ~/.bitphantom/bitphantom.conf
 
-echo "usehd=1" >> ~/.VERGE/VERGE.conf
+echo "usehd=1" >> ~/.bitphantom/bitphantom.conf
 
 
 #// Extract http link, download blockchain and install it.
@@ -257,34 +257,34 @@ sudo echo "FORCE_SSL_PROMPT:YES" >> /etc/lynx/lynx.cfg
 
 # Create Icon on Desktop and in menu
 mkdir -p ~/Desktop/
-sudo cp ~/VERGE/src/qt/res/icons/verge.png /usr/share/icons/
-echo "#!/usr/bin/env xdg-open" >> ~/Desktop/VERGE.desktop
-echo "[Desktop Entry]" >> ~/Desktop/VERGE.desktop
-echo "Version=1.0" >> ~/Desktop/VERGE.desktop
-echo "Type=Application" >> ~/Desktop/VERGE.desktop
-echo "Terminal=false" >> ~/Desktop/VERGE.desktop
-echo "Icon[en]=/usr/share/icons/verge.png" >> ~/Desktop/VERGE.desktop
-echo "Name[en]=VERGE" >> ~/Desktop/VERGE.desktop
-echo "Exec=verge-qt" >> ~/Desktop/VERGE.desktop
-echo "Name=VERGE" >> ~/Desktop/VERGE.desktop
-echo "Icon=/usr/share/icons/verge.png" >> ~/Desktop/VERGE.desktop
-echo "Categories=Network;Internet;" >> ~/Desktop/VERGE.desktop
-sudo chmod +x ~/Desktop/VERGE.desktop
-sudo cp ~/Desktop/VERGE.desktop /usr/share/applications/VERGE.desktop
-sudo chmod +x /usr/share/applications/VERGE.desktop
+sudo cp ~/bitphantom/src/qt/res/icons/bitphantom.png /usr/share/icons/
+echo "#!/usr/bin/env xdg-open" >> ~/Desktop/bitphantom.desktop
+echo "[Desktop Entry]" >> ~/Desktop/bitphantom.desktop
+echo "Version=1.0" >> ~/Desktop/bitphantom.desktop
+echo "Type=Application" >> ~/Desktop/bitphantom.desktop
+echo "Terminal=false" >> ~/Desktop/bitphantom.desktop
+echo "Icon[en]=/usr/share/icons/bitphantom.png" >> ~/Desktop/bitphantom.desktop
+echo "Name[en]=bitphantom" >> ~/Desktop/bitphantom.desktop
+echo "Exec=bitphantom-qt" >> ~/Desktop/bitphantom.desktop
+echo "Name=bitphantom" >> ~/Desktop/bitphantom.desktop
+echo "Icon=/usr/share/icons/bitphantom.png" >> ~/Desktop/bitphantom.desktop
+echo "Categories=Network;Internet;" >> ~/Desktop/bitphantom.desktop
+sudo chmod +x ~/Desktop/bitphantom.desktop
+sudo cp ~/Desktop/bitphantom.desktop /usr/share/applications/bitphantom.desktop
+sudo chmod +x /usr/share/applications/bitphantom.desktop
 
-# Erase all VERGE compilation directory , cleaning
+# Erase all bitphantom compilation directory , cleaning
 
 cd ~
-#sudo rm -Rf ~/VERGE
+#sudo rm -Rf ~/bitphantom
 
 # Blockchain
 
-echo -n "Success....Blockchain is now downloading press Ctrl-C to cancel but it will take longer to sync from 0. And you will have to start verge manual"
+echo -n "Success....Blockchain is now downloading press Ctrl-C to cancel but it will take longer to sync from 0. And you will have to start bitphantom manual"
 sudo rm QT-Wallet*.zip
-echo "wget --no-check-certificate " $(lynx --dump --listonly https://verge-blockchain.com/down/ | grep -o "https://verge-blockchain.com/blockchain5.*zip") > link.sh
+echo "wget --no-check-certificate " $(lynx --dump --listonly https://bitphantom-blockchain.com/down/ | grep -o "https://bitphantom-blockchain.com/blockchain5.*zip") > link.sh
 sh link.sh
-unzip -o QT-Wallet*.zip -d ~/.VERGE
+unzip -o QT-Wallet*.zip -d ~/.bitphantom
 sudo rm QT-Wallet*.zip
-#// Start Verge
-verge-qt
+#// Start bitphantom
+bitphantom-qt

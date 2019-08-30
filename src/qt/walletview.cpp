@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 #include <qt/addressbookpage.h>
 #include <qt/askpassphrasedialog.h>
-#include <qt/vergegui.h>
+#include <qt/bitphantomgui.h>
 #include <qt/clientmodel.h>
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
@@ -89,7 +89,7 @@ WalletView::~WalletView()
 {
 }
 
-void WalletView::setVERGEGUI(VERGEGUI *gui)
+void WalletView::setbitphantomGUI(bitphantomGUI *gui)
 {
     if (gui)
     {

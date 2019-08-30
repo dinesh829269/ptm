@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <qt/walletframe.h>
 #include <qt/walletmodel.h>
 
-#include <qt/vergegui.h>
+#include <qt/bitphantomgui.h>
 #include <qt/walletview.h>
 
 #include <cassert>
@@ -15,7 +15,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, VERGEGUI *_gui) :
+WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, bitphantomGUI *_gui) :
     QFrame(_gui),
     gui(_gui),
     platformStyle(_platformStyle)
@@ -53,7 +53,7 @@ bool WalletFrame::addWallet(WalletModel *walletModel)
     }
 
     WalletView *walletView = new WalletView(platformStyle, this);
-    walletView->setVERGEGUI(gui);
+    walletView->setbitphantomGUI(gui);
     walletView->setClientModel(clientModel);
     walletView->setWalletModel(walletModel);
     walletView->showOutOfSyncWarning(bOutOfSync);

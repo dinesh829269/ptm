@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_TIMEDATA_H
-#define VERGE_TIMEDATA_H
+#ifndef bitphantom_TIMEDATA_H
+#define bitphantom_TIMEDATA_H
 
 #include <algorithm>
 #include <assert.h>
@@ -76,4 +76,4 @@ int64_t GetTimeOffset();
 int64_t GetAdjustedTime();
 void AddTimeData(const CNetAddr& ip, int64_t nTime);
 
-#endif // VERGE_TIMEDATA_H
+#endif // bitphantom_TIMEDATA_H

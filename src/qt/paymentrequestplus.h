@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_PAYMENTREQUESTPLUS_H
-#define VERGE_QT_PAYMENTREQUESTPLUS_H
+#ifndef bitphantom_QT_PAYMENTREQUESTPLUS_H
+#define bitphantom_QT_PAYMENTREQUESTPLUS_H
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -50,4 +50,4 @@ private:
     payments::PaymentDetails details;
 };
 
-#endif // VERGE_QT_PAYMENTREQUESTPLUS_H
+#endif // bitphantom_QT_PAYMENTREQUESTPLUS_H

@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <qt/guiutil.h>
 
-#include <qt/vergeaddressvalidator.h>
-#include <qt/vergeunits.h>
+#include <qt/bitphantomaddressvalidator.h>
+#include <qt/bitphantomunits.h>
 #include <qt/qvalidatedlineedit.h>
 #include <qt/walletmodel.h>
 
@@ -131,17 +131,17 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a VERGE address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a bitphantom address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
 #endif
-    widget->setValidator(new VERGEAddressEntryValidator(parent));
-    widget->setCheckValidator(new VERGEAddressCheckValidator(parent));
+    widget->setValidator(new bitphantomAddressEntryValidator(parent));
+    widget->setCheckValidator(new bitphantomAddressCheckValidator(parent));
 }
 
-bool parseVERGEURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parsebitphantomURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no verge: URI
-    if(!uri.isValid() || uri.scheme() != QString("verge"))
+    // return if URI is not valid or is no bitphantom: URI
+    if(!uri.isValid() || uri.scheme() != QString("bitphantom"))
         return false;
 
     SendCoinsRecipient rv;
@@ -181,7 +181,7 @@ bool parseVERGEURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!VERGEUnits::parse(VERGEUnits::XVG, i->second, &rv.amount))
+                if(!bitphantomUnits::parse(bitphantomUnits::XVG, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -199,20 +199,20 @@ bool parseVERGEURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseVERGEURI(QString uri, SendCoinsRecipient *out)
+bool parsebitphantomURI(QString uri, SendCoinsRecipient *out)
 {
     QUrl uriInstance(uri);
-    return parseVERGEURI(uriInstance, out);
+    return parsebitphantomURI(uriInstance, out);
 }
 
-QString formatVERGEURI(const SendCoinsRecipient &info)
+QString formatbitphantomURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("verge:%1").arg(info.address);
+    QString ret = QString("bitphantom:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(VERGEUnits::format(VERGEUnits::XVG, info.amount, false, VERGEUnits::separatorNever));
+        ret += QString("?amount=%1").arg(bitphantomUnits::format(bitphantomUnits::XVG, info.amount, false, bitphantomUnits::separatorNever));
         paramCount++;
     }
 
@@ -402,9 +402,9 @@ void openDebugLogfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
 }
 
-bool openVERGEConf()
+bool openbitphantomConf()
 {
-    boost::filesystem::path pathConfig = GetConfigFile(gArgs.GetArg("-conf", VERGE_CONF_FILENAME));
+    boost::filesystem::path pathConfig = GetConfigFile(gArgs.GetArg("-conf", bitphantom_CONF_FILENAME));
 
     /* Create the file */
     boost::filesystem::ofstream configFile(pathConfig, std::ios_base::app);
@@ -414,7 +414,7 @@ bool openVERGEConf()
     
     configFile.close();
     
-    /* Open verge.conf with the associated application */
+    /* Open bitphantom.conf with the associated application */
     return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
@@ -602,15 +602,15 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "VERGE.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "bitphantom.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "VERGE (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("VERGE (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "bitphantom (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("bitphantom (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for VERGE*.lnk
+    // check for bitphantom*.lnk
     return fs::exists(StartupShortcutPath());
 }
 
@@ -700,8 +700,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "verge.desktop";
-    return GetAutostartDir() / strprintf("verge-%s.lnk", chain);
+        return GetAutostartDir() / "bitphantom.desktop";
+    return GetAutostartDir() / strprintf("bitphantom-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -741,13 +741,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         std::string chain = gArgs.GetChainName();
-        // Write a verge.desktop file to the autostart directory:
+        // Write a bitphantom.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=VERGE\n";
+            optionFile << "Name=bitphantom\n";
         else
-            optionFile << strprintf("Name=VERGE (%s)\n", chain);
+            optionFile << strprintf("Name=bitphantom (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -773,7 +773,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
         return nullptr;
     }
     
-    // loop through the list of startup items and try to find the verge app
+    // loop through the list of startup items and try to find the bitphantom app
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
         UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
@@ -807,38 +807,38 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
 
 bool GetStartOnSystemStartup()
 {
-    CFURLRef vergeAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (vergeAppUrl == nullptr) {
+    CFURLRef bitphantomAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    if (bitphantomAppUrl == nullptr) {
         return false;
     }
     
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, vergeAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitphantomAppUrl);
 
-    CFRelease(vergeAppUrl);
+    CFRelease(bitphantomAppUrl);
     return !!foundItem; // return boolified object
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
-    CFURLRef vergeAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (vergeAppUrl == nullptr) {
+    CFURLRef bitphantomAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    if (bitphantomAppUrl == nullptr) {
         return false;
     }
     
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, vergeAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitphantomAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add verge app to startup item list
-        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, vergeAppUrl, nullptr, nullptr);
+        // add bitphantom app to startup item list
+        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, bitphantomAppUrl, nullptr, nullptr);
     }
     else if(!fAutoStart && foundItem) {
         // remove item
         LSSharedFileListItemRemove(loginItems, foundItem);
     }
     
-    CFRelease(vergeAppUrl);
+    CFRelease(bitphantomAppUrl);
     return true;
 }
 #pragma GCC diagnostic pop

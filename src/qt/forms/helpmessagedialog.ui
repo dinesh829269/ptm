@@ -52,7 +52,7 @@
         </size>
        </property>
        <property name="pixmap">
-        <pixmap resource="../verge.qrc">:/icons/verge</pixmap>
+        <pixmap resource="../bitphantom.qrc">:/icons/bitphantom</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -150,7 +150,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../verge.qrc"/>
+  <include location="../bitphantom.qrc"/>
  </resources>
  <connections>
   <connection>

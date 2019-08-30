@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -639,7 +639,7 @@ BOOST_AUTO_TEST_CASE(util_FormatMoney)
     BOOST_CHECK_EQUAL(FormatMoney(COIN/10000), "0.0001");
     BOOST_CHECK_EQUAL(FormatMoney(COIN/100000), "0.00001");
     BOOST_CHECK_EQUAL(FormatMoney(COIN/1000000), "0.000001");
-    // too small verge cuts at 6 decimals
+    // too small bitphantom cuts at 6 decimals
     BOOST_CHECK_EQUAL(FormatMoney(COIN/10000000), "0.00");
     BOOST_CHECK_EQUAL(FormatMoney(COIN/100000000), "0.00");
 }
@@ -1232,7 +1232,7 @@ BOOST_AUTO_TEST_CASE(test_ToLower)
  BOOST_AUTO_TEST_CASE(test_Capitalize)
 {
     BOOST_CHECK_EQUAL(Capitalize(""), "");
-    BOOST_CHECK_EQUAL(Capitalize("verge"), "Verge");
+    BOOST_CHECK_EQUAL(Capitalize("bitphantom"), "bitphantom");
     BOOST_CHECK_EQUAL(Capitalize("\x00\xfe\xff"), "\x00\xfe\xff");
 }
 

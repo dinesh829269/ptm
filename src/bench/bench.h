@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_BENCH_BENCH_H
-#define VERGE_BENCH_BENCH_H
+#ifndef bitphantom_BENCH_BENCH_H
+#define bitphantom_BENCH_BENCH_H
 
 #include <functional>
 #include <limits>
@@ -140,4 +140,4 @@ private:
 #define BENCHMARK(n, num_iters_for_one_second) \
     benchmark::BenchRunner BOOST_PP_CAT(bench_, BOOST_PP_CAT(__LINE__, n))(BOOST_PP_STRINGIZE(n), n, (num_iters_for_one_second));
 
-#endif // VERGE_BENCH_BENCH_H
+#endif // bitphantom_BENCH_BENCH_H

@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SERIALIZE_H
-#define VERGE_SERIALIZE_H
+#ifndef bitphantom_SERIALIZE_H
+#define bitphantom_SERIALIZE_H
 
 #include <compat/endian.h>
 
@@ -992,4 +992,4 @@ size_t GetSerializeSize(const S& s, const T& t)
     return (CSizeComputer(s.GetType(), s.GetVersion()) << t).size();
 }
 
-#endif // VERGE_SERIALIZE_H
+#endif // bitphantom_SERIALIZE_H

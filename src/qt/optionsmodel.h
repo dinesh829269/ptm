@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_OPTIONSMODEL_H
-#define VERGE_QT_OPTIONSMODEL_H
+#ifndef bitphantom_QT_OPTIONSMODEL_H
+#define bitphantom_QT_OPTIONSMODEL_H
 
 #include <amount.h>
 
@@ -21,7 +21,7 @@ QT_END_NAMESPACE
 extern const char *DEFAULT_GUI_PROXY_HOST;
 static constexpr unsigned short DEFAULT_GUI_PROXY_PORT = 9050;
 
-/** Interface from Qt to configuration data structure for VERGE client.
+/** Interface from Qt to configuration data structure for bitphantom client.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
    This can be changed to a tree once the settings become sufficiently
@@ -46,7 +46,7 @@ public:
         ProxyUseTor,            // bool
         ProxyIPTor,             // QString
         ProxyPortTor,           // int
-        DisplayUnit,            // VERGEUnits::Unit
+        DisplayUnit,            // bitphantomUnits::Unit
         ThirdPartyTxUrls,       // QString
         Language,               // QString
         CoinControlFeatures,    // bool
@@ -108,4 +108,4 @@ Q_SIGNALS:
     void hideTrayIconChanged(bool);
 };
 
-#endif // VERGE_QT_OPTIONSMODEL_H
+#endif // bitphantom_QT_OPTIONSMODEL_H

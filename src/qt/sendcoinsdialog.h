@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_SENDCOINSDIALOG_H
-#define VERGE_QT_SENDCOINSDIALOG_H
+#ifndef bitphantom_QT_SENDCOINSDIALOG_H
+#define bitphantom_QT_SENDCOINSDIALOG_H
 
 #include <qt/walletmodel.h>
 
@@ -26,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class QUrl;
 QT_END_NAMESPACE
 
-/** Dialog for sending verge */
+/** Dialog for sending bitphantom */
 class SendCoinsDialog : public QDialog
 {
     Q_OBJECT
@@ -124,4 +124,4 @@ private:
     int secDelay;
 };
 
-#endif // VERGE_QT_SENDCOINSDIALOG_H
+#endif // bitphantom_QT_SENDCOINSDIALOG_H

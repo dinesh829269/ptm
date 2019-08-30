@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CRYPTO_CHACHA20_H
-#define VERGE_CRYPTO_CHACHA20_H
+#ifndef bitphantom_CRYPTO_CHACHA20_H
+#define bitphantom_CRYPTO_CHACHA20_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -24,4 +24,4 @@ public:
     void Output(unsigned char* output, size_t bytes);
 };
 
-#endif // VERGE_CRYPTO_CHACHA20_H
+#endif // bitphantom_CRYPTO_CHACHA20_H

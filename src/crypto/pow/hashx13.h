@@ -1,5 +1,5 @@
-#ifndef VERGE_CRYPTO_POW_HASHX13_H
-#define VERGE_CRYPTO_POW_HASHX13_H
+#ifndef bitphantom_CRYPTO_POW_HASHX13_H
+#define bitphantom_CRYPTO_POW_HASHX13_H
 
 #include <uint256.h>
 #include <sph_blake.h>
@@ -147,4 +147,4 @@ inline uint256 HashX13(const T1 pbegin, const T1 pend)
     return uint256(hash[12]);
 }
 
-#endif // VERGE_CRYPTO_POW_HASHX13_H
+#endif // bitphantom_CRYPTO_POW_HASHX13_H

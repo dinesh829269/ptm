@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,11 +8,11 @@
  * Server/client environment: argument handling, config file parsing,
  * thread wrappers, startup time
  */
-#ifndef VERGE_UTIL_SYSTEM_H
-#define VERGE_UTIL_SYSTEM_H
+#ifndef bitphantom_UTIL_SYSTEM_H
+#define bitphantom_UTIL_SYSTEM_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/verge-config.h>
+#include <config/bitphantom-config.h>
 #endif
 
 #include <compat.h>
@@ -48,8 +48,8 @@ public:
 
 extern CTranslationInterface translationInterface;
 
-extern const char * const VERGE_CONF_FILENAME;
-extern const char * const VERGE_PID_FILENAME;
+extern const char * const bitphantom_CONF_FILENAME;
+extern const char * const bitphantom_PID_FILENAME;
 
 /**
  * Translation function: Call Translate signal on UI interface, which returns a boost::optional result.
@@ -335,7 +335,7 @@ static inline bool NewThread(void(*pfn)(void*), void* parg)
  */
 template <typename Callable> void TraceThread(const char* name,  Callable func)
 {
-    std::string s = strprintf("verge-%s", name);
+    std::string s = strprintf("bitphantom-%s", name);
     RenameThread(s.c_str());
     try
     {
@@ -369,4 +369,4 @@ std::string CopyrightHolders(const std::string& strPrefix);
  */
 int ScheduleBatchPriority(void);
 
-#endif // VERGE_UTIL_SYSTEM_H
+#endif // bitphantom_UTIL_SYSTEM_H

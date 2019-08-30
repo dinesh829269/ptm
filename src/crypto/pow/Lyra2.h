@@ -17,8 +17,8 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef VERGE_CRYPTO_POW_LYRA2_H
-#define VERGE_CRYPTO_POW_LYRA2_H
+#ifndef bitphantom_CRYPTO_POW_LYRA2_H
+#define bitphantom_CRYPTO_POW_LYRA2_H
 
 #include <stdint.h>
 
@@ -41,4 +41,4 @@ int LYRA2(void *K, uint64_t kLen, const void *pwd, uint64_t pwdlen, const void *
 
 int LYRA2_old(void *K, uint64_t kLen, const void *pwd, uint64_t pwdlen, const void *salt, uint64_t saltlen, uint64_t timeCost, uint64_t nRows, uint64_t nCols);
 
-#endif // VERGE_CRYPTO_POW_LYRA2_H
+#endif // bitphantom_CRYPTO_POW_LYRA2_H

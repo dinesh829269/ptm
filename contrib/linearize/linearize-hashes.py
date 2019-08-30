@@ -28,7 +28,7 @@ def hex_switchEndian(s):
     return b''.join(pairList[::-1]).decode()
 
 
-class VERGERPC:
+class bitphantomRPC:
     def __init__(self, host, port, username, password):
         authpair = "%s:%s" % (username, password)
         authpair = authpair.encode('utf-8')
@@ -71,7 +71,7 @@ class VERGERPC:
 
 
 def get_block_hashes(settings, max_blocks_per_call=10000):
-    rpc = VERGERPC(settings['host'], settings['port'],
+    rpc = bitphantomRPC(settings['host'], settings['port'],
                      settings['rpcuser'], settings['rpcpassword'])
 
     height = settings['min_height']

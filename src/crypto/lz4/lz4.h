@@ -31,8 +31,8 @@
    - LZ4 homepage : http://fastcompression.blogspot.com/p/lz4.html
    - LZ4 source repository : http://code.google.com/p/lz4/
 */
-#ifndef VERGE_CRYPTO_LZ4_LZ4_H
-#define VERGE_CRYPTO_LZ4_LZ4_H
+#ifndef bitphantom_CRYPTO_LZ4_LZ4_H
+#define bitphantom_CRYPTO_LZ4_LZ4_H
 #pragma once
 
 #if defined (__cplusplus)
@@ -249,4 +249,4 @@ int LZ4_uncompress_unknownOutputSize (const char* source, char* dest, int isize,
 }
 #endif
 
-#endif // VERGE_CRYPTO_LZ4_LZ4_H
+#endif // bitphantom_CRYPTO_LZ4_LZ4_H

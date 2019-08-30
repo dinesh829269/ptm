@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SUPPORT_LOCKEDPOOL_H
-#define VERGE_SUPPORT_LOCKEDPOOL_H
+#ifndef bitphantom_SUPPORT_LOCKEDPOOL_H
+#define bitphantom_SUPPORT_LOCKEDPOOL_H
 
 #include <stdint.h>
 #include <list>
@@ -238,4 +238,4 @@ private:
     static std::once_flag init_flag;
 };
 
-#endif // VERGE_SUPPORT_LOCKEDPOOL_H
+#endif // bitphantom_SUPPORT_LOCKEDPOOL_H

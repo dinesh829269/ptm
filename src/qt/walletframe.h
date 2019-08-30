@@ -1,15 +1,15 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_WALLETFRAME_H
-#define VERGE_QT_WALLETFRAME_H
+#ifndef bitphantom_QT_WALLETFRAME_H
+#define bitphantom_QT_WALLETFRAME_H
 
 #include <QFrame>
 #include <QMap>
 
-class VERGEGUI;
+class bitphantomGUI;
 class ClientModel;
 class PlatformStyle;
 class SendCoinsRecipient;
@@ -22,9 +22,9 @@ QT_END_NAMESPACE
 
 /**
  * A container for embedding all wallet-related
- * controls into VERGEGUI. The purpose of this class is to allow future
+ * controls into bitphantomGUI. The purpose of this class is to allow future
  * refinements of the wallet controls with minimal need for further
- * modifications to VERGEGUI, thus greatly simplifying merges while
+ * modifications to bitphantomGUI, thus greatly simplifying merges while
  * reducing the risk of breaking top-level stuff.
  */
 class WalletFrame : public QFrame
@@ -32,7 +32,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(const PlatformStyle *platformStyle, VERGEGUI *_gui = 0);
+    explicit WalletFrame(const PlatformStyle *platformStyle, bitphantomGUI *_gui = 0);
     ~WalletFrame();
 
     void setClientModel(ClientModel *clientModel);
@@ -52,7 +52,7 @@ Q_SIGNALS:
 
 private:
     QStackedWidget *walletStack;
-    VERGEGUI *gui;
+    bitphantomGUI *gui;
     ClientModel *clientModel;
     QMap<QString, WalletView*> mapWalletViews;
 
@@ -95,4 +95,4 @@ public Q_SLOTS:
     void outOfSyncWarningClicked();
 };
 
-#endif // VERGE_QT_WALLETFRAME_H
+#endif // bitphantom_QT_WALLETFRAME_H

@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_MESSAGEMODEL_H
-#define VERGE_QT_MESSAGEMODEL_H
+#ifndef bitphantom_QT_MESSAGEMODEL_H
+#define bitphantom_QT_MESSAGEMODEL_H
 #include <uint256.h>
 #include <vector>
 #include <allocators.h> /* for SecureString */
@@ -59,7 +59,7 @@ public:
     {
     }
 };
- /** Interface to Verge Secure Messaging (VISP) from Qt view code. */
+ /** Interface to bitphantom Secure Messaging (VISP) from Qt view code. */
 class MessageModel : public QAbstractTableModel
 {
     Q_OBJECT
@@ -82,8 +82,8 @@ class MessageModel : public QAbstractTableModel
         SentDateTime = 1, /**< Time Sent */
         ReceivedDateTime = 2, /**< Time Received */
         Label = 3,   /**< User specified label */
-        ToAddress = 4, /**< To Verge address */
-        FromAddress = 5, /**< From Verge address */
+        ToAddress = 4, /**< To bitphantom address */
+        FromAddress = 5, /**< From bitphantom address */
         Message = 6, /**< Plaintext */
         TypeInt = 7, /**< Plaintext */
         Key = 8, /**< chKey */
@@ -167,4 +167,4 @@ private:
     void error(const QString &title, const QString &message, bool modal);
 };
 
-#endif // VERGE_QT_MESSAGEMODEL_H
+#endif // bitphantom_QT_MESSAGEMODEL_H

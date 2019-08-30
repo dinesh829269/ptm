@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef VERGE_CRYPTO_POW_HASHGROESTL_H
-#define VERGE_CRYPTO_POW_HASHGROESTL_H
+#ifndef bitphantom_CRYPTO_POW_HASHGROESTL_H
+#define bitphantom_CRYPTO_POW_HASHGROESTL_H
 
 #include <uint256.h>
 #include <serialize.h>
@@ -36,4 +36,4 @@ inline uint256 HashGroestl(const T1 pbegin, const T1 pend)
     return hash2;
 }
 
-#endif // VERGE_CRYPTO_POW_HASHGROESTL_H
+#endif // bitphantom_CRYPTO_POW_HASHGROESTL_H

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_FS_H
-#define VERGE_FS_H
+#ifndef bitphantom_FS_H
+#define bitphantom_FS_H
 
 #include <stdio.h>
 #include <string>
@@ -22,4 +22,4 @@ namespace fsbridge {
     FILE *freopen(const fs::path& p, const char *mode, FILE *stream);
 };
 
-#endif // VERGE_FS_H
+#endif // bitphantom_FS_H

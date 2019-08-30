@@ -19,9 +19,9 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-VERGE_INCLUDES  = -I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
-VERGE_INCLUDES += -I$(srcdir)/secp256k1/include
-VERGE_INCLUDES += $(UNIVALUE_CFLAGS)
+bitphantom_INCLUDES  = -I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+bitphantom_INCLUDES += -I$(srcdir)/secp256k1/include
+bitphantom_INCLUDES += $(UNIVALUE_CFLAGS)
 
 # "Common" libraries used to link tor's utility code.
 TOR_UTIL_LIBS = \
@@ -72,33 +72,33 @@ TOR_LIBS = \
 	tor/src/trunnel/libor-trunnel.a \
 	tor/src/lib/libtor-trace.a
 
-libverge_SERVER=libverge_server.a
-libverge_COMMON=libverge_common.a
-libverge_CONSENSUS=libverge_consensus.a
-libverge_CLI=libverge_cli.a
-libverge_UTIL=libverge_util.a
-libverge_CRYPTO_BASE=crypto/libverge_crypto_base.a
-libvergeQT=qt/libvergeqt.a
+libbitphantom_SERVER=libbitphantom_server.a
+libbitphantom_COMMON=libbitphantom_common.a
+libbitphantom_CONSENSUS=libbitphantom_consensus.a
+libbitphantom_CLI=libbitphantom_cli.a
+libbitphantom_UTIL=libbitphantom_util.a
+libbitphantom_CRYPTO_BASE=crypto/libbitphantom_crypto_base.a
+libbitphantomQT=qt/libbitphantomqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-libverge_ZMQ=libverge_zmq.a
+libbitphantom_ZMQ=libbitphantom_zmq.a
 endif
-if BUILD_VERGE_LIBS
-libvergeCONSENSUS=libvergeconsensus.la
+if BUILD_bitphantom_LIBS
+libbitphantomCONSENSUS=libbitphantomconsensus.la
 endif
 if ENABLE_WALLET
-libverge_WALLET=libverge_wallet.a
+libbitphantom_WALLET=libbitphantom_wallet.a
 endif
 
-libverge_CRYPTO= $(libverge_CRYPTO_BASE)
+libbitphantom_CRYPTO= $(libbitphantom_CRYPTO_BASE)
 if ENABLE_SSE41
-libverge_CRYPTO_SSE41 = crypto/libverge_crypto_sse41.a
-libverge_CRYPTO += $(libverge_CRYPTO_SSE41)
+libbitphantom_CRYPTO_SSE41 = crypto/libbitphantom_crypto_sse41.a
+libbitphantom_CRYPTO += $(libbitphantom_CRYPTO_SSE41)
 endif
 if ENABLE_AVX2
-libverge_CRYPTO_AVX2 = crypto/libverge_crypto_avx2.a
-libverge_CRYPTO += $(libverge_CRYPTO_AVX2)
+libbitphantom_CRYPTO_AVX2 = crypto/libbitphantom_crypto_avx2.a
+libbitphantom_CRYPTO += $(libbitphantom_CRYPTO_AVX2)
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
@@ -107,33 +107,33 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  $(libverge_CRYPTO) \
-  $(libverge_UTIL) \
-  $(libverge_COMMON) \
-  $(libverge_CONSENSUS) \
-  $(libverge_SERVER) \
-  $(libverge_CLI) \
-  $(libverge_WALLET) \
-  $(libverge_ZMQ)
+  $(libbitphantom_CRYPTO) \
+  $(libbitphantom_UTIL) \
+  $(libbitphantom_COMMON) \
+  $(libbitphantom_CONSENSUS) \
+  $(libbitphantom_SERVER) \
+  $(libbitphantom_CLI) \
+  $(libbitphantom_WALLET) \
+  $(libbitphantom_ZMQ)
 
-lib_LTLIBRARIES = $(libvergeCONSENSUS)
+lib_LTLIBRARIES = $(libbitphantomCONSENSUS)
 
 bin_PROGRAMS =
 noinst_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-if BUILD_VERGEd
-  bin_PROGRAMS += verged
+if BUILD_bitphantomd
+  bin_PROGRAMS += bitphantomd
 endif
 
-if BUILD_VERGE_UTILS
-  bin_PROGRAMS += verge-cli verge-tx
+if BUILD_bitphantom_UTILS
+  bin_PROGRAMS += bitphantom-cli bitphantom-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# verge core #
-VERGE_CORE_H = \
+# bitphantom core #
+bitphantom_CORE_H = \
   addrdb.h \
   addrman.h \
   base58.h \
@@ -255,12 +255,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
-libverge_util_a-clientversion.$(OBJEXT): obj/build.h
+libbitphantom_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between verged and verge-qt
-libverge_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libverge_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_server_a_SOURCES = \
+# server: shared between bitphantomd and bitphantom-qt
+libbitphantom_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libbitphantom_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_server_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   bloom.cpp \
@@ -303,23 +303,23 @@ libverge_server_a_SOURCES = \
   validationinterface.cpp \
   versionbits.cpp \
   torcontroller.cpp \
-  $(VERGE_CORE_H)
+  $(bitphantom_CORE_H)
 
 if ENABLE_ZMQ
-libverge_zmq_a_CPPFLAGS = $(VERGE_INCLUDES) $(ZMQ_CFLAGS)
-libverge_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_zmq_a_SOURCES = \
+libbitphantom_zmq_a_CPPFLAGS = $(bitphantom_INCLUDES) $(ZMQ_CFLAGS)
+libbitphantom_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
 
-# wallet: shared between verged and verge-qt, but only linked
+# wallet: shared between bitphantomd and bitphantom-qt, but only linked
 # when wallet enabled
-libverge_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-libverge_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_wallet_a_SOURCES = \
+libbitphantom_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+libbitphantom_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_wallet_a_SOURCES = \
   interfaces/wallet.cpp \
   wallet/crypter.cpp \
   wallet/db.cpp \
@@ -333,12 +333,12 @@ libverge_wallet_a_SOURCES = \
   wallet/walletutil.cpp \
   wallet/coinselection.cpp \
   stealth.cpp \
-  $(VERGE_CORE_H)
+  $(bitphantom_CORE_H)
 
 # crypto primitives library
-crypto_libverge_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libverge_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libverge_crypto_base_a_SOURCES = \
+crypto_libbitphantom_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libbitphantom_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitphantom_crypto_base_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -417,25 +417,25 @@ crypto_libverge_crypto_base_a_SOURCES = \
 
 
 if USE_ASM
-crypto_libverge_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libbitphantom_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
 endif
 
-crypto_libverge_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libverge_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libverge_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
-crypto_libverge_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
-crypto_libverge_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
+crypto_libbitphantom_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitphantom_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libbitphantom_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
+crypto_libbitphantom_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
+crypto_libbitphantom_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
 
-crypto_libverge_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libverge_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libverge_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
-crypto_libverge_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
-crypto_libverge_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
+crypto_libbitphantom_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitphantom_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libbitphantom_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
+crypto_libbitphantom_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
+crypto_libbitphantom_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
 
 # consensus: shared between all executables that validate any consensus rules.
-libverge_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-libverge_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_consensus_a_SOURCES = \
+libbitphantom_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+libbitphantom_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -452,7 +452,7 @@ libverge_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/vergeconsensus.cpp \
+  script/bitphantomconsensus.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -469,10 +469,10 @@ libverge_consensus_a_SOURCES = \
   timedatadummy.cpp \
   version.h
 
-# common: shared between verged, and verge-qt and non-server tools
-libverge_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-libverge_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_common_a_SOURCES = \
+# common: shared between bitphantomd, and bitphantom-qt and non-server tools
+libbitphantom_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+libbitphantom_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_common_a_SOURCES = \
   base58.cpp \
   bech32.cpp \
   chainparams.cpp \
@@ -493,14 +493,14 @@ libverge_common_a_SOURCES = \
   script/standard.cpp \
   warnings.cpp \
   stealth.cpp \
-  $(VERGE_CORE_H)
+  $(bitphantom_CORE_H)
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libverge_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-libverge_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_util_a_SOURCES = \
+libbitphantom_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+libbitphantom_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -522,43 +522,43 @@ libverge_util_a_SOURCES = \
   util/moneystr.cpp \
   util/strencodings.cpp \
   util/time.cpp \
-  $(VERGE_CORE_H)
+  $(bitphantom_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libverge_util_a_SOURCES += compat/glibc_compat.cpp
+libbitphantom_util_a_SOURCES += compat/glibc_compat.cpp
 endif
 
-# cli: shared between verge-cli and verge-qt
-libverge_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-libverge_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libverge_cli_a_SOURCES = \
+# cli: shared between bitphantom-cli and bitphantom-qt
+libbitphantom_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+libbitphantom_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantom_cli_a_SOURCES = \
   rpc/client.cpp \
-  $(VERGE_CORE_H)
+  $(bitphantom_CORE_H)
 
-nodist_libverge_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libbitphantom_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# verged binary #
-verged_SOURCES = verged.cpp
-verged_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES) $(LIBEVENT_CFLAGS) $(LIBSECCOMP_CFLAGS) $(LIBCAP_CFLAGS) $(ZLIB_CFLAGS)
-verged_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-verged_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# bitphantomd binary #
+bitphantomd_SOURCES = bitphantomd.cpp
+bitphantomd_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES) $(LIBEVENT_CFLAGS) $(LIBSECCOMP_CFLAGS) $(LIBCAP_CFLAGS) $(ZLIB_CFLAGS)
+bitphantomd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bitphantomd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-verged_SOURCES += verged-res.rc
+bitphantomd_SOURCES += bitphantomd-res.rc
 endif
 
 
 
-verged_LDADD = \
-  $(libverge_SERVER) \
-  $(libverge_WALLET) \
-  $(libverge_COMMON) \
+bitphantomd_LDADD = \
+  $(libbitphantom_SERVER) \
+  $(libbitphantom_WALLET) \
+  $(libbitphantom_COMMON) \
   $(LIBUNIVALUE) \
-  $(libverge_UTIL) \
-  $(libverge_ZMQ) \
-  $(libverge_CONSENSUS) \
-  $(libverge_CRYPTO) \
+  $(libbitphantom_UTIL) \
+  $(libbitphantom_ZMQ) \
+  $(libbitphantom_CONSENSUS) \
+  $(libbitphantom_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBLEVELDB_SSE42) \
   $(LIBMEMENV) \
@@ -569,67 +569,67 @@ verged_LDADD = \
   $(LIBCAP_LIBS) \
   $(ZLIB_LIBS)
 
-verged_LDADD  += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) $(LIBEVENT_LDFLAGS) $(LIBSECCOMP_LDFLAGS) $(LIBCAP_LDFLAGS) -lz
+bitphantomd_LDADD  += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) $(LIBEVENT_LDFLAGS) $(LIBSECCOMP_LDFLAGS) $(LIBCAP_LDFLAGS) -lz
 
 # if BUILD_DARWIN
-# verged_CPPFLAGS += -I/usr/local/opt/libomp/include
-# verged_LDFLAGS += -L/usr/local/opt/libomp/lib
-# verged_LDADD += -lomp
+# bitphantomd_CPPFLAGS += -I/usr/local/opt/libomp/include
+# bitphantomd_LDFLAGS += -L/usr/local/opt/libomp/lib
+# bitphantomd_LDADD += -lomp
 # endif
 
-# verge-cli binary #
-verge_cli_SOURCES = verge-cli.cpp
-verge_cli_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES) $(EVENT_CFLAGS)
-verge_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-verge_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# bitphantom-cli binary #
+bitphantom_cli_SOURCES = bitphantom-cli.cpp
+bitphantom_cli_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES) $(EVENT_CFLAGS)
+bitphantom_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bitphantom_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-verge_cli_SOURCES += verge-cli-res.rc
+bitphantom_cli_SOURCES += bitphantom-cli-res.rc
 endif
 
-verge_cli_LDADD = \
-  $(libverge_CLI) \
+bitphantom_cli_LDADD = \
+  $(libbitphantom_CLI) \
   $(LIBUNIVALUE) \
-  $(libverge_UTIL) \
-  $(libverge_CRYPTO)
+  $(libbitphantom_UTIL) \
+  $(libbitphantom_CRYPTO)
 
-verge_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+bitphantom_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# verge-tx binary #
-verge_tx_SOURCES = verge-tx.cpp
-verge_tx_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-verge_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-verge_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# bitphantom-tx binary #
+bitphantom_tx_SOURCES = bitphantom-tx.cpp
+bitphantom_tx_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+bitphantom_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bitphantom_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-verge_tx_SOURCES += verge-tx-res.rc
+bitphantom_tx_SOURCES += bitphantom-tx-res.rc
 endif
 
-verge_tx_LDADD = \
+bitphantom_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(libverge_COMMON) \
-  $(libverge_UTIL) \
-  $(libverge_CONSENSUS) \
-  $(libverge_CRYPTO) \
+  $(libbitphantom_COMMON) \
+  $(libbitphantom_UTIL) \
+  $(libbitphantom_CONSENSUS) \
+  $(libbitphantom_CRYPTO) \
   $(LIBSECP256K1)
 
-verge_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+bitphantom_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# vergeconsensus library #
-if BUILD_VERGE_LIBS
-include_HEADERS = script/vergeconsensus.h
-libvergeconsensus_la_SOURCES = $(crypto_libverge_crypto_base_a_SOURCES) $(libverge_consensus_a_SOURCES)
+# bitphantomconsensus library #
+if BUILD_bitphantom_LIBS
+include_HEADERS = script/bitphantomconsensus.h
+libbitphantomconsensus_la_SOURCES = $(crypto_libbitphantom_crypto_base_a_SOURCES) $(libbitphantom_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
-  libvergeconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libbitphantomconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libvergeconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libvergeconsensus_la_LIBADD = $(LIBSECP256K1)
-libvergeconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_VERGE_INTERNAL
-libvergeconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitphantomconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libbitphantomconsensus_la_LIBADD = $(LIBSECP256K1)
+libbitphantomconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_bitphantom_INTERNAL
+libbitphantomconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #
@@ -665,12 +665,12 @@ CLEANFILES += obj/build.h
 EXTRA_DIST = $(CTAES_DIST) $(CRYPTO_HELPER_DIST)
 
 
-config/verge-config.h: config/stamp-h1
+config/bitphantom-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/verge-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/bitphantom-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/verge-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/verge-config.h.in
+$(top_srcdir)/$(subdir)/config/bitphantom-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/bitphantom-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean

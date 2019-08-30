@@ -1,5 +1,5 @@
 ---
-name: "verge-linux-5.0.0-beta1"
+name: "bitphantom-linux-5.0.0-beta1"
 enable_cache: true
 distro: "ubuntu"
 suites:
@@ -35,8 +35,8 @@ packages:
 - "libattr1-dev"
 
 remotes:
-- "url": "https://github.com/vergecurrency/VERGE.git"
-  "dir": "verge"
+- "url": "https://github.com/bitphantomcurrency/bitphantom.git"
+  "dir": "bitphantom"
 files: []
 script: |
 
@@ -120,7 +120,7 @@ script: |
   chmod +x ${WRAP_DIR}/${prog}
   done
 
-  cd verge
+  cd bitphantom
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -142,13 +142,13 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}/`echo "${HOSTS}" | awk '{print $1;}'`/share/config.site ./configure --prefix=/
   make dist
-  SOURCEDIST=`echo verge-*.tar.gz`
+  SOURCEDIST=`echo bitphantom-*.tar.gz`
   DISTNAME=`echo ${SOURCEDIST} | sed 's/.tar.*//'`
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar xf ../$SOURCEDIST
-  find verge-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find bitphantom-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   popd
 
   # Workaround for tarball not building with the bare tag version (prep)

@@ -9,8 +9,8 @@
 //
 // For more information, see BIP 173.
 
-#ifndef VERGE_BECH32_H
-#define VERGE_BECH32_H
+#ifndef bitphantom_BECH32_H
+#define bitphantom_BECH32_H
 
 #include <stdint.h>
 #include <string>
@@ -27,4 +27,4 @@ std::pair<std::string, std::vector<uint8_t>> Decode(const std::string& str);
 
 } // namespace bech32
 
-#endif // VERGE_BECH32_H
+#endif // bitphantom_BECH32_H

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,8 +8,8 @@
 #error This header can only be compiled as C++.
 #endif
 
-#ifndef VERGE_PROTOCOL_H
-#define VERGE_PROTOCOL_H
+#ifndef bitphantom_PROTOCOL_H
+#define bitphantom_PROTOCOL_H
 
 #include <netaddress.h>
 #include <serialize.h>
@@ -62,7 +62,7 @@ public:
 };
 
 /**
- * VERGE protocol message types. When adding new message types, don't forget
+ * bitphantom protocol message types. When adding new message types, don't forget
  * to update allNetMessageTypes in protocol.cpp.
  */
 namespace NetMsgType {
@@ -249,17 +249,17 @@ enum ServiceFlags : uint64_t {
     // Nothing
     NODE_NONE = 0,
     // NODE_NETWORK means that the node is capable of serving the complete block chain. It is currently
-    // set by all VERGE Core non pruned nodes, and is unset by SPV clients or other light clients.
+    // set by all bitphantom Core non pruned nodes, and is unset by SPV clients or other light clients.
     NODE_NETWORK = (1 << 0),
     // NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
-    // VERGE Core nodes used to support this by default, without advertising this bit,
+    // bitphantom Core nodes used to support this by default, without advertising this bit,
     // but no longer do as of protocol version 70011 (= NO_BLOOM_VERSION)
     NODE_BLOOM = (1 << 1),
     // NODE_WITNESS indicates that a node can be asked for blocks and transactions including
     // witness data.
     NODE_WITNESS = (1 << 2),
     // NODE_GETUTXO means the node is capable of responding to the getutxo protocol request.
-    // VERGE Core does not support this but a patch set called VERGE XT does.
+    // bitphantom Core does not support this but a patch set called bitphantom XT does.
     // See BIP 64 for details on how this is implemented.
     NODE_GETUTXO = (1 << 3),
     // NODE_XTHIN means the node supports Xtreme Thinblocks
@@ -421,4 +421,4 @@ public:
     uint256 hash;
 };
 
-#endif // VERGE_PROTOCOL_H
+#endif // bitphantom_PROTOCOL_H

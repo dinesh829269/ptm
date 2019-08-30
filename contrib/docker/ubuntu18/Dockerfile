@@ -1,9 +1,9 @@
-# Dockerfile for Verge
-# http://vergecurrency.com/
+# Dockerfile for bitphantom
+# http://bitphantomcurrency.com/
 # https://bitcointalk.org/index.php?topic=1365894
-# https://github.com/vergecurrency/verge
+# https://github.com/bitphantomcurrency/bitphantom
 
-# https://github.com/vergecurrency/Docker-Verge-Daemon.git
+# https://github.com/bitphantomcurrency/Docker-bitphantom-Daemon.git
 #  Jeremiah Buddenhagen <bitspill@bitspill.net>
 
 FROM ubuntu:18.04
@@ -56,18 +56,18 @@ RUN apt-get update --yes > /dev/null && \
        zlib1g-dev \
       > /dev/null
 
-RUN git clone https://github.com/vergecurrency/VERGE.git /coin/git
+RUN git clone https://github.com/bitphantomcurrency/bitphantom.git /coin/git
 
 WORKDIR /coin/git
 
-RUN ./autogen.sh && ./configure --with-gui=qt5 && make && mv src/verged /coin/verged
+RUN ./autogen.sh && ./configure --with-gui=qt5 && make && mv src/bitphantomd /coin/bitphantomd
 
 WORKDIR /coin
 VOLUME ["/coin/home"]
 
 ENV HOME /coin/home
 
-CMD ["/coin/verged"]
+CMD ["/coin/bitphantomd"]
 
 # P2P, RPC
-EXPOSE 21102 20102
+EXPOSE 80111 80122

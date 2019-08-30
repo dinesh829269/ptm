@@ -11,7 +11,7 @@
   </array>
 
   <key>CFBundleIconFile</key>
-  <string>VERGE.icns</string>
+  <string>bitphantom.icns</string>
 
   <key>CFBundlePackageType</key>
   <string>APPL</string>
@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>verge-qt</string>
+  <string>bitphantom-qt</string>
   
   <key>CFBundleName</key>
-  <string>verge-qt</string>
+  <string>bitphantom-qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.vergefoundation.verge-qt</string>
+  <string>org.bitphantomfoundation.bitphantom-qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,10 +46,10 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.verge.vergePayment</string>
+      <string>org.bitphantom.bitphantomPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>verge</string>
+        <string>bitphantom</string>
       </array>
     </dict>
   </array>
@@ -58,9 +58,9 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>org.verge.paymentrequest</string>
+      <string>org.bitphantom.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>Verge payment request</string>
+      <string>bitphantom payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
@@ -68,10 +68,10 @@
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.mime-type</key>
-        <string>application/x-verge-payment-request</string>
+        <string>application/x-bitphantom-payment-request</string>
         <key>public.filename-extension</key>
         <array>
-          <string>vergepaymentrequest</string>
+          <string>bitphantompaymentrequest</string>
         </array>
       </dict>
     </dict>
@@ -84,7 +84,7 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
-        <string>org.verge.paymentrequest</string>
+        <string>org.bitphantom.paymentrequest</string>
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>

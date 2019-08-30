@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_RPCCONSOLE_H
-#define VERGE_QT_RPCCONSOLE_H
+#ifndef bitphantom_QT_RPCCONSOLE_H
+#define bitphantom_QT_RPCCONSOLE_H
 
 #include <qt/guiutil.h>
 #include <qt/peertablemodel.h>
@@ -33,7 +33,7 @@ class QMenu;
 class QItemSelection;
 QT_END_NAMESPACE
 
-/** Local VERGE RPC console. */
+/** Local bitphantom RPC console. */
 class RPCConsole: public QWidget
 {
     Q_OBJECT
@@ -165,4 +165,4 @@ private:
     void updateNetworkState();
 };
 
-#endif // VERGE_QT_RPCCONSOLE_H
+#endif // bitphantom_QT_RPCCONSOLE_H

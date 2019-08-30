@@ -1,12 +1,12 @@
-// Copyright (c) 2018-2019 The VERGE Core developers
+// Copyright (c) 2018-2019 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Functionality for communicating with Tor.
  */
-#ifndef VERGE_TORCONTROLLER_H
-#define VERGE_TORCONTROLLER_H
+#ifndef bitphantom_TORCONTROLLER_H
+#define bitphantom_TORCONTROLLER_H
 
 #include <stdint.h>
 #include <atomic>
@@ -47,4 +47,4 @@ void StopTorController();
  **/
 void StartTorController();
 
-#endif /* VERGE_TORCONTROLLER_H */
+#endif /* bitphantom_TORCONTROLLER_H */

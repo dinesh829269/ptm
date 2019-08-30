@@ -18,7 +18,7 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/vergecurrency/VERGE
+url=https://github.com/bitphantomcurrency/bitphantom
 proc=2
 mem=2000
 lxc=true
@@ -32,7 +32,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] signer version
 
-Run this script from the directory containing the verge, gitian-builder, gitian.sigs, and verge-detached-sigs.
+Run this script from the directory containing the bitphantom, gitian-builder, gitian.sigs, and bitphantom-detached-sigs.
 
 Arguments:
 signer          GPG signer to sign each build assert file
@@ -40,7 +40,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/vergecurrency/VERGE
+-u|--url	Specify the URL of the repository. Default is https://github.com/bitphantomcurrency/bitphantom
 -v|--verify 	Verify the Gitian build
 -b|--build	Do a Gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -231,8 +231,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/vergecurrency/gitian.sigs.git
-    git clone https://github.com/vergecurrency/verge-detached-sigs.git
+    git clone https://github.com/bitphantomcurrency/gitian.sigs.git
+    git clone https://github.com/bitphantomcurrency/bitphantom-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -246,7 +246,7 @@ then
 fi
 
 # Set up build
-pushd ./verge
+pushd ./bitphantom
 git fetch
 git checkout ${COMMIT}
 popd
@@ -255,7 +255,7 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./verge-binaries/${VERSION}
+	mkdir -p ./bitphantom-binaries/${VERSION}
 	
 	# Build Dependencies
 	echo ""
@@ -265,7 +265,7 @@ then
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../verge/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../bitphantom/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -273,9 +273,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit verge=${COMMIT} --url verge=${url} ../verge/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs/ ../verge/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/verge-*.tar.gz build/out/src/verge-*.tar.gz ../verge-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitphantom=${COMMIT} --url bitphantom=${url} ../bitphantom/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitphantom/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/bitphantom-*.tar.gz build/out/src/bitphantom-*.tar.gz ../bitphantom-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -283,10 +283,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit verge=${COMMIT} --url verge=${url} ../verge/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../verge/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/verge-*-win-unsigned.tar.gz inputs/verge-win-unsigned.tar.gz
-	    mv build/out/verge-*.zip build/out/verge-*.exe ../verge-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitphantom=${COMMIT} --url bitphantom=${url} ../bitphantom/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitphantom/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/bitphantom-*-win-unsigned.tar.gz inputs/bitphantom-win-unsigned.tar.gz
+	    mv build/out/bitphantom-*.zip build/out/bitphantom-*.exe ../bitphantom-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -294,10 +294,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit verge=${COMMIT} --url verge=${url} ../verge/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../verge/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/verge-*-osx-unsigned.tar.gz inputs/verge-osx-unsigned.tar.gz
-	    mv build/out/verge-*.tar.gz build/out/verge-*.dmg ../verge-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitphantom=${COMMIT} --url bitphantom=${url} ../bitphantom/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitphantom/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/bitphantom-*-osx-unsigned.tar.gz inputs/bitphantom-osx-unsigned.tar.gz
+	    mv build/out/bitphantom-*.tar.gz build/out/bitphantom-*.dmg ../bitphantom-binaries/${VERSION}
 	fi
 	popd
 
@@ -324,27 +324,27 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../verge/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../bitphantom/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../verge/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bitphantom/contrib/gitian-descriptors/gitian-win.yml
 	# Mac OSX	
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
 	echo ""	
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../verge/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitphantom/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../verge/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitphantom/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../verge/contrib/gitian-descriptors/gitian-osx-signer.yml	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitphantom/contrib/gitian-descriptors/gitian-osx-signer.yml	
 	popd
 fi
 
@@ -359,10 +359,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../verge/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../verge/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/verge-*win64-setup.exe ../verge-binaries/${VERSION}
-	    mv build/out/verge-*win32-setup.exe ../verge-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../bitphantom/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitphantom/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/bitphantom-*win64-setup.exe ../bitphantom-binaries/${VERSION}
+	    mv build/out/bitphantom-*win32-setup.exe ../bitphantom-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -370,9 +370,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../verge/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../verge/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/verge-osx-signed.dmg ../verge-binaries/${VERSION}/verge-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../bitphantom/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p "$signProg" --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitphantom/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/bitphantom-osx-signed.dmg ../bitphantom-binaries/${VERSION}/bitphantom-${VERSION}-osx.dmg
 	fi
 	popd
 

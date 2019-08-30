@@ -4,10 +4,10 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the wallet keypool and interaction with wallet encryption/locking."""
 
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import *
 
-class KeyPoolTest(VergeTestFramework):
+class KeyPoolTest(bitphantomTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
 

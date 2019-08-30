@@ -1,2 +1,2 @@
-contrib/verged.bash-completion	verged
-contrib/verge-cli.bash-completion	verge-cli
+contrib/bitphantomd.bash-completion	bitphantomd
+contrib/bitphantom-cli.bash-completion	bitphantom-cli

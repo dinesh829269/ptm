@@ -8,10 +8,10 @@
 import os
 import shutil
 
-from test_framework.test_framework import VergeTestFramework, initialize_datadir
+from test_framework.test_framework import bitphantomTestFramework, initialize_datadir
 
 
-class BlocksdirTest(VergeTestFramework):
+class BlocksdirTest(bitphantomTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

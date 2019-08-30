@@ -3,9 +3,9 @@
 export LC_ALL=C
 KNOWN_VIOLATIONS=(
     "src/base58.cpp:.*isspace"
-    "src/verge-tx.cpp.*stoul"
-    "src/verge-tx.cpp.*trim_right"
-    "src/verge-tx.cpp:.*atoi"
+    "src/bitphantom-tx.cpp.*stoul"
+    "src/bitphantom-tx.cpp.*trim_right"
+    "src/bitphantom-tx.cpp:.*atoi"
     "src/core_read.cpp.*is_digit"
     "src/dbwrapper.cpp.*stoul"
     "src/dbwrapper.cpp:.*vsnprintf"

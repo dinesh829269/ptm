@@ -29,10 +29,10 @@ jobs:
       - run:
           <<: *run_apt_packages
       - checkout:
-          path: ~/project/verge
+          path: ~/project/bitphantom
       - run:
           name: Hardcopy gitian build script
-          command: cp ./verge/contrib/gitian-build.py . && chmod u+x gitian-build.py
+          command: cp ./bitphantom/contrib/gitian-build.py . && chmod u+x gitian-build.py
       - run:
           name: Prepare VM Builder
           command: git clone https://github.com/newroco/vmbuilder.git && cd vmbuilder && sudo chmod u+x setup.py && sudo ./setup.py install
@@ -57,7 +57,7 @@ jobs:
           command: ./gitian-build.py --docker --detach-sign -o w --commit -j 4 -m 4000 -b marpme master
       - persist_to_workspace:
           root: .
-          paths: 'verge-binaries/master'
+          paths: 'bitphantom-binaries/master'
 
   release-macos:
     <<: *defaults
@@ -78,7 +78,7 @@ jobs:
           command: ./gitian-build.py --docker --detach-sign -o m --commit -j 4 -m 4000 -b marpme master
       - persist_to_workspace:
           root: .
-          paths: 'verge-binaries/master'
+          paths: 'bitphantom-binaries/master'
 
   release-linux:
     <<: *defaults
@@ -96,7 +96,7 @@ jobs:
           command: ./gitian-build.py --docker --detach-sign -o l --commit -j 4 -m 4000 -b marpme master
       - persist_to_workspace:
           root: .
-          paths: 'verge-binaries/master'
+          paths: 'bitphantom-binaries/master'
 
   upload-github-releases:
     docker:
@@ -104,12 +104,12 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ./verge-binaries/master
+          at: ./bitphantom-binaries/master
       - run:
           name: 'Publish Release on GitHub'
           command: |
             VERSION=$(git describe)
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -delete ${CIRCLE_TAG} ./verge-binaries/master/verge-binaries/master/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -delete ${CIRCLE_TAG} ./bitphantom-binaries/master/bitphantom-binaries/master/
 
   test-setup-env:
     <<: *defaults-docker

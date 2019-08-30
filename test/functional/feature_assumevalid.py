@@ -41,7 +41,7 @@ from test_framework.mininode import (CBlockHeader,
                                      msg_block,
                                      msg_headers)
 from test_framework.script import (CScript, OP_TRUE)
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import assert_equal
 
 class BaseNode(P2PInterface):
@@ -50,7 +50,7 @@ class BaseNode(P2PInterface):
         headers_message.headers = [CBlockHeader(b) for b in new_blocks]
         self.send_message(headers_message)
 
-class AssumeValidTest(VergeTestFramework):
+class AssumeValidTest(bitphantomTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3

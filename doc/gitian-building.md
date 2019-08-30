@@ -1,9 +1,9 @@
 Gitian building
 ================
 
-*Setup instructions for a Gitian build of Verge Core using a VM or physical system.*
+*Setup instructions for a Gitian build of bitphantom Core using a VM or physical system.*
 
-Gitian is the deterministic build process that is used to build the Verge
+Gitian is the deterministic build process that is used to build the bitphantom
 Core executables. It provides a way to be reasonably sure that the
 executables are really built from the git source. It also makes sure that
 the same, tested dependencies are used and statically built into the executable.
@@ -22,7 +22,7 @@ Table of Contents
 
 - [Preparing the Gitian builder host](#preparing-the-gitian-builder-host)
 - [Getting and building the inputs](#getting-and-building-the-inputs)
-- [Building Verge Core](#building-Verge-core)
+- [Building bitphantom Core](#building-bitphantom-core)
 - [Building an alternative repository](#building-an-alternative-repository)
 - [Signing externally](#signing-externally)
 - [Uploading signatures](#uploading-signatures)
@@ -66,7 +66,7 @@ Initial Gitian Setup
 The `gitian-build.py` script will checkout different release tags, so it's best to copy it:
 
 ```bash
-cp VERGE/contrib/gitian-build.py .
+cp bitphantom/contrib/gitian-build.py .
 ```
 
 You only need to do this once:
@@ -80,7 +80,7 @@ Where `satoshi` is your Github name and `0.16.0rc1` is the most recent tag (with
 In order to sign gitian builds on your host machine, which has your PGP key, fork the gitian.sigs repository and clone it on your host machine:
 
 ```
-git clone git@github.com:vergecurrency/gitian.sigs.git
+git clone git@github.com:bitphantomcurrency/gitian.sigs.git
 git remote add satoshi git@github.com:satoshi/gitian.sigs.git
 ```
 
@@ -100,13 +100,13 @@ You need to copy these uncommited changes to your host machine, where you can si
 
 ```
 export NAME=satoshi
-gpg --output $VERSION-linux/$NAME/Verge-linux-0.16-build.assert.sig --detach-sign 0.16.0rc1-linux/$NAME/Verge-linux-0.16-build.assert 
-gpg --output $VERSION-osx-unsigned/$NAME/Verge-osx-0.16-build.assert.sig --detach-sign 0.16.0rc1-osx-unsigned/$NAME/Verge-osx-0.16-build.assert 
-gpg --output $VERSION-win-unsigned/$NAME/Verge-win-0.16-build.assert.sig --detach-sign 0.16.0rc1-win-unsigned/$NAME/Verge-win-0.16-build.assert 
+gpg --output $VERSION-linux/$NAME/bitphantom-linux-0.16-build.assert.sig --detach-sign 0.16.0rc1-linux/$NAME/bitphantom-linux-0.16-build.assert 
+gpg --output $VERSION-osx-unsigned/$NAME/bitphantom-osx-0.16-build.assert.sig --detach-sign 0.16.0rc1-osx-unsigned/$NAME/bitphantom-osx-0.16-build.assert 
+gpg --output $VERSION-win-unsigned/$NAME/bitphantom-win-0.16-build.assert.sig --detach-sign 0.16.0rc1-win-unsigned/$NAME/bitphantom-win-0.16-build.assert 
 ```
 
 Make a PR (both the `.assert` and `.assert.sig` files) to the
-[Verge-core/gitian.sigs](https://github.com/vergecurrency/gitian.sigs/) repository:
+[bitphantom-core/gitian.sigs](https://github.com/bitphantomcurrency/gitian.sigs/) repository:
 
 ```
 git checkout -b 0.16.0rc1-not-codesigned
@@ -117,9 +117,9 @@ git push --set-upstream $NAME 0.16.0rc1
 You can also mail the files to Wladimir (laanwj@gmail.com) and he will commit them.
 
 ```bash
-    gpg --detach-sign ${VERSION}-linux/${SIGNER}/Verge-linux-*-build.assert
-    gpg --detach-sign ${VERSION}-win-unsigned/${SIGNER}/Verge-win-*-build.assert
-    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/Verge-osx-*-build.assert
+    gpg --detach-sign ${VERSION}-linux/${SIGNER}/bitphantom-linux-*-build.assert
+    gpg --detach-sign ${VERSION}-win-unsigned/${SIGNER}/bitphantom-win-*-build.assert
+    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/bitphantom-osx-*-build.assert
 ```
 
 You may have other .assert files as well (e.g. `signed` ones), in which case you should sign them too. You can see all of them by doing `ls ${VERSION}-*/${SIGNER}`.

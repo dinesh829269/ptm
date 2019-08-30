@@ -2,10 +2,10 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-bin_PROGRAMS += test/test_verge
-noinst_PROGRAMS += test/test_verge_fuzzy
+bin_PROGRAMS += test/test_bitphantom
+noinst_PROGRAMS += test/test_bitphantom_fuzzy
 TEST_SRCDIR = test
-TEST_BINARY=test/test_verge$(EXEEXT)
+TEST_BINARY=test/test_bitphantom$(EXEEXT)
 
 JSON_TEST_FILES = \
   test/data/base58_encode_decode.json \
@@ -20,13 +20,13 @@ RAW_TEST_FILES =
 
 GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
 
-VERGE_TEST_SUITE = \
-  test/test_verge_main.cpp \
+bitphantom_TEST_SUITE = \
+  test/test_bitphantom_main.cpp \
   test/setup_common.h \
   test/setup_common.cpp
 
-# test_verge binary #
-VERGE_TESTS =\
+# test_bitphantom binary #
+bitphantom_TESTS =\
   test/arith_uint256_tests.cpp \
   test/scriptnum10.h \
   test/addrman_tests.cpp \
@@ -94,75 +94,75 @@ VERGE_TESTS =\
   test/versionbits_tests.cpp
 
 if ENABLE_WALLET
-VERGE_TESTS += \
+bitphantom_TESTS += \
   wallet/test/accounting_tests.cpp \
   wallet/test/wallet_tests.cpp \
   wallet/test/wallet_crypto_tests.cpp \
   wallet/test/coinselector_tests.cpp
 
-VERGE_TEST_SUITE += \
+bitphantom_TEST_SUITE += \
   wallet/test/wallet_test_fixture.cpp \
   wallet/test/wallet_test_fixture.h
 endif
 
-test_test_verge_SOURCES = $(VERGE_TEST_SUITE) $(VERGE_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
-test_test_verge_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES) $(TESTDEFS) $(EVENT_CFLAGS)
-test_test_verge_LDADD =
+test_test_bitphantom_SOURCES = $(bitphantom_TEST_SUITE) $(bitphantom_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
+test_test_bitphantom_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES) $(TESTDEFS) $(EVENT_CFLAGS)
+test_test_bitphantom_LDADD =
 if ENABLE_WALLET
-test_test_verge_LDADD += $(libverge_WALLET)
+test_test_bitphantom_LDADD += $(libbitphantom_WALLET)
 endif
 
-test_test_verge_LDADD += $(libverge_SERVER) $(libverge_CLI) $(libverge_COMMON) $(libverge_UTIL) $(libverge_CONSENSUS) $(libverge_CRYPTO) $(LIBUNIVALUE) \
+test_test_bitphantom_LDADD += $(libbitphantom_SERVER) $(libbitphantom_CLI) $(libbitphantom_COMMON) $(libbitphantom_UTIL) $(libbitphantom_CONSENSUS) $(libbitphantom_CRYPTO) $(LIBUNIVALUE) \
   $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) $(BOOST_LIBS) $(BOOST_UNIT_TEST_FRAMEWORK_LIB) $(LIBSECP256K1) $(EVENT_LIBS) $(EVENT_PTHREADS_LIBS)
-test_test_verge_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+test_test_bitphantom_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
-test_test_verge_LDADD += $(libverge_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
-test_test_verge_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
+test_test_bitphantom_LDADD += $(libbitphantom_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+test_test_bitphantom_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 
 if ENABLE_ZMQ
-test_test_verge_LDADD += $(ZMQ_LIBS)
+test_test_bitphantom_LDADD += $(ZMQ_LIBS)
 endif
 #
 
-# test_verge_fuzzy binary #
-test_test_verge_fuzzy_SOURCES = test/test_verge_fuzzy.cpp
-test_test_verge_fuzzy_CPPFLAGS = $(AM_CPPFLAGS) $(VERGE_INCLUDES)
-test_test_verge_fuzzy_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-test_test_verge_fuzzy_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# test_bitphantom_fuzzy binary #
+test_test_bitphantom_fuzzy_SOURCES = test/test_bitphantom_fuzzy.cpp
+test_test_bitphantom_fuzzy_CPPFLAGS = $(AM_CPPFLAGS) $(bitphantom_INCLUDES)
+test_test_bitphantom_fuzzy_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+test_test_bitphantom_fuzzy_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-test_test_verge_fuzzy_LDADD = \
+test_test_bitphantom_fuzzy_LDADD = \
   $(LIBUNIVALUE) \
-  $(libverge_SERVER) \
-  $(libverge_COMMON) \
-  $(libverge_UTIL) \
-  $(libverge_CONSENSUS) \
-  $(libverge_CRYPTO) \
-  $(libverge_CRYPTO_SSE41) \
-  $(libverge_CRYPTO_AVX2) \
+  $(libbitphantom_SERVER) \
+  $(libbitphantom_COMMON) \
+  $(libbitphantom_UTIL) \
+  $(libbitphantom_CONSENSUS) \
+  $(libbitphantom_CRYPTO) \
+  $(libbitphantom_CRYPTO_SSE41) \
+  $(libbitphantom_CRYPTO_AVX2) \
   $(LIBSECP256K1)
 
-test_test_verge_fuzzy_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+test_test_bitphantom_fuzzy_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-nodist_test_test_verge_SOURCES = $(GENERATED_TEST_FILES)
+nodist_test_test_bitphantom_SOURCES = $(GENERATED_TEST_FILES)
 
-$(VERGE_TESTS): $(GENERATED_TEST_FILES)
+$(bitphantom_TESTS): $(GENERATED_TEST_FILES)
 
-CLEAN_VERGE_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
+CLEAN_bitphantom_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
 
-CLEANFILES += $(CLEAN_VERGE_TEST)
+CLEANFILES += $(CLEAN_bitphantom_TEST)
 
-verge_test: $(TEST_BINARY)
+bitphantom_test: $(TEST_BINARY)
 
-verge_test_check: $(TEST_BINARY) FORCE
+bitphantom_test_check: $(TEST_BINARY) FORCE
 	$(MAKE) check-TESTS TESTS=$^
 
-verge_test_clean : FORCE
-	rm -f $(CLEAN_VERGE_TEST) $(test_test_verge_OBJECTS) $(TEST_BINARY)
+bitphantom_test_clean : FORCE
+	rm -f $(CLEAN_bitphantom_TEST) $(test_test_bitphantom_OBJECTS) $(TEST_BINARY)
 
-check-local: $(VERGE_TESTS:.cpp=.cpp.test)
-	@echo "Running test/util/verge-util-test.py..."
-	$(PYTHON) $(top_builddir)/test/util/verge-util-test.py
+check-local: $(bitphantom_TESTS:.cpp=.cpp.test)
+	@echo "Running test/util/bitphantom-util-test.py..."
+	$(PYTHON) $(top_builddir)/test/util/bitphantom-util-test.py
 	@echo "Running test/util/rpcauth-test.py..."
 	$(PYTHON) $(top_builddir)/test/util/rpcauth-test.py
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_OPTIONSDIALOG_H
-#define VERGE_QT_OPTIONSDIALOG_H
+#ifndef bitphantom_QT_OPTIONSDIALOG_H
+#define bitphantom_QT_OPTIONSDIALOG_H
 
 #include <QDialog>
 #include <QValidator>
@@ -48,7 +48,7 @@ private Q_SLOTS:
     /* set OK button state (enabled / disabled) */
     void setOkButtonState(bool fState);
     void on_resetButton_clicked();
-    void on_openVERGEConfButton_clicked();
+    void on_openbitphantomConfButton_clicked();
     void on_okButton_clicked();
     void on_cancelButton_clicked();
     
@@ -70,4 +70,4 @@ private:
     QDataWidgetMapper *mapper;
 };
 
-#endif // VERGE_QT_OPTIONSDIALOG_H
+#endif // bitphantom_QT_OPTIONSDIALOG_H

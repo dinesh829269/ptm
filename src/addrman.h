@@ -1,11 +1,11 @@
 // Copyright (c) 2012 Pieter Wuille
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_ADDRMAN_H
-#define VERGE_ADDRMAN_H
+#ifndef bitphantom_ADDRMAN_H
+#define bitphantom_ADDRMAN_H
 
 #include <netaddress.h>
 #include <protocol.h>
@@ -639,4 +639,4 @@ public:
 
 };
 
-#endif // VERGE_ADDRMAN_H
+#endif // bitphantom_ADDRMAN_H

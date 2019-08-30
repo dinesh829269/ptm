@@ -1,10 +1,10 @@
 // Copyright (c) 2018 The Particl Core developers
-// Copyright (c) 2017-2018 The Verge Core developers
+// Copyright (c) 2017-2018 The bitphantom Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SMSG_DB_H
-#define VERGE_SMSG_DB_H
+#ifndef bitphantom_SMSG_DB_H
+#define bitphantom_SMSG_DB_H
 
 #include <leveldb/db.h>
 #include <leveldb/write_batch.h>
@@ -74,4 +74,4 @@ public:
 
 } // namespace smsg
 
-#endif // VERGE_SMSG_DB_H
+#endif // bitphantom_SMSG_DB_H

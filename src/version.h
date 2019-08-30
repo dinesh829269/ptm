@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_VERSION_H
-#define VERGE_VERSION_H
+#ifndef bitphantom_VERSION_H
+#define bitphantom_VERSION_H
 
 /**
  * network protocol versioning
@@ -45,4 +45,4 @@ static const int SHORT_IDS_BLOCKS_VERSION = 90007;
 //! not banning for invalid compact blocks starts with this version
 static const int INVALID_CB_NO_BAN_VERSION = 90007;
 
-#endif // VERGE_VERSION_H
+#endif // bitphantom_VERSION_H

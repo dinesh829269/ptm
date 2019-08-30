@@ -1,5 +1,5 @@
-#ifndef VERGE_CRYPTO_POW_LYRA2RE_H
-#define VERGE_CRYPTO_POW_LYRA2RE_H
+#ifndef bitphantom_CRYPTO_POW_LYRA2RE_H
+#define bitphantom_CRYPTO_POW_LYRA2RE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,4 +12,4 @@ void lyra2re2_hash(const char* input, char* output);
 }
 #endif
 
-#endif // VERGE_CRYPTO_POW_LYRA2RE_H
+#endif // bitphantom_CRYPTO_POW_LYRA2RE_H

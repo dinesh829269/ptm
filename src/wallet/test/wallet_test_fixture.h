@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_WALLET_TEST_WALLET_TEST_FIXTURE_H
-#define VERGE_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#ifndef bitphantom_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#define bitphantom_WALLET_TEST_WALLET_TEST_FIXTURE_H
 
 #include <test/setup_common.h>
 
@@ -21,4 +21,4 @@ struct WalletTestingSetup: public TestingSetup {
     CWallet m_wallet;
 };
 
-#endif // VERGE_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#endif // bitphantom_WALLET_TEST_WALLET_TEST_FIXTURE_H

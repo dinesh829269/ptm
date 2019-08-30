@@ -82,8 +82,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const VERGE_CONF_FILENAME = "VERGE.conf";
-const char * const VERGE_PID_FILENAME = "verged.pid";
+const char * const bitphantom_CONF_FILENAME = "bitphantom.conf";
+const char * const bitphantom_PID_FILENAME = "bitphantomd.pid";
 
 ArgsManager gArgs;
 
@@ -282,7 +282,7 @@ public:
         std::pair<bool,std::string> found_result(false, std::string());
 
         // We pass "true" to GetArgHelper in order to return the last
-        // argument value seen from the command line (so "verged -foo=bar
+        // argument value seen from the command line (so "bitphantomd -foo=bar
         // -foo=baz" gives GetArg(am,"foo")=={true,"baz"}
         found_result = GetArgHelper(am.m_override_args, arg, true);
         if (found_result.first) {
@@ -694,7 +694,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "verge";
+    const char* pszModule = "bitphantom";
 #endif
     if (pex)
         return strprintf(
@@ -713,13 +713,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\VERGE
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\VERGE
-    // Mac: ~/Library/Application Support/VERGE
-    // Unix: ~/.verge
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\bitphantom
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\bitphantom
+    // Mac: ~/Library/Application Support/bitphantom
+    // Unix: ~/.bitphantom
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "VERGE";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "bitphantom";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -729,10 +729,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/VERGE";
+    return pathRet / "Library/Application Support/bitphantom";
 #else
     // Unix
-    return pathRet / ".VERGE";
+    return pathRet / ".bitphantom";
 #endif
 #endif
 }
@@ -853,7 +853,7 @@ bool ArgsManager::ReadConfigFiles(std::string& error, bool ignore_invalid_keys)
         m_config_args.clear();
     }
 
-    const std::string confPath = GetArg("-conf", VERGE_CONF_FILENAME);
+    const std::string confPath = GetArg("-conf", bitphantom_CONF_FILENAME);
     fs::ifstream stream(GetConfigFile(confPath));
 
     // ok to not have a config file
@@ -938,7 +938,7 @@ std::string ArgsManager::GetChainName() const
 #ifndef WIN32
 fs::path GetPidFile()
 {
-    return AbsPathForConfigVal(fs::path(gArgs.GetArg("-pid", VERGE_PID_FILENAME)));
+    return AbsPathForConfigVal(fs::path(gArgs.GetArg("-pid", bitphantom_PID_FILENAME)));
 }
 
 void CreatePidFile(const fs::path &path, pid_t pid)

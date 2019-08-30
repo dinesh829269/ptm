@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_ADDRDB_H
-#define VERGE_ADDRDB_H
+#ifndef bitphantom_ADDRDB_H
+#define bitphantom_ADDRDB_H
 
 #include <fs.h>
 #include <serialize.h>
@@ -100,4 +100,4 @@ public:
     bool Read(banmap_t& banSet);
 };
 
-#endif // VERGE_ADDRDB_H
+#endif // bitphantom_ADDRDB_H

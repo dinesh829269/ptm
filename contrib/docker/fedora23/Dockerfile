@@ -9,18 +9,18 @@ RUN dnf install -y protobuf-lite-devel
 
 RUN dnf install -y qt5-qtbase-devel qt5-qttools-devel qt5-qtwebkit-devel qt5-qtwebsockets qrencode-devel
 
-RUN git clone https://github.com/vergecurrency/verge /coin/git
+RUN git clone https://github.com/bitphantomcurrency/bitphantom /coin/git
 
 WORKDIR /coin/git
 
-RUN ./autogen.sh && ./configure --with-gui=qt5 && make && mv src/VERGEd /coin/VERGEd
+RUN ./autogen.sh && ./configure --with-gui=qt5 && make && mv src/bitphantomd /coin/bitphantomd
 
 WORKDIR /coin
 VOLUME ["/coin/home"]
 
 ENV HOME /coin/home
 
-CMD ["/coin/VERGEd"]
+CMD ["/coin/bitphantomd"]
 
 # P2P, RPC
-EXPOSE 21102 20102
+EXPOSE 80111 80122

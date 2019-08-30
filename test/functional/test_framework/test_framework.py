@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2018 The Bitcoin Core developers
-# Copyright (c) 2014-2018 The Verge Core developers
+# Copyright (c) 2014-2018 The bitphantom Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Base class for RPC testing."""
@@ -44,7 +44,7 @@ TEST_EXIT_PASSED = 0
 TEST_EXIT_FAILED = 1
 TEST_EXIT_SKIPPED = 77
 
-TMPDIR_PREFIX = "verge_func_test_"
+TMPDIR_PREFIX = "bitphantom_func_test_"
 
 
 class SkipTest(Exception):
@@ -54,30 +54,30 @@ class SkipTest(Exception):
         self.message = message
 
 
-class VergeTestMetaClass(type):
-    """Metaclass for VergeTestFramework.
+class bitphantomTestMetaClass(type):
+    """Metaclass for bitphantomTestFramework.
 
-    Ensures that any attempt to register a subclass of `VergeTestFramework`
+    Ensures that any attempt to register a subclass of `bitphantomTestFramework`
     adheres to a standard whereby the subclass overrides `set_test_params` and
     `run_test` but DOES NOT override either `__init__` or `main`. If any of
     those standards are violated, a ``TypeError`` is raised."""
 
     def __new__(cls, clsname, bases, dct):
-        if not clsname == 'VergeTestFramework':
+        if not clsname == 'bitphantomTestFramework':
             if not ('run_test' in dct and 'set_test_params' in dct):
-                raise TypeError("VergeTestFramework subclasses must override "
+                raise TypeError("bitphantomTestFramework subclasses must override "
                                 "'run_test' and 'set_test_params'")
             if '__init__' in dct or 'main' in dct:
-                raise TypeError("VergeTestFramework subclasses may not override "
+                raise TypeError("bitphantomTestFramework subclasses may not override "
                                 "'__init__' or 'main'")
 
         return super().__new__(cls, clsname, bases, dct)
 
 
-class VergeTestFramework(metaclass=VergeTestMetaClass):
-    """Base class for a verge test script.
+class bitphantomTestFramework(metaclass=bitphantomTestMetaClass):
+    """Base class for a bitphantom test script.
 
-    Individual verge test scripts should subclass this class and override the set_test_params() and run_test() methods.
+    Individual bitphantom test scripts should subclass this class and override the set_test_params() and run_test() methods.
 
     Individual tests can also override the following methods to customize the test setup:
 
@@ -108,9 +108,9 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
 
         parser = argparse.ArgumentParser(usage="%(prog)s [options]")
         parser.add_argument("--nocleanup", dest="nocleanup", default=False, action="store_true",
-                            help="Leave vergeds and test.* datadir on exit or error")
+                            help="Leave bitphantomds and test.* datadir on exit or error")
         parser.add_argument("--noshutdown", dest="noshutdown", default=False, action="store_true",
-                            help="Don't stop vergeds after the test execution")
+                            help="Don't stop bitphantomds after the test execution")
         parser.add_argument("--cachedir", dest="cachedir", default=os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + "/../../cache"),
                             help="Directory for caching pregenerated datadirs (default: %(default)s)")
         parser.add_argument("--tmpdir", dest="tmpdir", help="Root directory for datadirs")
@@ -128,7 +128,7 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
         parser.add_argument("--pdbonfailure", dest="pdbonfailure", default=False, action="store_true",
                             help="Attach a python debugger if test fails")
         parser.add_argument("--usecli", dest="usecli", default=False, action="store_true",
-                            help="use verge-cli instead of RPC for all commands")
+                            help="use bitphantom-cli instead of RPC for all commands")
         self.add_options(parser)
         self.options = parser.parse_args()
 
@@ -140,8 +140,8 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
 
         config = configparser.ConfigParser()
         config.read_file(open(self.options.configfile))
-        self.options.verged = os.getenv("VERGED", default=config["environment"]["BUILDDIR"] + '/src/verged' + config["environment"]["EXEEXT"])
-        self.options.vergecli = os.getenv("VERGECLI", default=config["environment"]["BUILDDIR"] + '/src/verge-cli' + config["environment"]["EXEEXT"])
+        self.options.bitphantomd = os.getenv("bitphantomD", default=config["environment"]["BUILDDIR"] + '/src/bitphantomd' + config["environment"]["EXEEXT"])
+        self.options.bitphantomcli = os.getenv("bitphantomCLI", default=config["environment"]["BUILDDIR"] + '/src/bitphantom-cli' + config["environment"]["EXEEXT"])
 
         os.environ['PATH'] = os.pathsep.join([
             os.path.join(config['environment']['BUILDDIR'], 'src'),
@@ -200,7 +200,7 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
         else:
             for node in self.nodes:
                 node.cleanup_on_exit = False
-            self.log.info("Note: vergeds were not stopped and may still be running")
+            self.log.info("Note: bitphantomds were not stopped and may still be running")
 
         if not self.options.nocleanup and not self.options.noshutdown and success != TestStatus.FAILED:
             self.log.info("Cleaning up {} on exit".format(self.options.tmpdir))
@@ -290,15 +290,15 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
         if extra_args is None:
             extra_args = [[]] * num_nodes
         if binary is None:
-            binary = [self.options.verged] * num_nodes
+            binary = [self.options.bitphantomd] * num_nodes
         assert_equal(len(extra_confs), num_nodes)
         assert_equal(len(extra_args), num_nodes)
         assert_equal(len(binary), num_nodes)
         for i in range(num_nodes):
-            self.nodes.append(TestNode(i, get_datadir_path(self.options.tmpdir, i), rpchost=rpchost, timewait=self.rpc_timewait, verged=binary[i], verge_cli=self.options.vergecli, mocktime=self.mocktime, coverage_dir=self.options.coveragedir, extra_conf=extra_confs[i], extra_args=extra_args[i], use_cli=self.options.usecli))
+            self.nodes.append(TestNode(i, get_datadir_path(self.options.tmpdir, i), rpchost=rpchost, timewait=self.rpc_timewait, bitphantomd=binary[i], bitphantom_cli=self.options.bitphantomcli, mocktime=self.mocktime, coverage_dir=self.options.coveragedir, extra_conf=extra_confs[i], extra_args=extra_args[i], use_cli=self.options.usecli))
 
     def start_node(self, i, *args, **kwargs):
-        """Start a verged"""
+        """Start a bitphantomd"""
 
         node = self.nodes[i]
 
@@ -309,7 +309,7 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
             coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def start_nodes(self, extra_args=None, *args, **kwargs):
-        """Start multiple vergeds"""
+        """Start multiple bitphantomds"""
 
         if extra_args is None:
             extra_args = [None] * self.num_nodes
@@ -329,12 +329,12 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
                 coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def stop_node(self, i, expected_stderr='', wait=0):
-        """Stop a verged test node"""
+        """Stop a bitphantomd test node"""
         self.nodes[i].stop_node(expected_stderr, wait=wait)
         self.nodes[i].wait_until_stopped()
 
     def stop_nodes(self, wait=0):
-        """Stop multiple verged test nodes"""
+        """Stop multiple bitphantomd test nodes"""
         for node in self.nodes:
             # Issue RPC to stop nodes
             node.stop_node(wait=wait)
@@ -403,7 +403,7 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
         # User can provide log level as a number or string (eg DEBUG). loglevel was caught as a string, so try to convert it to an int
         ll = int(self.options.loglevel) if self.options.loglevel.isdigit() else self.options.loglevel.upper()
         ch.setLevel(ll)
-        # Format logs the same as verged's debug.log with microprecision (so log files can be concatenated and sorted)
+        # Format logs the same as bitphantomd's debug.log with microprecision (so log files can be concatenated and sorted)
         formatter = logging.Formatter(fmt='%(asctime)s.%(msecs)03d000Z %(name)s (%(levelname)s): %(message)s', datefmt='%Y-%m-%dT%H:%M:%S')
         formatter.converter = time.gmtime
         fh.setFormatter(formatter)
@@ -413,7 +413,7 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
         self.log.addHandler(ch)
 
         if self.options.trace_rpc:
-            rpc_logger = logging.getLogger("VergeRPC")
+            rpc_logger = logging.getLogger("bitphantomRPC")
             rpc_logger.setLevel(logging.DEBUG)
             rpc_handler = logging.StreamHandler(sys.stdout)
             rpc_handler.setLevel(logging.DEBUG)
@@ -440,13 +440,13 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
                 if os.path.isdir(get_datadir_path(self.options.cachedir, i)):
                     shutil.rmtree(get_datadir_path(self.options.cachedir, i))
 
-            # Create cache directories, run vergeds:
+            # Create cache directories, run bitphantomds:
             for i in range(MAX_NODES):
                 datadir = initialize_datadir(self.options.cachedir, i)
-                args = [self.options.verged, "-datadir=" + datadir, '-disablewallet']
+                args = [self.options.bitphantomd, "-datadir=" + datadir, '-disablewallet']
                 if i > 0:
                     args.append("-connect=127.0.0.1:" + str(p2p_port(0)))
-                self.nodes.append(TestNode(i, get_datadir_path(self.options.cachedir, i), extra_conf=["bind=127.0.0.1"], extra_args=[], rpchost=None, timewait=self.rpc_timewait, verged=self.options.verged, verge_cli=self.options.vergecli, mocktime=self.mocktime, coverage_dir=None))
+                self.nodes.append(TestNode(i, get_datadir_path(self.options.cachedir, i), extra_conf=["bind=127.0.0.1"], extra_args=[], rpchost=None, timewait=self.rpc_timewait, bitphantomd=self.options.bitphantomd, bitphantom_cli=self.options.bitphantomcli, mocktime=self.mocktime, coverage_dir=None))
                 self.nodes[i].args = args
                 self.start_node(i)
 
@@ -490,7 +490,7 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
             from_dir = get_datadir_path(self.options.cachedir, i)
             to_dir = get_datadir_path(self.options.tmpdir, i)
             shutil.copytree(from_dir, to_dir)
-            initialize_datadir(self.options.tmpdir, i)  # Overwrite port/rpcport in verge.conf
+            initialize_datadir(self.options.tmpdir, i)  # Overwrite port/rpcport in bitphantom.conf
 
     def _initialize_chain_clean(self):
         """Initialize empty blockchain for use by the test.
@@ -507,10 +507,10 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
         except ImportError:
             raise SkipTest("python3-zmq module not available.")
 
-    def skip_if_no_verged_zmq(self):
-        """Skip the running test if verged has not been compiled with zmq support."""
+    def skip_if_no_bitphantomd_zmq(self):
+        """Skip the running test if bitphantomd has not been compiled with zmq support."""
         if not self.is_zmq_compiled():
-            raise SkipTest("verged has not been built with zmq enabled.")
+            raise SkipTest("bitphantomd has not been built with zmq enabled.")
 
     def skip_if_no_wallet(self):
         """Skip the running test if wallet has not been compiled."""
@@ -518,12 +518,12 @@ class VergeTestFramework(metaclass=VergeTestMetaClass):
             raise SkipTest("wallet has not been compiled.")
 
     def skip_if_no_cli(self):
-        """Skip the running test if verge-cli has not been compiled."""
+        """Skip the running test if bitphantom-cli has not been compiled."""
         if not self.is_cli_compiled():
-            raise SkipTest("verge-cli has not been compiled.")
+            raise SkipTest("bitphantom-cli has not been compiled.")
 
     def is_cli_compiled(self):
-        """Checks whether verge-cli was compiled."""
+        """Checks whether bitphantom-cli was compiled."""
         config = configparser.ConfigParser()
         config.read_file(open(self.options.configfile))
 

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_CLIENTMODEL_H
-#define VERGE_QT_CLIENTMODEL_H
+#ifndef bitphantom_QT_CLIENTMODEL_H
+#define bitphantom_QT_CLIENTMODEL_H
 
 #include <QObject>
 #include <QDateTime>
@@ -41,7 +41,7 @@ enum NumConnections {
     CONNECTIONS_ALL  = (CONNECTIONS_IN | CONNECTIONS_OUT),
 };
 
-/** Model for VERGE network client. */
+/** Model for bitphantom network client. */
 class ClientModel : public QObject
 {
     Q_OBJECT
@@ -117,4 +117,4 @@ public Q_SLOTS:
     void updateBanlist();
 };
 
-#endif // VERGE_QT_CLIENTMODEL_H
+#endif // bitphantom_QT_CLIENTMODEL_H

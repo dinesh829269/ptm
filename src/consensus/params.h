@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CONSENSUS_PARAMS_H
-#define VERGE_CONSENSUS_PARAMS_H
+#ifndef bitphantom_CONSENSUS_PARAMS_H
+#define bitphantom_CONSENSUS_PARAMS_H
 
 #include <uint256.h>
 #include <limits>
@@ -62,7 +62,7 @@ struct Params {
     int STEALTH_TX_SWITCH_BLOCK;
     /* Block height at which has been manifested to not reuse mining algos more than 5 times in a row */
     int FlexibleMiningAlgorithms;
-    /** Block height at which VERGE was forked into VERGE v3 */
+    /** Block height at which bitphantom was forked into bitphantom v3 */
     int ForkHeight;
     int CLOCK_DRIFT_FORK;
 
@@ -87,4 +87,4 @@ struct Params {
 };
 } // namespace Consensus
 
-#endif // VERGE_CONSENSUS_PARAMS_H
+#endif // bitphantom_CONSENSUS_PARAMS_H

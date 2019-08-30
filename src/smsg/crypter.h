@@ -1,10 +1,10 @@
 // Copyright (c) 2017 The Particl Core developers
-// Copyright (c) 2018 Verge Core developers
+// Copyright (c) 2018 bitphantom Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SMSG_CRYPTER_H
-#define VERGE_SMSG_CRYPTER_H
+#ifndef bitphantom_SMSG_CRYPTER_H
+#define bitphantom_SMSG_CRYPTER_H
 
 #include <support/allocators/secure.h>
 #include <vector>
@@ -47,4 +47,4 @@ public:
     bool Decrypt(const uint8_t *chCiphertext, uint32_t nCipher, std::vector<uint8_t> &vchPlaintext);
 };
 
-#endif // VERGE_SMSG_CRYPTER_H
+#endif // bitphantom_SMSG_CRYPTER_H

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 Verge Core developers
+// Copyright (c) 2018-2018 bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -51,7 +51,7 @@
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)
-# error "VERGE cannot be compiled without assertions."
+# error "bitphantom cannot be compiled without assertions."
 #endif
 
 #define MICRO 0.000001
@@ -250,7 +250,7 @@ std::atomic_bool g_is_mempool_loaded{false};
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const std::string strMessageMagic = "VERGE Signed Message:\n";
+const std::string strMessageMagic = "bitphantom Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -1714,7 +1714,7 @@ static bool WriteUndoDataForBlock(const CBlockUndo& blockundo, CValidationState&
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("verge-scriptch");
+    RenameThread("bitphantom-scriptch");
     scriptcheckqueue.Thread();
 }
 

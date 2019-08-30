@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_INDEX_BASE_H
-#define VERGE_INDEX_BASE_H
+#ifndef bitphantom_INDEX_BASE_H
+#define bitphantom_INDEX_BASE_H
 
 #include <dbwrapper.h>
 #include <primitives/block.h>
@@ -96,4 +96,4 @@ public:
     void Stop();
 };
 
-#endif // VERGE_INDEX_BASE_H
+#endif // bitphantom_INDEX_BASE_H

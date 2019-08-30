@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_WALLET_COINSELECTION_H
-#define VERGE_WALLET_COINSELECTION_H
+#ifndef bitphantom_WALLET_COINSELECTION_H
+#define bitphantom_WALLET_COINSELECTION_H
 
 #include <amount.h>
 #include <primitives/transaction.h>
@@ -52,4 +52,4 @@ bool SelectCoinsBnB(std::vector<CInputCoin>& utxo_pool, const CAmount& target_va
 
 // Original coin selection algorithm as a fallback
 bool KnapsackSolver(const CAmount& nTargetValue, std::vector<CInputCoin>& vCoins, std::set<CInputCoin>& setCoinsRet, CAmount& nValueRet);
-#endif // VERGE_WALLET_COINSELECTION_H
+#endif // bitphantom_WALLET_COINSELECTION_H

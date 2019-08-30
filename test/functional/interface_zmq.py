@@ -6,7 +6,7 @@
 import configparser
 import struct
 
-from test_framework.test_framework import VergeTestFramework, SkipTest
+from test_framework.test_framework import bitphantomTestFramework, SkipTest
 from test_framework.mininode import CTransaction
 from test_framework.util import (assert_equal,
                                  bytes_to_hex_str,
@@ -33,7 +33,7 @@ class ZMQSubscriber:
         return body
 
 
-class ZMQTest (VergeTestFramework):
+class ZMQTest (bitphantomTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -44,12 +44,12 @@ class ZMQTest (VergeTestFramework):
         except ImportError:
             raise SkipTest("python3-zmq module not available.")
 
-        # Check that verge has been built with ZMQ enabled.
+        # Check that bitphantom has been built with ZMQ enabled.
         config = configparser.ConfigParser()
         config.read_file(open(self.options.configfile))
 
         if not config["components"].getboolean("ENABLE_ZMQ"):
-            raise SkipTest("verged has not been built with zmq enabled.")
+            raise SkipTest("bitphantomd has not been built with zmq enabled.")
 
         # Initialize ZMQ context and socket.
         # All messages are received in the same socket which means

@@ -2,41 +2,41 @@
 
 # backward compatibility for existing gentoo layout 
 #
-if [ -d "/var/lib/verge/.verge3" ]; then
-	VERGED_DEFAULT_DATADIR="/var/lib/verge/.verge3"
+if [ -d "/var/lib/bitphantom/.bitphantom3" ]; then
+	bitphantomD_DEFAULT_DATADIR="/var/lib/bitphantom/.bitphantom3"
 else
-	VERGED_DEFAULT_DATADIR="/var/lib/verged"
+	bitphantomD_DEFAULT_DATADIR="/var/lib/bitphantomd"
 fi
 
-VERGED_CONFIGFILE=${VERGED_CONFIGFILE:-/etc/verge/verge.conf}
-VERGED_PIDDIR=${VERGED_PIDDIR:-/var/run/verged}
-VERGED_PIDFILE=${VERGED_PIDFILE:-${VERGED_PIDDIR}/verged.pid}
-VERGED_DATADIR=${VERGED_DATADIR:-${VERGED_DEFAULT_DATADIR}}
-VERGED_USER=${VERGED_USER:-${VERGE_USER:-verge}}
-VERGED_GROUP=${VERGED_GROUP:-verge}
-VERGED_BIN=${VERGED_BIN:-/usr/bin/verged}
-VERGED_NICE=${VERGED_NICE:-${NICELEVEL:-0}}
-VERGED_OPTS="${VERGED_OPTS:-${VERGE_OPTS}}"
+bitphantomD_CONFIGFILE=${bitphantomD_CONFIGFILE:-/etc/bitphantom/bitphantom.conf}
+bitphantomD_PIDDIR=${bitphantomD_PIDDIR:-/var/run/bitphantomd}
+bitphantomD_PIDFILE=${bitphantomD_PIDFILE:-${bitphantomD_PIDDIR}/bitphantomd.pid}
+bitphantomD_DATADIR=${bitphantomD_DATADIR:-${bitphantomD_DEFAULT_DATADIR}}
+bitphantomD_USER=${bitphantomD_USER:-${bitphantom_USER:-bitphantom}}
+bitphantomD_GROUP=${bitphantomD_GROUP:-bitphantom}
+bitphantomD_BIN=${bitphantomD_BIN:-/usr/bin/bitphantomd}
+bitphantomD_NICE=${bitphantomD_NICE:-${NICELEVEL:-0}}
+bitphantomD_OPTS="${bitphantomD_OPTS:-${bitphantom_OPTS}}"
 
-name="VERGE Core Daemon"
-description="VERGE cryptocurrency P2P network daemon"
+name="bitphantom Core Daemon"
+description="bitphantom cryptocurrency P2P network daemon"
 
-command="/usr/bin/verged"
-command_args="-pid=\"${VERGED_PIDFILE}\" \
-		-conf=\"${VERGED_CONFIGFILE}\" \
-		-datadir=\"${VERGED_DATADIR}\" \
+command="/usr/bin/bitphantomd"
+command_args="-pid=\"${bitphantomD_PIDFILE}\" \
+		-conf=\"${bitphantomD_CONFIGFILE}\" \
+		-datadir=\"${bitphantomD_DATADIR}\" \
 		-daemon \
-		${VERGED_OPTS}"
+		${bitphantomD_OPTS}"
 
-required_files="${VERGED_CONFIGFILE}"
-start_stop_daemon_args="-u ${VERGED_USER} \
-			-N ${VERGED_NICE} -w 2000"
-pidfile="${VERGED_PIDFILE}"
+required_files="${bitphantomD_CONFIGFILE}"
+start_stop_daemon_args="-u ${bitphantomD_USER} \
+			-N ${bitphantomD_NICE} -w 2000"
+pidfile="${bitphantomD_PIDFILE}"
 
 # The retry schedule to use when stopping the daemon. Could be either
 # a timeout in seconds or multiple signal/timeout pairs (like
 # "SIGKILL/180 SIGTERM/300")
-retry="${VERGED_SIGTERM_TIMEOUT}"
+retry="${bitphantomD_SIGTERM_TIMEOUT}"
 
 depend() {
 	need localmount net
@@ -50,29 +50,29 @@ start_pre() {
 	checkpath \
 	-d \
 	--mode 0750 \
-	--owner "${VERGED_USER}:${VERGED_GROUP}" \
-	"${VERGED_DATADIR}"
+	--owner "${bitphantomD_USER}:${bitphantomD_GROUP}" \
+	"${bitphantomD_DATADIR}"
 
 	checkpath \
 	-d \
 	--mode 0755 \
-	--owner "${VERGED_USER}:${VERGED_GROUP}" \
-	"${VERGED_PIDDIR}"
+	--owner "${bitphantomD_USER}:${bitphantomD_GROUP}" \
+	"${bitphantomD_PIDDIR}"
 
 	checkpath -f \
-	-o ${VERGED_USER}:${VERGED_GROUP} \
+	-o ${bitphantomD_USER}:${bitphantomD_GROUP} \
 	-m 0660 \
-	${VERGED_CONFIGFILE}
+	${bitphantomD_CONFIGFILE}
 
 	checkconfig || return 1
 }
 
 checkconfig()
 {
-	if ! grep -qs '^rpcpassword=' "${VERGED_CONFIGFILE}" ; then
+	if ! grep -qs '^rpcpassword=' "${bitphantomD_CONFIGFILE}" ; then
 		eerror ""
-		eerror "ERROR: You must set a secure rpcpassword to run verged."
-		eerror "The setting must appear in ${VERGED_CONFIGFILE}"
+		eerror "ERROR: You must set a secure rpcpassword to run bitphantomd."
+		eerror "The setting must appear in ${bitphantomD_CONFIGFILE}"
 		eerror ""
 		eerror "This password is security critical to securing wallets "
 		eerror "and must not be the same as the rpcuser setting."
@@ -84,7 +84,7 @@ checkconfig()
 		eerror "It is recommended that you also set alertnotify so you are "
 		eerror "notified of problems:"
 		eerror ""
-		eerror "ie: alertnotify=echo %%s | mail -s \"VERGE Alert\"" \
+		eerror "ie: alertnotify=echo %%s | mail -s \"bitphantom Alert\"" \
 			"admin@foo.com"
 		eerror ""
 		return 1

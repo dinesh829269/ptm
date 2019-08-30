@@ -7,7 +7,7 @@
 Tests correspond to code in rpc/net.cpp.
 """
 
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than_or_equal,
@@ -21,7 +21,7 @@ from test_framework.util import (
 from test_framework.mininode import P2PInterface
 from test_framework.messages import CAddress, msg_addr, NODE_NETWORK, NODE_WITNESS
 
-class NetTest(VergeTestFramework):
+class NetTest(bitphantomTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -113,7 +113,7 @@ class NetTest(VergeTestFramework):
             addr.time = 100000000
             addr.nServices = NODE_NETWORK | NODE_WITNESS
             addr.ip = a
-            addr.port = 21102
+            addr.port = 80111
             msg.addrs.append(addr)
         self.nodes[0].p2p.send_and_ping(msg)
          # obtain addresses via rpc call and check they were ones sent in before
@@ -124,7 +124,7 @@ class NetTest(VergeTestFramework):
             assert_greater_than(a["time"], 1527811200) # 1st June 2018
             assert_equal(a["services"], NODE_NETWORK | NODE_WITNESS)
             assert a["address"] in imported_addrs
-            assert_equal(a["port"], 21102)
+            assert_equal(a["port"], 80111)
          assert_raises_rpc_error(-8, "Address count out of range", self.nodes[0].getnodeaddresses, -1)
          # addrman's size cannot be known reliably after insertion, as hash collisions may occur
         # so only test that requesting a large number of addresses returns less than that

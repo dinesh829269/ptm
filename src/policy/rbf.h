@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_POLICY_RBF_H
-#define VERGE_POLICY_RBF_H
+#ifndef bitphantom_POLICY_RBF_H
+#define bitphantom_POLICY_RBF_H
 
 #include <txmempool.h>
 
@@ -26,4 +26,4 @@ bool SignalsOptInRBF(const CTransaction &tx);
 // as the sequence numbers of all in-mempool ancestors.
 RBFTransactionState IsRBFOptIn(const CTransaction &tx, CTxMemPool &pool) EXCLUSIVE_LOCKS_REQUIRED(pool.cs);
 
-#endif // VERGE_POLICY_RBF_H
+#endif // bitphantom_POLICY_RBF_H

@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_HASH_H
-#define VERGE_HASH_H
+#ifndef bitphantom_HASH_H
+#define bitphantom_HASH_H
 
 #include <crypto/ripemd160.h>
 #include <crypto/sha256.h>
@@ -196,4 +196,4 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
 void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char header, const unsigned char data[32], unsigned char output[64]);
 
-#endif // VERGE_HASH_H
+#endif // bitphantom_HASH_H

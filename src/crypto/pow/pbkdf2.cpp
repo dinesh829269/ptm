@@ -1,4 +1,4 @@
-// Copyright (c) 2016 VERGE Developers
+// Copyright (c) 2016 bitphantom Developers
 
 #include <string.h>
 #include <pbkdf2.h>

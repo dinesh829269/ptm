@@ -1,10 +1,10 @@
 // Copyright (c) 2018 The Particl Core developers
-// Copyright (c) 2018 The Verge Core developers
+// Copyright (c) 2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_SMSG_KEYSTORE_H
-#define VERGE_SMSG_KEYSTORE_H
+#ifndef bitphantom_SMSG_KEYSTORE_H
+#define bitphantom_SMSG_KEYSTORE_H
 
 #include <key.h>
 #include <pubkey.h>
@@ -61,4 +61,4 @@ public:
 
 } // namespace smsg
 
-#endif //VERGE_SMSG_KEYSTORE_H
+#endif //bitphantom_SMSG_KEYSTORE_H

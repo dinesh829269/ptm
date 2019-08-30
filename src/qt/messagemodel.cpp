@@ -1,6 +1,6 @@
 #include <guiutil.h>
 #include <guiconstants.h>
-#include <vergeunits.h>
+#include <bitphantomunits.h>
 #include <optionsmodel.h>
 #include <walletmodel.h>
 #include <messagemodel.h>

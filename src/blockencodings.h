@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_BLOCKENCODINGS_H
-#define VERGE_BLOCKENCODINGS_H
+#ifndef bitphantom_BLOCKENCODINGS_H
+#define bitphantom_BLOCKENCODINGS_H
 
 #include <primitives/block.h>
 
@@ -209,4 +209,4 @@ public:
     ReadStatus FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing);
 };
 
-#endif // VERGE_BLOCKENCODINGS_H
+#endif // bitphantom_BLOCKENCODINGS_H

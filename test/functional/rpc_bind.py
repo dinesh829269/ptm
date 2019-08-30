@@ -2,15 +2,15 @@
 # Copyright (c) 2014-2017 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test running verged with the -rpcbind and -rpcallowip options."""
+"""Test running bitphantomd with the -rpcbind and -rpcallowip options."""
 
 import sys
 
-from test_framework.test_framework import VergeTestFramework, SkipTest
+from test_framework.test_framework import bitphantomTestFramework, SkipTest
 from test_framework.util import *
 from test_framework.netutil import *
 
-class RPCBindTest(VergeTestFramework):
+class RPCBindTest(bitphantomTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.bind_to_localhost_only = False

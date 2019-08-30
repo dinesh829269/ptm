@@ -2,7 +2,7 @@
 #include <qt/test/util.h>
 
 #include <interfaces/node.h>
-#include <qt/vergeamountfield.h>
+#include <qt/bitphantomamountfield.h>
 #include <qt/callback.h>
 #include <qt/optionsmodel.h>
 #include <qt/platformstyle.h>
@@ -59,7 +59,7 @@ uint256 SendCoins(CWallet& wallet, SendCoinsDialog& sendCoinsDialog, const CTxDe
     QVBoxLayout* entries = sendCoinsDialog.findChild<QVBoxLayout*>("entries");
     SendCoinsEntry* entry = qobject_cast<SendCoinsEntry*>(entries->itemAt(0)->widget());
     entry->findChild<QValidatedLineEdit*>("payTo")->setText(QString::fromStdString(EncodeDestination(address)));
-    entry->findChild<VERGEAmountField*>("payAmount")->setValue(amount);
+    entry->findChild<bitphantomAmountField*>("payAmount")->setValue(amount);
     sendCoinsDialog.findChild<QFrame*>("frameFee")
         ->findChild<QFrame*>("frameFeeSelection")
         ->findChild<QCheckBox*>("optInRBF")
@@ -134,9 +134,9 @@ void BumpFee(TransactionView& view, const uint256& txid, bool expectDisabled, st
 //
 // This also requires overriding the default minimal Qt platform:
 //
-//     src/qt/test/test_verge-qt -platform xcb      # Linux
-//     src/qt/test/test_verge-qt -platform windows  # Windows
-//     src/qt/test/test_verge-qt -platform cocoa    # macOS
+//     src/qt/test/test_bitphantom-qt -platform xcb      # Linux
+//     src/qt/test/test_bitphantom-qt -platform windows  # Windows
+//     src/qt/test/test_bitphantom-qt -platform cocoa    # macOS
 void TestGUI()
 {
     // Set up wallet and chain with 105 blocks (5 mature blocks for spending).
@@ -194,7 +194,7 @@ void TestGUI()
     QString balanceText = balanceLabel->text();
     int unit = walletModel.getOptionsModel()->getDisplayUnit();
     CAmount balance = walletModel.wallet().getBalance();
-    QString balanceComparison = VERGEUnits::formatWithUnit(unit, balance, false, VERGEUnits::separatorAlways);
+    QString balanceComparison = bitphantomUnits::formatWithUnit(unit, balance, false, bitphantomUnits::separatorAlways);
     QCOMPARE(balanceText, balanceComparison);
 
     // Check Request Payment button
@@ -207,7 +207,7 @@ void TestGUI()
     labelInput->setText("TEST_LABEL_1");
 
     // Amount input
-    VERGEAmountField* amountInput = receiveCoinsDialog.findChild<VERGEAmountField*>("reqAmount");
+    bitphantomAmountField* amountInput = receiveCoinsDialog.findChild<bitphantomAmountField*>("reqAmount");
     amountInput->setValue(1);
 
     // Message input
@@ -223,7 +223,7 @@ void TestGUI()
             QString paymentText = rlist->toPlainText();
             QStringList paymentTextList = paymentText.split('\n');
             QCOMPARE(paymentTextList.at(0), QString("Payment information"));
-            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: verge:")) != -1);
+            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: bitphantom:")) != -1);
             QVERIFY(paymentTextList.at(2).indexOf(QString("Address:")) != -1);
             QCOMPARE(paymentTextList.at(3), QString("Amount: 0.00000001 ") + QString::fromStdString(CURRENCY_UNIT));
             QCOMPARE(paymentTextList.at(4), QString("Label: TEST_LABEL_1"));

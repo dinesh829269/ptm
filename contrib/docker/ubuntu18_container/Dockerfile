@@ -13,21 +13,21 @@ RUN apt-get install -y libdb4.8-dev libdb4.8++-dev libtool autotools-dev automak
     bsdmainutils git libboost-all-dev libminiupnpc-dev libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools \
     libprotobuf-dev protobuf-compiler libqrencode-dev zlib1g-dev libseccomp-dev libcap-dev libncap-dev
 
-#verge
-RUN mkdir /root/VERGE
-RUN git clone https://github.com/vergecurrency/VERGE /root/VERGE
-RUN cd /root/VERGE/ ; /root/VERGE/autogen.sh
-RUN cd /root/VERGE/ ; /root/VERGE/configure
-RUN cd /root/VERGE/ ; make
+#bitphantom
+RUN mkdir /root/bitphantom
+RUN git clone https://github.com/bitphantomcurrency/bitphantom /root/bitphantom
+RUN cd /root/bitphantom/ ; /root/bitphantom/autogen.sh
+RUN cd /root/bitphantom/ ; /root/bitphantom/configure
+RUN cd /root/bitphantom/ ; make
 
-RUN chmod 0777 /root/VERGE/src/*
+RUN chmod 0777 /root/bitphantom/src/*
 
-ADD ./conf/VERGE.conf /root/.VERGE/VERGE.conf
+ADD ./conf/bitphantom.conf /root/.bitphantom/bitphantom.conf
 
-WORKDIR /root/VERGE
+WORKDIR /root/bitphantom
 
-EXPOSE 21102 20102
+EXPOSE 80111 80122
 
 #CMD printenv | grep -v "yyyyyxxxx" >> /etc/environment && tail -f /dev/null
 
-CMD /root/VERGE/src/VERGEd -printtoconsole
+CMD /root/bitphantom/src/bitphantomd -printtoconsole

@@ -1,5 +1,5 @@
-#ifndef VERGE_CRYPTO_POW_HASHX11_H
-#define VERGE_CRYPTO_POW_HASHX11_H
+#ifndef bitphantom_CRYPTO_POW_HASHX11_H
+#define bitphantom_CRYPTO_POW_HASHX11_H
 
 #include <uint256.h>
 #include <sph_blake.h>
@@ -133,4 +133,4 @@ inline uint256 HashX11(const T1 pbegin, const T1 pend)
     return uinst256(hash[10]);
 }
 
-#endif // VERGE_CRYPTO_POW_HASHX11_H
+#endif // bitphantom_CRYPTO_POW_HASHX11_H

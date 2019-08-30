@@ -1,24 +1,24 @@
 (note: this is a temporary file, to be added-to by anybody, and moved to
 release-notes at release time)
 
-Verge Core version *version* is now available from:
+bitphantom Core version *version* is now available from:
 
-  <https://github.com/vergecurrency/VERGE/releases>
+  <https://github.com/bitphantomcurrency/bitphantom/releases>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/vergecurrency/VERGE/issues>
+  <https://github.com/bitphantomcurrency/bitphantom/issues>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Verge-Qt` (on Mac)
-or `verged`/`verge-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/bitphantom-Qt` (on Mac)
+or `bitphantomd`/`bitphantom-qt` (on Linux).
 
 The first time you run version 0.15.0, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
@@ -43,10 +43,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Verge Core is extensively tested on multiple operating systems using
+bitphantom Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows 7 and newer (Windows XP is not supported).
 
-Verge Core should also work on most other Unix-like systems but is not
+bitphantom Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 Notable changes
@@ -100,9 +100,9 @@ same as before.
 Low-level RPC changes
 ---------------------
 
-- When Verge is not started with any `-wallet=<path>` options, the name of
+- When bitphantom is not started with any `-wallet=<path>` options, the name of
   the default wallet returned by `getwalletinfo` and `listwallets` RPCs is
-  now the empty string `""` instead of `"wallet.dat"`. If Verge is started
+  now the empty string `""` instead of `"wallet.dat"`. If bitphantom is started
   with any `-wallet=<path>` options, there is no change in behavior, and the
   name of any wallet is just its `<path>` string.
 - Passing an empty string (`""`) as the `address_type` parameter to

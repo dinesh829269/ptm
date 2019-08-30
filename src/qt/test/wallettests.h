@@ -1,5 +1,5 @@
-#ifndef VERGE_QT_TEST_WALLETTESTS_H
-#define VERGE_QT_TEST_WALLETTESTS_H
+#ifndef bitphantom_QT_TEST_WALLETTESTS_H
+#define bitphantom_QT_TEST_WALLETTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -12,4 +12,4 @@ private Q_SLOTS:
     void walletTests();
 };
 
-#endif // VERGE_QT_TEST_WALLETTESTS_H
+#endif // bitphantom_QT_TEST_WALLETTESTS_H

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_ADDRESSTABLEMODEL_H
-#define VERGE_QT_ADDRESSTABLEMODEL_H
+#ifndef bitphantom_QT_ADDRESSTABLEMODEL_H
+#define bitphantom_QT_ADDRESSTABLEMODEL_H
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -31,7 +31,7 @@ public:
 
     enum ColumnIndex {
         Label = 0,   /**< User specified label */
-        Address = 1  /**< VERGE address */
+        Address = 1  /**< bitphantom address */
     };
 
     enum RoleIndex {
@@ -103,4 +103,4 @@ public Q_SLOTS:
     friend class AddressTablePriv;
 };
 
-#endif // VERGE_QT_ADDRESSTABLEMODEL_H
+#endif // bitphantom_QT_ADDRESSTABLEMODEL_H

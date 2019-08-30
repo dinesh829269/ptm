@@ -1,13 +1,13 @@
 *.tar.gz
 
 *.exe
-src/verge
-src/verged
-src/verge-cli
-src/verge-tx
-src/test/test_verge
-src/test/test_verge_fuzzy
-src/qt/test/test_verge-qt
+src/bitphantom
+src/bitphantomd
+src/bitphantom-cli
+src/bitphantom-tx
+src/test/test_bitphantom
+src/test/test_bitphantom_fuzzy
+src/qt/test/test_bitphantom-qt
 
 Makefile
 !depends/Makefile
@@ -33,8 +33,8 @@ config.log
 config.status
 configure
 libtool
-src/config/verge-config.h
-src/config/verge-config.h.in
+src/config/bitphantom-config.h
+src/config/bitphantom-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -45,11 +45,11 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
-src/qt/verge-qt.config
-src/qt/verge-qt.creator
-src/qt/verge-qt.creator.user
-src/qt/verge-qt.files
-src/qt/verge-qt.includes
+src/qt/bitphantom-qt.config
+src/qt/bitphantom-qt.creator
+src/qt/bitphantom-qt.creator.user
+src/qt/bitphantom-qt.files
+src/qt/bitphantom-qt.includes
 
 .deps
 .dirstamp
@@ -82,12 +82,12 @@ src/qt/verge-qt.includes
 # Compilation and Qt preprocessor part
 *.qm
 # Makefile
-verge-qt
-verge-qt.app
+bitphantom-qt
+bitphantom-qt.app
 
 # Unit-tests
 Makefile.test
-verge-qt_test
+bitphantom-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -100,7 +100,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_verge.coverage/
+test_bitphantom.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -115,7 +115,7 @@ test/cache/*
 
 /doc/doxygen/
 
-libvergeconsensus.pc
+libbitphantomconsensus.pc
 contrib/devtools/split-debug.sh
 
 cmake-build-debug/

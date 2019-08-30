@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,7 +34,7 @@
 #include <memory>
 
 #if defined(NDEBUG)
-# error "VERGE cannot be compiled without assertions."
+# error "bitphantom cannot be compiled without assertions."
 #endif
 
 std::atomic<int64_t> nTimeBestReceived(0); // Used only to inform the wallet of when we last received a block
@@ -1480,7 +1480,7 @@ bool static ProcessHeadersMessage(CNode *pfrom, CConnman *connman, const std::ve
                     pindexContinue = pindexBestHeader; // cases 2, 3
                     strDesc += "best: ";
                 } else if (LastCommonAncestor(pindexFork, pindexLast) == pindexLast) {
-                    // received header is an ancestor of where the tip and BestHeader diverges
+                    // received header is an ancestor of where the tip and BestHeader dibitphantoms
                     pindexContinue = pindexFork; // case 4
                     strDesc += "fork: ";
                 }

@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_CONSENSUS_VALIDATION_H
-#define VERGE_CONSENSUS_VALIDATION_H
+#ifndef bitphantom_CONSENSUS_VALIDATION_H
+#define bitphantom_CONSENSUS_VALIDATION_H
 
 #include <string>
 #include <version.h>
@@ -108,4 +108,4 @@ static inline int64_t GetTransactionInputWeight(const CTxIn& txin)
     return ::GetSerializeSize(txin, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) * (WITNESS_SCALE_FACTOR - 1) + ::GetSerializeSize(txin, SER_NETWORK, PROTOCOL_VERSION) + ::GetSerializeSize(txin.scriptWitness.stack, SER_NETWORK, PROTOCOL_VERSION);
 }
 
-#endif // VERGE_CONSENSUS_VALIDATION_H
+#endif // bitphantom_CONSENSUS_VALIDATION_H

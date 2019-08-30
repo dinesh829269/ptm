@@ -1,14 +1,14 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: VERGE
-Upstream-Contact: contact@vergecurrency.com
-https://discord.gg/vergecurrency
-Source: https://github.com/vergecurrency/VERGE
+Upstream-Name: bitphantom
+Upstream-Contact: contact@bitphantomcurrency.com
+https://discord.gg/bitphantomcurrency
+Source: https://github.com/bitphantomcurrency/bitphantom
 
 Files: *
 Copyright: 2009-2018, Bitcoin Core Developers
-           2018, Verge Core Developers
+           2018, bitphantom Core Developers
 License: Expat
-Comment: The VERGE Core Developers encompasses the current developers listed on vergecurrency.com,
+Comment: The bitphantom Core Developers encompasses the current developers listed on bitphantomcurrency.com,
          as well as the numerous contributors to the project.
 
 Files: debian/*
@@ -87,9 +87,9 @@ License: Expat
 Comment: Modifications of Stephan Hutchings Typicons
 
 Files: src/qt/res/icons/about.png
-       src/qt/res/icons/verge.*
-       share/pixmaps/verge*
-       src/qt/res/src/verge.svg
+       src/qt/res/icons/bitphantom.*
+       share/pixmaps/bitphantom*
+       src/qt/res/src/bitphantom.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
 

@@ -1,81 +1,81 @@
-policy_module(verge, 1.100.1)
+policy_module(bitphantom, 1.100.1)
 
 ########################################
 #
 # Declarations
 #
 
-type verge_t;
-type verge_exec_t;
-init_daemon_domain(verge_t, verge_exec_t)
+type bitphantom_t;
+type bitphantom_exec_t;
+init_daemon_domain(bitphantom_t, bitphantom_exec_t)
 
-permissive verge_t;
+permissive bitphantom_t;
 
-type verge_initrc_exec_t;
-init_script_file(verge_initrc_exec_t)
+type bitphantom_initrc_exec_t;
+init_script_file(bitphantom_initrc_exec_t)
 
-type verge_conf_t;
-files_type(verge_conf_t)
+type bitphantom_conf_t;
+files_type(bitphantom_conf_t)
 
-type verge_var_lib_t;
-files_type(verge_var_lib_t)
+type bitphantom_var_lib_t;
+files_type(bitphantom_var_lib_t)
 
-type verge_var_run_t;
-files_type(verge_var_run_t)
+type bitphantom_var_run_t;
+files_type(bitphantom_var_run_t)
 
-type verge_port_t;
-corenet_port(verge_port_t)
+type bitphantom_port_t;
+corenet_port(bitphantom_port_t)
 
 ########################################
 #
-# verge local policy
+# bitphantom local policy
 #
-allow verge_t self:process { fork };
+allow bitphantom_t self:process { fork };
 
-allow verge_t self:fifo_file rw_fifo_file_perms;
-allow verge_t self:unix_stream_socket create_stream_socket_perms;
+allow bitphantom_t self:fifo_file rw_fifo_file_perms;
+allow bitphantom_t self:unix_stream_socket create_stream_socket_perms;
 
-manage_dirs_pattern(verge_t, verge_conf_t, verge_conf_t)
-manage_files_pattern(verge_t, verge_conf_t, verge_conf_t)
+manage_dirs_pattern(bitphantom_t, bitphantom_conf_t, bitphantom_conf_t)
+manage_files_pattern(bitphantom_t, bitphantom_conf_t, bitphantom_conf_t)
 
-manage_dirs_pattern(verge_t, verge_var_lib_t, verge_var_lib_t)
-manage_files_pattern(verge_t, verge_var_lib_t, verge_var_lib_t)
-files_var_lib_filetrans(verge_t, verge_var_lib_t, { dir file })
+manage_dirs_pattern(bitphantom_t, bitphantom_var_lib_t, bitphantom_var_lib_t)
+manage_files_pattern(bitphantom_t, bitphantom_var_lib_t, bitphantom_var_lib_t)
+files_var_lib_filetrans(bitphantom_t, bitphantom_var_lib_t, { dir file })
 
-manage_dirs_pattern(verge_t, verge_var_run_t, verge_var_run_t)
-manage_files_pattern(verge_t, verge_var_run_t, verge_var_run_t)
+manage_dirs_pattern(bitphantom_t, bitphantom_var_run_t, bitphantom_var_run_t)
+manage_files_pattern(bitphantom_t, bitphantom_var_run_t, bitphantom_var_run_t)
 
-sysnet_dns_name_resolve(verge_t)
-corenet_all_recvfrom_unlabeled(verge_t)
+sysnet_dns_name_resolve(bitphantom_t)
+corenet_all_recvfrom_unlabeled(bitphantom_t)
 
-allow verge_t self:tcp_socket create_stream_socket_perms;
-corenet_tcp_sendrecv_generic_if(verge_t)
-corenet_tcp_sendrecv_generic_node(verge_t)
-corenet_tcp_sendrecv_all_ports(verge_t)
-corenet_tcp_bind_generic_node(verge_t)
-
-gen_require(`
-    type verge_port_t;
-')
-allow verge_t verge_port_t:tcp_socket name_bind;
+allow bitphantom_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(bitphantom_t)
+corenet_tcp_sendrecv_generic_node(bitphantom_t)
+corenet_tcp_sendrecv_all_ports(bitphantom_t)
+corenet_tcp_bind_generic_node(bitphantom_t)
 
 gen_require(`
-    type verge_port_t;
+    type bitphantom_port_t;
 ')
-allow verge_t verge_port_t:tcp_socket name_connect;
+allow bitphantom_t bitphantom_port_t:tcp_socket name_bind;
 
-domain_use_interactive_fds(verge_t)
+gen_require(`
+    type bitphantom_port_t;
+')
+allow bitphantom_t bitphantom_port_t:tcp_socket name_connect;
 
-files_read_etc_files(verge_t)
+domain_use_interactive_fds(bitphantom_t)
 
-miscfiles_read_localization(verge_t)
+files_read_etc_files(bitphantom_t)
 
-sysnet_dns_name_resolve(verge_t)
+miscfiles_read_localization(bitphantom_t)
 
-allow verge_t verge_exec_t:file execute_no_trans;
-allow verge_t self:process setsched;
-corecmd_exec_ls(verge_t)
-corenet_tcp_connect_http_port(verge_t)
-dev_read_urand(verge_t)
-fs_getattr_xattr_fs(verge_t)
-kernel_read_system_state(verge_t)
+sysnet_dns_name_resolve(bitphantom_t)
+
+allow bitphantom_t bitphantom_exec_t:file execute_no_trans;
+allow bitphantom_t self:process setsched;
+corecmd_exec_ls(bitphantom_t)
+corenet_tcp_connect_http_port(bitphantom_t)
+dev_read_urand(bitphantom_t)
+fs_getattr_xattr_fs(bitphantom_t)
+kernel_read_system_state(bitphantom_t)

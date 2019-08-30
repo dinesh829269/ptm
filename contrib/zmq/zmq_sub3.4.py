@@ -6,8 +6,8 @@
 """
     ZMQ example using python3's asyncio
 
-    VERGE should be started with the command line arguments:
-        verged -testnet -daemon \
+    bitphantom should be started with the command line arguments:
+        bitphantomd -testnet -daemon \
                 -zmqpubrawtx=tcp://127.0.0.1:220103 \
                 -zmqpubrawblock=tcp://127.0.0.1:220103 \
                 -zmqpubhashtx=tcp://127.0.0.1:220103 \

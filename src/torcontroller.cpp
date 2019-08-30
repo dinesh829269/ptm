@@ -1,9 +1,9 @@
-// Copyright (c) 2018-2019 The VERGE Core developers
+// Copyright (c) 2018-2019 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/verge-config.h>
+#include <config/bitphantom-config.h>
 #endif
 
 #include <torcontroller.h>
@@ -80,7 +80,7 @@ void run_tor() {
     argv.push_back("--HiddenServiceVersion");
     argv.push_back("3");
     argv.push_back("--HiddenServicePort");
-    argv.push_back("21102");
+    argv.push_back("80111");
     argv.push_back("--CookieAuthentication");
     argv.push_back("1");
 

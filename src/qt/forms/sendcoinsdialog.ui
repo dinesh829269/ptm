@@ -846,7 +846,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayoutFee13">
                  <item>
-                  <widget class="VERGEAmountField" name="customFee"/>
+                  <widget class="bitphantomAmountField" name="customFee"/>
                  </item>
                  <item>
                   <spacer name="horizontalSpacer_6">
@@ -868,7 +868,7 @@
                  <item>
                   <widget class="QCheckBox" name="checkBoxMinimumFee">
                    <property name="toolTip">
-                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for VERGE transactions than the network can process.</string>
+                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitphantom transactions than the network can process.</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -881,7 +881,7 @@
                     <bool>true</bool>
                    </property>
                    <property name="toolTip">
-                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for VERGE transactions than the network can process.</string>
+                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitphantom transactions than the network can process.</string>
                    </property>
                    <property name="text">
                     <string>(read the tooltip)</string>
@@ -1138,7 +1138,7 @@
         <string>S&amp;end</string>
        </property>
        <property name="icon">
-        <iconset resource="../verge.qrc">
+        <iconset resource="../bitphantom.qrc">
          <normaloff>:/icons/send</normaloff>:/icons/send</iconset>
        </property>
        <property name="autoDefault">
@@ -1164,7 +1164,7 @@
         <string>Clear &amp;All</string>
        </property>
        <property name="icon">
-        <iconset resource="../verge.qrc">
+        <iconset resource="../bitphantom.qrc">
          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
        </property>
        <property name="autoDefault">
@@ -1181,7 +1181,7 @@
         <string>Add &amp;Recipient</string>
        </property>
        <property name="icon">
-        <iconset resource="../verge.qrc">
+        <iconset resource="../bitphantom.qrc">
          <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
        </property>
        <property name="autoDefault">
@@ -1252,14 +1252,14 @@
    <header>qt/qvalidatedlineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>VERGEAmountField</class>
+   <class>bitphantomAmountField</class>
    <extends>QLineEdit</extends>
-   <header>qt/vergeamountfield.h</header>
+   <header>qt/bitphantomamountfield.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../verge.qrc"/>
+  <include location="../bitphantom.qrc"/>
  </resources>
  <connections/>
  <buttongroups>

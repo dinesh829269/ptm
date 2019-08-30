@@ -1,15 +1,15 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_QT_UTILITYDIALOG_H
-#define VERGE_QT_UTILITYDIALOG_H
+#ifndef bitphantom_QT_UTILITYDIALOG_H
+#define bitphantom_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QObject>
 
-class VERGEGUI;
+class bitphantomGUI;
 
 namespace interfaces {
     class Node;
@@ -47,10 +47,10 @@ class ShutdownWindow : public QWidget
 
 public:
     explicit ShutdownWindow(QWidget *parent=0, Qt::WindowFlags f=0);
-    static QWidget *showShutdownWindow(VERGEGUI *window);
+    static QWidget *showShutdownWindow(bitphantomGUI *window);
 
 protected:
     void closeEvent(QCloseEvent *event);
 };
 
-#endif // VERGE_QT_UTILITYDIALOG_H
+#endif // bitphantom_QT_UTILITYDIALOG_H

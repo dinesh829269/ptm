@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_UINT256_H
-#define VERGE_UINT256_H
+#ifndef bitphantom_UINT256_H
+#define bitphantom_UINT256_H
 
 #include <assert.h>
 #include <cstring>
@@ -175,4 +175,4 @@ inline uint256 uint256S(const std::string& str)
     return rv;
 }
 
-#endif // VERGE_UINT256_H
+#endif // bitphantom_UINT256_H

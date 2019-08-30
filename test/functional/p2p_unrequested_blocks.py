@@ -52,13 +52,13 @@ Node1 is unused in tests 3-7:
 """
 
 from test_framework.mininode import *
-from test_framework.test_framework import VergeTestFramework
+from test_framework.test_framework import bitphantomTestFramework
 from test_framework.util import *
 import time
 from test_framework.blocktools import create_block, create_coinbase, create_transaction
 
 
-class AcceptBlockTest(VergeTestFramework):
+class AcceptBlockTest(bitphantomTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

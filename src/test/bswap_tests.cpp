@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,7 +12,7 @@ BOOST_FIXTURE_TEST_SUITE(bswap_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE(bswap_tests)
 {
-	// Sibling in verge/src/qt/test/compattests.cpp
+	// Sibling in bitphantom/src/qt/test/compattests.cpp
 	uint16_t u1 = 0x1234;
 	uint32_t u2 = 0x56789abc;
 	uint64_t u3 = 0xdef0123456789abc;

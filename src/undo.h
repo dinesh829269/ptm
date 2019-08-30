@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
-// Copyright (c) 2018-2018 The VERGE Core developers
+// Copyright (c) 2018-2018 The bitphantom Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef VERGE_UNDO_H
-#define VERGE_UNDO_H
+#ifndef bitphantom_UNDO_H
+#define bitphantom_UNDO_H
 
 #include <coins.h>
 #include <compressor.h>
@@ -112,4 +112,4 @@ public:
     }
 };
 
-#endif // VERGE_UNDO_H
+#endif // bitphantom_UNDO_H
